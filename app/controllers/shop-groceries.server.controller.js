@@ -14,7 +14,6 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var shopGrocery = new ShopGrocery(req.body);
 	shopGrocery.user = req.user;
-
 	shopGrocery.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -91,7 +90,7 @@ exports.listNear = function(req, res) {
   }else{
     var page = req.params.page;
   }
-  var per_page = 20;
+  var per_page = 10;
 
   ShopGrocery.find(
       {
