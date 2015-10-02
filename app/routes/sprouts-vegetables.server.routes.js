@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(sproutsVegetables.list)
 		.post(users.requiresLogin, sproutsVegetables.create);
 
-  app.route('/sprouts-vegetables/page/:page')
+  app.route('/sproutsvegetables/page/:page')
       .get(sproutsVegetables.listPage)
 
 	app.route('/sprouts-vegetables/:sproutsVegetableId')

@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(leafyVegetables.list)
 		.post(users.requiresLogin, leafyVegetables.create);
 
-  app.route('/leafy-vegetables/page/:page')
+  app.route('/leafyvegetables/page/:page')
       .get(leafyVegetables.listPage)
 
 	app.route('/leafy-vegetables/:leafyVegetableId')
