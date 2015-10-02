@@ -9,7 +9,10 @@ module.exports = function(app) {
 		.get(personalcares.list)
 		.post(users.requiresLogin, personalcares.create);
 
-	app.route('/personalcares/:personalcareId')
+  app.route('/personalcares/page/:page')
+      .get(personalcares.listPage);
+
+  app.route('/personalcares/:personalcareId')
 		.get(personalcares.read)
 		.put(users.requiresLogin, personalcares.hasAuthorization, personalcares.update)
 		.delete(users.requiresLogin, personalcares.hasAuthorization, personalcares.delete);

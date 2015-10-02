@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(packetfoods.list)
 		.post(users.requiresLogin, packetfoods.create);
 
+  app.route('/packetfoods/page/:page')
+      .get(packetfoods.listPage);
+
 	app.route('/packetfoods/:packetfoodId')
 		.get(packetfoods.read)
 		.put(users.requiresLogin, packetfoods.hasAuthorization, packetfoods.update)

@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(households.list)
 		.post(users.requiresLogin, households.create);
 
+  app.route('/households/page/:page')
+      .get(households.listPage);
+
 	app.route('/households/:householdId')
 		.get(households.read)
 		.put(users.requiresLogin, households.hasAuthorization, households.update)

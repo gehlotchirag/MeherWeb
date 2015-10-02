@@ -85,6 +85,28 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of pagination
+ */
+exports.listPage = function(req, res) {
+  if(!req.params.page)
+  {
+    var page = 1;
+  }else{
+    var page = req.params.page;
+  }
+  var per_page = 8;
+  Household.find().sort('-created').skip((page-1)*per_page).limit(per_page).exec(function(err, fruits) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(fruits);
+    }
+  });
+};
+
+/**
  * Household middleware
  */
 exports.householdByID = function(req, res, next, id) { 
