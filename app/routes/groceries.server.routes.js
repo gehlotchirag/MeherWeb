@@ -9,9 +9,6 @@ module.exports = function(app) {
 		.get(groceries.list)
 		.post(users.requiresLogin, groceries.create);
 
-  app.route('/groceries/page/:page')
-      .get(fruits.listPage)
-
 	app.route('/groceries/:groceryId')
 		.get(groceries.read)
 		.put(users.requiresLogin, groceries.hasAuthorization, groceries.update)
