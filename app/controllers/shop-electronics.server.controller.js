@@ -5,30 +5,30 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	ShopFruit = mongoose.model('ShopFruit'),
+	ShopElectronic = mongoose.model('ShopElectronic'),
 	_ = require('lodash');
 
 /**
- * Create a Shop fruit
+ * Create a Shop electronic
  */
 exports.create = function(req, res) {
-	var shopFruit = new ShopFruit(req.body);
-	shopFruit.user = req.user;
+	var shopElectronic = new ShopElectronic(req.body);
+	shopElectronic.user = req.user;
 
-	shopFruit.save(function(err) {
+	shopElectronic.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruit);
+			res.jsonp(shopElectronic);
 		}
 	});
 };
 
 exports.createAll = function(req, res, next) {
   var importShops = (req.body);
-  var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
+  var bulk = ShopElectronic.collection.initializeUnorderedBulkOp();
   importShops.forEach(function(shop) {
     if (shop)
       bulk.insert(shop);
@@ -46,80 +46,80 @@ exports.createAll = function(req, res, next) {
 
 
 /**
- * Show the current Shop fruit
+ * Show the current Shop electronic
  */
 exports.read = function(req, res) {
-	res.jsonp(req.shopFruit);
+	res.jsonp(req.shopElectronic);
 };
 
 /**
- * Update a Shop fruit
+ * Update a Shop electronic
  */
 exports.update = function(req, res) {
-	var shopFruit = req.shopFruit ;
+	var shopElectronic = req.shopElectronic ;
 
-	shopFruit = _.extend(shopFruit , req.body);
+	shopElectronic = _.extend(shopElectronic , req.body);
 
-	shopFruit.save(function(err) {
+	shopElectronic.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruit);
+			res.jsonp(shopElectronic);
 		}
 	});
 };
 
 /**
- * Delete an Shop fruit
+ * Delete an Shop electronic
  */
 exports.delete = function(req, res) {
-	var shopFruit = req.shopFruit ;
+	var shopElectronic = req.shopElectronic ;
 
-	shopFruit.remove(function(err) {
+	shopElectronic.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruit);
+			res.jsonp(shopElectronic);
 		}
 	});
 };
 
 /**
- * List of Shop fruits
+ * List of Shop electronics
  */
 exports.list = function(req, res) { 
-	ShopFruit.find().sort('-created').populate('user', 'displayName').exec(function(err, shopFruits) {
+	ShopElectronic.find().sort('-created').populate('user', 'displayName').exec(function(err, shopElectronics) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruits);
+			res.jsonp(shopElectronics);
 		}
 	});
 };
 
 /**
- * Shop fruit middleware
+ * Shop electronic middleware
  */
-exports.shopFruitByID = function(req, res, next, id) { 
-	ShopFruit.findById(id).populate('user', 'displayName').exec(function(err, shopFruit) {
+exports.shopElectronicByID = function(req, res, next, id) { 
+	ShopElectronic.findById(id).populate('user', 'displayName').exec(function(err, shopElectronic) {
 		if (err) return next(err);
-		if (! shopFruit) return next(new Error('Failed to load Shop fruit ' + id));
-		req.shopFruit = shopFruit ;
+		if (! shopElectronic) return next(new Error('Failed to load Shop electronic ' + id));
+		req.shopElectronic = shopElectronic ;
 		next();
 	});
 };
 
 /**
- * Shop fruit authorization middleware
+ * Shop electronic authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.shopFruit.user.id !== req.user.id) {
+	if (req.shopElectronic.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

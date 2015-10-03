@@ -5,30 +5,30 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	ShopFruit = mongoose.model('ShopFruit'),
+	ShopMedical = mongoose.model('ShopMedical'),
 	_ = require('lodash');
 
 /**
- * Create a Shop fruit
+ * Create a Shop medical
  */
 exports.create = function(req, res) {
-	var shopFruit = new ShopFruit(req.body);
-	shopFruit.user = req.user;
+	var shopMedical = new ShopMedical(req.body);
+	shopMedical.user = req.user;
 
-	shopFruit.save(function(err) {
+	shopMedical.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruit);
+			res.jsonp(shopMedical);
 		}
 	});
 };
 
 exports.createAll = function(req, res, next) {
   var importShops = (req.body);
-  var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
+  var bulk = ShopMedical.collection.initializeUnorderedBulkOp();
   importShops.forEach(function(shop) {
     if (shop)
       bulk.insert(shop);
@@ -44,82 +44,81 @@ exports.createAll = function(req, res, next) {
   });
 };
 
-
 /**
- * Show the current Shop fruit
+ * Show the current Shop medical
  */
 exports.read = function(req, res) {
-	res.jsonp(req.shopFruit);
+	res.jsonp(req.shopMedical);
 };
 
 /**
- * Update a Shop fruit
+ * Update a Shop medical
  */
 exports.update = function(req, res) {
-	var shopFruit = req.shopFruit ;
+	var shopMedical = req.shopMedical ;
 
-	shopFruit = _.extend(shopFruit , req.body);
+	shopMedical = _.extend(shopMedical , req.body);
 
-	shopFruit.save(function(err) {
+	shopMedical.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruit);
+			res.jsonp(shopMedical);
 		}
 	});
 };
 
 /**
- * Delete an Shop fruit
+ * Delete an Shop medical
  */
 exports.delete = function(req, res) {
-	var shopFruit = req.shopFruit ;
+	var shopMedical = req.shopMedical ;
 
-	shopFruit.remove(function(err) {
+	shopMedical.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruit);
+			res.jsonp(shopMedical);
 		}
 	});
 };
 
 /**
- * List of Shop fruits
+ * List of Shop medicals
  */
 exports.list = function(req, res) { 
-	ShopFruit.find().sort('-created').populate('user', 'displayName').exec(function(err, shopFruits) {
+	ShopMedical.find().sort('-created').populate('user', 'displayName').exec(function(err, shopMedicals) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(shopFruits);
+			res.jsonp(shopMedicals);
 		}
 	});
 };
 
 /**
- * Shop fruit middleware
+ * Shop medical middleware
  */
-exports.shopFruitByID = function(req, res, next, id) { 
-	ShopFruit.findById(id).populate('user', 'displayName').exec(function(err, shopFruit) {
+exports.shopMedicalByID = function(req, res, next, id) { 
+	ShopMedical.findById(id).populate('user', 'displayName').exec(function(err, shopMedical) {
 		if (err) return next(err);
-		if (! shopFruit) return next(new Error('Failed to load Shop fruit ' + id));
-		req.shopFruit = shopFruit ;
+		if (! shopMedical) return next(new Error('Failed to load Shop medical ' + id));
+		req.shopMedical = shopMedical ;
 		next();
 	});
 };
 
 /**
- * Shop fruit authorization middleware
+ * Shop medical authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.shopFruit.user.id !== req.user.id) {
+	if (req.shopMedical.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

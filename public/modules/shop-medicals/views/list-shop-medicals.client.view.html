@@ -1,0 +1,19 @@
+<section data-ng-controller="ShopMedicalsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Shop medicals</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="shopMedical in shopMedicals" data-ng-href="#!/shop-medicals/{{shopMedical._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="shopMedical.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="shopMedical.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="shopMedical.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!shopMedicals.$resolved || shopMedicals.length">
+    	No Shop medicals yet, why don't you <a href="/#!/shop-medicals/create">create one</a>?
+    </div>
+</section>

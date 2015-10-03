@@ -40,7 +40,6 @@ exports.createAll = function(req, res, next) {
   var importShops = (req.body);
   var bulk = ShopGrocery.collection.initializeUnorderedBulkOp();
   importShops.forEach(function(shop) {
-    console.log(shop);
     if (shop)
     bulk.insert(shop);
   })

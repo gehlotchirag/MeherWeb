@@ -1,0 +1,19 @@
+<section data-ng-controller="ShopElectronicsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Shop electronics</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="shopElectronic in shopElectronics" data-ng-href="#!/shop-electronics/{{shopElectronic._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="shopElectronic.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="shopElectronic.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="shopElectronic.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!shopElectronics.$resolved || shopElectronics.length">
+    	No Shop electronics yet, why don't you <a href="/#!/shop-electronics/create">create one</a>?
+    </div>
+</section>
