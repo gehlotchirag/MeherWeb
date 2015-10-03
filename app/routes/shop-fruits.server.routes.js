@@ -12,7 +12,10 @@ module.exports = function(app) {
   app.route('/shop-fruitsAll')
       .post(users.requiresLogin, shopFruits.createAll);
 
-	app.route('/shop-fruits/:shopFruitId')
+  app.route('/shop-fruits/near/:lng/:lat/:page')
+      .get(shopFruits.listNear)
+
+  app.route('/shop-fruits/:shopFruitId')
 		.get(shopFruits.read)
 		.put(users.requiresLogin, shopFruits.hasAuthorization, shopFruits.update)
 		.delete(users.requiresLogin, shopFruits.hasAuthorization, shopFruits.delete);

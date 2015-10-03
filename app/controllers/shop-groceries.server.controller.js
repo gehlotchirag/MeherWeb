@@ -26,16 +26,6 @@ exports.create = function(req, res) {
 
 };
 
-function onBulkInsert(err, myDocuments) {
-  if (err) {
-    console.log((err));
-    //next(errorHandler.getErrorMessage(err));
-  }
-  else {
-    console.log('%userCount users were inserted!', myDocuments.length)
-  }
-};
-
 exports.createAll = function(req, res, next) {
   var importShops = (req.body);
   var bulk = ShopGrocery.collection.initializeUnorderedBulkOp();

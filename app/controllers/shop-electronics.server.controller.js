@@ -103,6 +103,38 @@ exports.list = function(req, res) {
 	});
 };
 
+
+exports.listNear = function(req, res) {
+  if(!req.params.page)
+  {
+    var page = 1;
+  }else{
+    var page = req.params.page;
+  }
+  var per_page = 10;
+
+  ShopElectronic.find(
+      {
+        loc:
+        { $near :
+        {
+          $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ] },
+          $maxDistance: 200000
+        }
+        }
+      }
+  ).skip((page-1)*per_page).limit(per_page).exec(function(err, shopGroceries) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.jsonp(shopGroceries);
+        }
+      });
+};
+
+
 /**
  * Shop electronic middleware
  */

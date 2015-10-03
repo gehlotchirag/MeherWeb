@@ -12,7 +12,10 @@ module.exports = function(app) {
   app.route('/shop-medicalsAll')
       .post(users.requiresLogin, shopMedicals.createAll);
 
-	app.route('/shop-medicals/:shopMedicalId')
+  app.route('/shop-medicals/near/:lng/:lat/:page')
+      .get(shopMedicals.listNear)
+
+  app.route('/shop-medicals/:shopMedicalId')
 		.get(shopMedicals.read)
 		.put(users.requiresLogin, shopMedicals.hasAuthorization, shopMedicals.update)
 		.delete(users.requiresLogin, shopMedicals.hasAuthorization, shopMedicals.delete);

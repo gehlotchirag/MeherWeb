@@ -12,6 +12,9 @@ module.exports = function(app) {
   app.route('/shop-electronicsAll')
       .post(users.requiresLogin, shopElectronics.createAll);
 
+  app.route('/shop-electronics/near/:lng/:lat/:page')
+      .get(shopElectronics.listNear)
+
   app.route('/shop-electronics/:shopElectronicId')
 		.get(shopElectronics.read)
 		.put(users.requiresLogin, shopElectronics.hasAuthorization, shopElectronics.update)
