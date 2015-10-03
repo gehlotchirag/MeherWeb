@@ -59,4 +59,5 @@ var ShopElectronicSchema = new Schema({
   }
 });
 
+ShopElectronicSchema.index({loc: '2dsphere'});
 mongoose.model('ShopElectronic', ShopElectronicSchema);

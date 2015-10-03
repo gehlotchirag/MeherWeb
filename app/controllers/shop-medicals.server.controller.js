@@ -111,6 +111,9 @@ exports.listNear = function(req, res) {
     var page = req.params.page;
   }
   var per_page = 10;
+  console.log(page);
+  console.log(page);
+  console.log(page);
 
   ShopMedical.find(
       {

@@ -58,5 +58,5 @@ var ShopMedicalSchema = new Schema({
     ref: 'User'
   }
 });
-
+ShopMedicalSchema.index({loc: '2dsphere'});
 mongoose.model('ShopMedical', ShopMedicalSchema);

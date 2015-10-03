@@ -58,7 +58,5 @@ var ShopGrocerySchema = new Schema({
 		ref: 'User'
 	}
 });
-
 ShopGrocerySchema.index({loc: '2dsphere'});
-
 mongoose.model('ShopGrocery', ShopGrocerySchema);

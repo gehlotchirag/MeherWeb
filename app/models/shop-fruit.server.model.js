@@ -58,5 +58,5 @@ var ShopFruitSchema = new Schema({
 		ref: 'User'
 	}
 });
-
+ShopFruitSchema.index({loc: '2dsphere'});
 mongoose.model('ShopFruit', ShopFruitSchema);
