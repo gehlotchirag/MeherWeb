@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(shopGroceries.list)
 		.post(users.requiresLogin, shopGroceries.create);
 
+  app.route('/shop-groceriesAll')
+      .post(users.requiresLogin, shopGroceries.createAll);
+
   app.route('/shop-groceries/near/:lng/:lat/:page')
       .get(shopGroceries.listNear)
 

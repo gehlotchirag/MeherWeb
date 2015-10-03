@@ -7,26 +7,26 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * Shop grocery Schema
+ * Shop fruit Schema
  */
-var ShopGrocerySchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Shop grocery name',
-		trim: true
-	},
+var ShopFruitSchema = new Schema({
+  name: {
+    type: String,
+    default: '',
+    required: 'Please fill Shop name',
+    trim: true
+  },
   phone: {
     type: String,
     default: '',
-    required: 'Please fill Shop grocery Phone Numbers',
+    required: 'Please fill Shop Phone Numbers',
     trim: true
   },
   address: {
     type: String,
     default: '',
     unique: true,
-    required: 'Please fill Shop grocery address',
+    required: 'Please fill Shop address',
     trim: true
   },
 
@@ -34,14 +34,14 @@ var ShopGrocerySchema = new Schema({
 
   category: {
     type: String,
-    default: 'Grocery',
-    required: 'Please fill Shop grocery category',
+    default: 'fruits',
+    required: 'Please fill Shop category',
     trim: true
   },
   city: {
     type: String,
     default: '',
-    required: 'Please fill Shop grocery city',
+    required: 'Please fill Shop city',
     trim: true
   },
   mobile: {
@@ -59,6 +59,4 @@ var ShopGrocerySchema = new Schema({
 	}
 });
 
-ShopGrocerySchema.index({loc: '2dsphere'});
-
-mongoose.model('ShopGrocery', ShopGrocerySchema);
+mongoose.model('ShopFruit', ShopFruitSchema);

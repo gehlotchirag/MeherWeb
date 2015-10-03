@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var shopGrocery = new ShopGrocery(req.body);
-	shopGrocery.user = req.user;
+
 	shopGrocery.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -23,6 +23,36 @@ exports.create = function(req, res) {
 			res.jsonp(shopGrocery);
 		}
 	});
+
+};
+
+function onBulkInsert(err, myDocuments) {
+  if (err) {
+    console.log((err));
+    //next(errorHandler.getErrorMessage(err));
+  }
+  else {
+    console.log('%userCount users were inserted!', myDocuments.length)
+  }
+};
+
+exports.createAll = function(req, res, next) {
+  var importShops = (req.body);
+  var bulk = ShopGrocery.collection.initializeUnorderedBulkOp();
+  importShops.forEach(function(shop) {
+    console.log(shop);
+    if (shop)
+    bulk.insert(shop);
+  })
+  bulk.execute(function (err,result) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(result);
+    }
+  });
 };
 
 /**
