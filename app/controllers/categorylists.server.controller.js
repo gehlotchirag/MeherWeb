@@ -26,6 +26,32 @@ exports.create = function(req, res) {
 	});
 };
 
+
+exports.createAll = function(req, res, next) {
+  Categorylist.collection.remove(function(err, removedCount) {
+    //your next actions
+    if(!err){
+      var importShops = (req.body);
+      var bulk = Categorylist.collection.initializeUnorderedBulkOp();
+      importShops.forEach(function(shop) {
+        if (shop)
+          bulk.insert(shop);
+      })
+      bulk.execute(function (err,result) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.jsonp(result);
+        }
+      });
+    }
+  });
+
+};
+
+
 /**
  * Show the current Categorylist
  */
