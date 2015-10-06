@@ -117,6 +117,7 @@ exports.listLink = function(req, res) {
   });
 };
 
+
 /**
  * Mobiledescription middleware
  */
@@ -128,16 +129,6 @@ exports.mobiledescriptionByID = function(req, res, next, id) {
 		next();
 	});
 };
-
-//exports.mobiledescriptionByLink = function(req, res, next, id) {
-//  Mobiledescription.find({ link: 'wds' }).exec(function(err, mobiledescription) {
-//    if (err) return next(err);
-//    if (! mobiledescription) return next(new Error('Failed to load Mobiledescription ' + id));
-//    req.mobiledescription = mobiledescription ;
-//    next();
-//  });
-//};
-
 
 
 /**

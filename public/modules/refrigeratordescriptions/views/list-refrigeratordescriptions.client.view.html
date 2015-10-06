@@ -1,0 +1,19 @@
+<section data-ng-controller="RefrigeratordescriptionsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Refrigeratordescriptions</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="refrigeratordescription in refrigeratordescriptions" data-ng-href="#!/refrigeratordescriptions/{{refrigeratordescription._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="refrigeratordescription.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="refrigeratordescription.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="refrigeratordescription.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!refrigeratordescriptions.$resolved || refrigeratordescriptions.length">
+    	No Refrigeratordescriptions yet, why don't you <a href="/#!/refrigeratordescriptions/create">create one</a>?
+    </div>
+</section>

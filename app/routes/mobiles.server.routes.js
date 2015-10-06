@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(mobiles.list)
 		.post(users.requiresLogin, mobiles.create);
 
+  app.route('/mobiles/page/:page')
+      .get(mobiles.listPage)
+
   app.route('/mobilesAll')
       .post(users.requiresLogin, mobiles.createAll);
 

@@ -7,14 +7,13 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * Mobile Schema
+ * Wmachine Schema
  */
-var MobileSchema = new Schema({
+var WmachineSchema = new Schema({
 	name: {
 		type: String,
 		default: '',
-    unique: true,
-		required: 'Please fill Mobile name',
+		required: 'Please fill Wmachine name',
 		trim: true
 	},
   link: {
@@ -23,10 +22,14 @@ var MobileSchema = new Schema({
     required: 'Please fill Mobiledescription link',
     trim: true
   },
-	created: {
+  created: {
 		type: Date,
 		default: Date.now
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	}
 });
 
-mongoose.model('Mobile', MobileSchema);
+mongoose.model('Wmachine', WmachineSchema);

@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.route('/mobiledescriptionsAll')
       .post(users.requiresLogin, mobiledescriptions.createAll);
 
-  app.route('/mobilelink/')
+  app.route('/mobiledescriptionslink/')
       .post(mobiledescriptions.listLink);
 
 	app.route('/mobiledescriptions/:mobiledescriptionId')
