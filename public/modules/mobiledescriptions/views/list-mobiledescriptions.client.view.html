@@ -1,0 +1,19 @@
+<section data-ng-controller="MobiledescriptionsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Mobiledescriptions</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="mobiledescription in mobiledescriptions" data-ng-href="#!/mobiledescriptions/{{mobiledescription._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="mobiledescription.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="mobiledescription.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="mobiledescription.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!mobiledescriptions.$resolved || mobiledescriptions.length">
+    	No Mobiledescriptions yet, why don't you <a href="/#!/mobiledescriptions/create">create one</a>?
+    </div>
+</section>

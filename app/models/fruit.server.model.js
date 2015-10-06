@@ -34,12 +34,6 @@ var FruitSchema = new Schema({
     required: 'Please fill Fruit name',
     trim: true
   },
-  ImgFileServer: {
-    type: String,
-    default: '',
-    required: 'Please fill Fruit name',
-    trim: true
-  },
   created: {
 		type: Date,
 		default: Date.now
