@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.route('/personalcares/:personalcareId')
 		.get(personalcares.read)
 		.put(users.requiresLogin, personalcares.hasAuthorization, personalcares.update)
-		.delete(users.requiresLogin, personalcares.hasAuthorization, personalcares.delete);
+		.delete(users.requiresLogin, personalcares.delete);
 
 	// Finish by binding the Personalcare middleware
 	app.param('personalcareId', personalcares.personalcareByID);
