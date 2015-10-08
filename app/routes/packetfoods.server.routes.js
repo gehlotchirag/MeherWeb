@@ -15,7 +15,7 @@ module.exports = function(app) {
 	app.route('/packetfoods/:packetfoodId')
 		.get(packetfoods.read)
 		.put(users.requiresLogin, packetfoods.hasAuthorization, packetfoods.update)
-		.delete(users.requiresLogin, packetfoods.hasAuthorization, packetfoods.delete);
+		.delete(users.requiresLogin, packetfoods.delete);
 
 	// Finish by binding the Packetfood middleware
 	app.param('packetfoodId', packetfoods.packetfoodByID);
