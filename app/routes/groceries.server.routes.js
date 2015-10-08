@@ -15,7 +15,7 @@ module.exports = function(app) {
 	app.route('/groceries/:groceryId')
 		.get(groceries.read)
 		.put(users.requiresLogin, groceries.hasAuthorization, groceries.update)
-		.delete(users.requiresLogin, groceries.hasAuthorization, groceries.delete);
+		.delete(users.requiresLogin, groceries.delete);
 
 	// Finish by binding the Grocery middleware
 	app.param('groceryId', groceries.groceryByID);
