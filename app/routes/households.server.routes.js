@@ -15,7 +15,7 @@ module.exports = function(app) {
 	app.route('/households/:householdId')
 		.get(households.read)
 		.put(users.requiresLogin, households.hasAuthorization, households.update)
-		.delete(users.requiresLogin, households.hasAuthorization, households.delete);
+		.delete(users.requiresLogin, households.delete);
 
 	// Finish by binding the Household middleware
 	app.param('householdId', households.householdByID);
