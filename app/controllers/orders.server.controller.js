@@ -96,6 +96,18 @@ exports.orderByID = function(req, res, next, id) {
 	});
 };
 
+exports.orderByShop= function(req, res) {
+  Order.find({'store._id': req.params.storeID }).exec(function(err, shopOrder) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopOrder);
+    }
+  });
+};
+
 /**
  * Order authorization middleware
  */

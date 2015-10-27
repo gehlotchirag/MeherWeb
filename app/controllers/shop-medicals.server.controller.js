@@ -149,6 +149,18 @@ exports.shopMedicalByID = function(req, res, next, id) {
 	});
 };
 
+exports.shopMedicalByMobile= function(req, res) {
+  ShopMedical.find({ mobile: req.params.mobile }).exec(function(err, shopGrocery) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopGrocery);
+    }
+  });
+};
+
 /**
  * Shop medical authorization middleware
  */

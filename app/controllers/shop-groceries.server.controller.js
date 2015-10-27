@@ -135,7 +135,7 @@ exports.listNear = function(req, res) {
 /**
  * Shop grocery middleware
  */
-exports.shopGroceryByID = function(req, res, next, id) { 
+exports.shopGroceryByID = function(req, res, next, id) {
 	ShopGrocery.findById(id).populate('user', 'displayName').exec(function(err, shopGrocery) {
 		if (err) return next(err);
 		if (! shopGrocery) return next(new Error('Failed to load Shop grocery ' + id));
@@ -144,6 +144,20 @@ exports.shopGroceryByID = function(req, res, next, id) {
 	});
 };
 
+/**
+ * Shop grocery middleware
+ */
+exports.shopGroceryByMobile= function(req, res) {
+  ShopGrocery.find({ mobile: req.params.mobile }).exec(function(err, shopGrocery) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopGrocery);
+    }
+  });
+};
 /**
  * Shop grocery authorization middleware
  */

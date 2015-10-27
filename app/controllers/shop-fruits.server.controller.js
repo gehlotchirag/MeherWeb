@@ -145,6 +145,18 @@ exports.shopFruitByID = function(req, res, next, id) {
 	});
 };
 
+exports.shopFruitByMobile= function(req, res) {
+  ShopFruit.find({ mobile: req.params.mobile }).exec(function(err, shopGrocery) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopGrocery);
+    }
+  });
+};
+
 /**
  * Shop fruit authorization middleware
  */

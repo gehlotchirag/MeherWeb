@@ -15,6 +15,9 @@ module.exports = function(app) {
   app.route('/shop-medicals/near/:lng/:lat/:page')
       .get(shopMedicals.listNear)
 
+  app.route('/shop-medicals/mobile/:mobile')
+      .get(shopMedicals.shopMedicalByMobile)
+
   app.route('/shop-medicals/:shopMedicalId')
 		.get(shopMedicals.read)
 		.put(users.requiresLogin, shopMedicals.hasAuthorization, shopMedicals.update)

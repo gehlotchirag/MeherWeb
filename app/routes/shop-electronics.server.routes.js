@@ -13,7 +13,10 @@ module.exports = function(app) {
       .post(users.requiresLogin, shopElectronics.createAll);
 
   app.route('/shop-electronics/near/:lng/:lat/:page')
-      .get(shopElectronics.listNear)
+      .get(shopElectronics.listNear);
+
+  app.route('/shop-electronics/mobile/:mobile')
+      .get(shopElectronics.shopElectronicByMobile);
 
   app.route('/shop-electronics/:shopElectronicId')
 		.get(shopElectronics.read)

@@ -9,7 +9,10 @@ module.exports = function(app) {
 		.get(orders.list)
 		.post(orders.create);
 
-	app.route('/orders/:orderId')
+  app.route('/orders/shop/:shopId')
+      .get(orders.orderByShop);
+
+  app.route('/orders/:orderId')
 		.get(orders.read)
 		.put(users.requiresLogin, orders.hasAuthorization, orders.update)
 		.delete(users.requiresLogin, orders.hasAuthorization, orders.delete);
