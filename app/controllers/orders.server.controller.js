@@ -97,12 +97,13 @@ exports.orderByID = function(req, res, next, id) {
 };
 
 exports.orderByShop= function(req, res) {
-  Order.find({'store._id': req.params.storeID }).exec(function(err, shopOrder) {
+  Order.find({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      console.log(shopOrder);
       res.jsonp(shopOrder);
     }
   });
