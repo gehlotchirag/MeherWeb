@@ -16,7 +16,7 @@ var OrderSchema = new Schema({
   order: {
     type: Object
   },
-  user: {
+  customer: {
     type: Object
   },
 	created: {
