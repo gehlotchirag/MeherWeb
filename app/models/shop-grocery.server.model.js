@@ -62,7 +62,8 @@ var ShopGrocerySchema = new Schema({
     default: "1"
   },
   deliveryTime:{
-    type: String
+    type: String,
+    default: "30"
   },
   startTime:{
     type: String,
