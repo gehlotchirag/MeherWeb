@@ -162,7 +162,8 @@ exports.shopGroceryByMobile= function(req, res) {
  * Shop grocery authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.shopGrocery.user.id !== req.user.id) {
+	//if (req.shopGrocery.user.id !== req.user.id) {
+	if ('gehlotchirag@gmail.com' !== req.user.email) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

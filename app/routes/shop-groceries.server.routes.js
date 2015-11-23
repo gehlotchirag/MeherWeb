@@ -20,7 +20,8 @@ module.exports = function(app) {
 
   app.route('/shop-groceries/:shopGroceryId')
 		.get(shopGroceries.read)
-		.put(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.update)
+		//.put(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.update)
+		.put(users.requiresLogin, shopGroceries.update)
 		.delete(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.delete);
 
 	// Finish by binding the Shop grocery middleware

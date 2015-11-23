@@ -53,6 +53,31 @@ var ShopGrocerySchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+
+  appDownloaded: {
+    type : Boolean
+  },
+  deliveryDistance:{
+    type: String,
+    default: "1"
+  },
+  deliveryTime:{
+    type: String
+  },
+  startTime:{
+    type: String,
+    default: "9"
+  },
+  closeTime:{
+    type: String,
+    default: "10"
+  },
+  ourExperience:{
+    type: String
+  },
+  OffDay:{
+    type: String
+  },
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
