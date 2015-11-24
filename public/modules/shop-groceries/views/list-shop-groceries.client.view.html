@@ -11,7 +11,7 @@
       <!--by-->
       <!--<span data-ng-bind="shopGrocery.user.displayName"></span>-->
       <!--</small>-->
-      <div class="row">
+      <div class="row" ng-if="shopGrocery.mobile !== 0">
         <div class="col-md-6">
           <h4 class="list-group-item-heading" data-ng-bind="shopGrocery.name"></h4>
           <span class="list-group-item-heading" data-ng-bind="shopGrocery.address"></span>
