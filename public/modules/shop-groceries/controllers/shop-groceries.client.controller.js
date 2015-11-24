@@ -5,23 +5,6 @@ angular.module('shop-groceries').controller('ShopGroceriesController', ['$scope'
 	function($scope, $stateParams, $location, Authentication, ShopGroceries) {
 		$scope.authentication = Authentication;
     $scope.openalldays = true;
-    //$scope.shopGrocery={};
-    //$scope.shopGrocery.deliveryDistance=1;
-    //$scope.shopGrocery = {appDownloaded:false,deliveryDistance:"1",deliveryTime:"30",startTime:"9",closeTime:"10"};
-    //$scope.shopGrocery = {};
-    //$scope.shopGrocery = {deliveryDistance:"1",x:"1"};
-    //alert($scope.shopGrocery.deliveryDistance);
-
-    //$scope.isCollapsed = false;
-    //$scope.shopGrocery.isCollapsed
-    //$scope.shopGrocery.deliveryDistance = 1;
-    //$scope.shopGrocery ={};
-    $scope.days = [
-      {name: 'Sunday' },
-      {  name: 'Monday' },
-      { name: 'Tuesday' }
-    ];
-
 		// Create new Shop grocery
 		$scope.create = function() {
 			// Create new Shop grocery object

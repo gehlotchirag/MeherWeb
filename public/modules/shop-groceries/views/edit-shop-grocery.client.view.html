@@ -38,6 +38,18 @@
             <label><input type="checkbox" data-ng-model="shopGrocery.appDownloaded"> Login App</label>
           </div>
 
+          <div class="col-md-2">
+            Open All days?{{shopGrocery.Offday.name}}</br>
+            <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" ng-model="openalldays">
+      </span>
+              <select ng-model="shopGrocery.Offday" class="form-control" ng-if="!openalldays" ng-options="day as day.name for day in days"></select>
+
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+
+
           <div class="col-md-3">
             Delivery Area? <b>{{shopGrocery.deliveryDistance}} </b></br>
             <div class="btn-group">
@@ -86,28 +98,19 @@
             </div>
           </div>
 
-          <div class="col-md-2">
-            Open All days?{{shopGrocery.Offday.name}}</br>
-            <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox" ng-model="openalldays">
-      </span>
-              <select ng-model="shopGrocery.Offday" class="form-control" ng-if="!openalldays" ng-options="day as day.name for day in days"></select>
 
-            </div><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
 
           <div class="col-md-4">
-            Intrest Level {{shopGrocery.storeExperience}}</br>
+            Intrest Level {{ourExperience}}</br>
             <div class="btn-group">
               <label class="btn btn-default">
-                <input type="radio" name="storeExperience" data-ng-model="shopGrocery.ourExperience" value="3"> Great
+                <input type="radio" name="storeExperience" data-ng-model="ourExperience" value="2"> Great
               </label>
               <label class="btn btn-default">
-                <input type="radio" name="storeExperience" data-ng-model="shopGrocery.ourExperience" value="2"> Average
+                <input type="radio" name="storeExperience" data-ng-model="ourExperience" value="1"> Average
               </label>
               <label class="btn btn-default">
-                <input type="radio" name="storeExperience" data-ng-model="shopGrocery.ourExperience" value="1"> Not Much
+                <input type="radio" name="storeExperience" data-ng-model="ourExperience" value="0"> Not Much
               </label>
             </div>
           </div>
