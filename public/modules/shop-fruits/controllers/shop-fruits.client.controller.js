@@ -31,7 +31,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       //  $location.path('shop-groceries');
       //});
       $http({
-        method: 'PUT',
+        method: 'DELETE',
         data: shopFruit,
         url: 'http://getmeher.com:3000/shop-fruits/'+shopFruit._id
       }).then(function successCallback(response) {
