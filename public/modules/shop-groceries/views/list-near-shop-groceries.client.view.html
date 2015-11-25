@@ -1,0 +1,275 @@
+<section data-ng-controller="ShopGroceriesController" data-ng-init="findNearby()">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6">
+    <h1>Shop groceries</h1>
+        </div>
+      <div class="col-md-6 ">
+        {{$scope.pageNumber}}
+        <button class="btn btn-danger pull-right" ng-click="loadmore()" type="button">Next Page ></button>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input type="text" g-places-autocomplete ng-model="areaLocation" placeholder="Select Locality" class="form-control"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="findNearby()" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+
+
+  </div>
+  <div class="list-group">
+    {{$scope.pageNumber}}
+    <div data-ng-repeat="shopGrocery in shopGroceries" data-ng-href="#!/shop-groceries/{{shopGrocery._id}}" class="list-group-item" ng-if="shopGrocery.mobile !== '0'">
+      <!--<small class="list-group-item-text">-->
+      <!--Posted on-->
+      <!--<span data-ng-bind="shopGrocery.created | date:'medium'"></span>-->
+      <!--by-->
+      <!--<span data-ng-bind="shopGrocery.user.displayName"></span>-->
+      <!--</small>-->
+      <div class="row" ng-if="shopGrocery.mobile !== '0'">
+        <div class="col-md-6">
+          <h4 class="list-group-item-heading" data-ng-bind="shopGrocery.name"></h4>
+          <span class="list-group-item-heading" data-ng-bind="shopGrocery.address"></span>
+        </div>
+        <div class="col-md-6 pull-right">
+          <div class = "pull-right">
+            <span class="list-group-item-heading" data-ng-bind="shopGrocery.mobile"></span>
+            <button class="button btn-success">call</button>
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+      <!--<button class="btn btn-default" ng-click="findSpecific(shopGrocery._id)">Toggle collapse</button>{{shopGrocery.isCollapsed}}-->
+      <br>
+      <div class="row" ng-if="shopGrocery.mobile !== '0'">
+        <div class="col-md-12 text-center">
+          <button class="btn btn-primary" ng-click="showDetails=!showDetails">Show Details</button>{{shopGrocery.isCollapsed}}
+          <div class="alert alert-warning" style="background-color: whitesmoke" ng-if="showDetails">
+            <div collapse="shopGrocery['isCollapsed']">
+              <div class="well well-lg">{{shopGrocery}}</div>
+              <div class="row" style="border-top:1px solid whitesmoke ">
+                <div class="col-md-2">
+                  Delivery boy?</br>
+                  <button class="button btn-success">Yes</button>
+                  <button class="button btn-danger" ng-click="removeSpecific(shopGrocery)">No</button>
+                </div>
+                <form class="form-horizontal" data-ng-submit="updateSpecific(shopGrocery)" novalidate>
+                  <fieldset>
+
+                    <div class="col-md-2">
+                      <label>Download App? {{shopGrocery.appDownloaded}}</label>
+                      <label><input type="checkbox" data-ng-model="shopGrocery.appDownloaded"> Login App</label>
+                    </div>
+
+                    <div class="col-md-4">
+                      Delivery Area? <b>{{shopGrocery.deliveryDistance}} </b></br>
+                      <div class="btn-group">
+                        <label class="btn btn-default">
+                          <input type="radio" name="color" data-ng-model="shopGrocery.deliveryDistance" value="0.5"> 0.5Km
+                        </label>
+                        <label class="btn btn-default">
+                          <input type="radio" name="color" data-ng-model="shopGrocery.deliveryDistance" value="1"> 1Km
+                        </label>
+                        <label class="btn btn-default">
+                          <input type="radio" name="color" data-ng-model="shopGrocery.deliveryDistance" value="2"> 2Km
+                        </label>
+                      </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                      Delivery time grantee? <b>{{shopGrocery.deliveryTime}}</b></br>
+                      <div class="btn-group">
+                        <label class="btn btn-default">
+                          <input type="radio" name="deliveryTime" data-ng-model="shopGrocery.deliveryTime" value="30"> 30 min
+                        </label>
+                        <label class="btn btn-default">
+                          <input type="radio" name="deliveryTime" data-ng-model="shopGrocery.deliveryTime" value="45"> 40 min
+                        </label>
+                        <label class="btn btn-default">
+                          <input type="radio" name="deliveryTime" data-ng-model="shopGrocery.deliveryTime" value="60"> 60 min
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class ="row" style="border-top:1px solid whitesmoke">
+
+                      <div class="col-md-2">
+                        Start Time?</br>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" id="timeam" name="timeam" maxlength="2" data-ng-model="shopGrocery.startTime">
+                            <label for="timeam">AM </label>{{shopGrocery.startTime}}
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" id="timepm" class="form-control" name="timepm" maxlength="2" data-ng-model="shopGrocery.closeTime">
+                            <label for="timepm">PM </label>{{shopGrocery.closeTime}}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-2">
+                        Open All days?{{shopGrocery.Offday.name}}</br>
+                        <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" ng-model="openalldays">
+      </span>
+                          <select ng-model="shopGrocery.Offday" class="form-control" ng-if="!openalldays">
+                            <option value="Sunday" label="Sunday">Sunday</option>
+                            <option value="Monday" label="Monday">Monday</option>
+                            <option value="Tuesday" label="Tuesday">Tuesday</option>
+                            <option value="Wednesday" label="Wednesday">Wednesday</option>
+                            <option value="Thursday" label="Thursday">Thursday</option>
+                            <option value="Friday" label="Friday">Friday</option>
+                            <option value="Saturday" label="Saturday">Saturday</option>
+                          </select>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+
+                      <div class="col-md-4">
+                        Intrest Level {{shopGrocery.storeExperience}}</br>
+                        <div class="btn-group">
+                          <label class="btn btn-success">
+                            <input type="radio" name="storeExperience" data-ng-model="shopGrocery.ourExperience" value="3"> Great
+                          </label>
+                          <label class="btn btn-primary">
+                            <input type="radio" name="storeExperience" data-ng-model="shopGrocery.ourExperience" value="2"> Average
+                          </label>
+                          <label class="btn btn-danger">
+                            <input type="radio" name="storeExperience" data-ng-model="shopGrocery.ourExperience" value="1"> Not Much
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <br/>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-10 text-center">
+                          <input type="submit" value="Save Changes" class="btn btn-lg btn-success">
+                        </div>
+                      </div>
+
+                      <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      <!--<div class="procedure-details" ng-show="shopGrocery.isCollapsed">-->
+      <!--<p>Number of patient discharges: </p>-->
+      <!--<p>Average amount covered by Medicare:</p>-->
+      <!--<p>Average total payments: </p>-->
+      <!--</div>-->
+
+
+      <!--<div class="row" style="border-top:1px solid whitesmoke ">-->
+
+      <!--<div class="col-md-2">-->
+      <!--Delivery boy?</br>-->
+      <!--<button class="button btn-success">Yes</button>-->
+      <!--<button class="button btn-danger">No</button>-->
+      <!--</div>-->
+
+      <!--<div class="col-md-2">-->
+      <!--<label>Download App</label>-->
+      <!--<input type="checkbox" class="form-control" value="">-->
+      <!--</div>-->
+
+      <!--<div class="col-md-3">-->
+      <!--Delivery Area?</br>-->
+      <!--<div class="btn-group" role="group">-->
+      <!--<button type="button" class="btn btn-default">0.5Km</button>-->
+      <!--<button type="button" class="btn btn-default">1 Km</button>-->
+      <!--<button type="button" class="btn btn-default">2 Km</button>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="col-md-3">-->
+      <!--Delivery time garuntee?</br>-->
+      <!--<div class="btn-group" role="group">-->
+      <!--<button type="button" class="btn btn-default">30 min</button>-->
+      <!--<button type="button" class="btn btn-default">45 min</button>-->
+      <!--<button type="button" class="btn btn-default">1 Hr</button>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class ="row" style="border-top:1px solid whitesmoke">-->
+
+      <!--<div class="col-md-2">-->
+      <!--Start Time?</br>-->
+      <!--<div class="row">-->
+      <!--<div class="col-md-6">-->
+      <!--<input type="number" class="form-control" id="timeam">-->
+      <!--<label for="timeam">AM</label>-->
+      <!--</div>-->
+      <!--<div class="col-md-6">-->
+      <!--<input type="number" class="form-control" id="timepm">-->
+      <!--<label for="timepm">PM</label>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="col-md-2">-->
+      <!--Open All days?</br>-->
+      <!--<div class="input-group">-->
+      <!--<span class="input-group-addon">-->
+      <!--<input type="checkbox" aria-label="...">-->
+      <!--</span>-->
+      <!--<div class="dropdown">-->
+      <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+      <!--select Days-->
+      <!--<span class="caret"></span>-->
+      <!--</button>-->
+      <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+      <!--<li><a href="#">Sunday</a></li>-->
+      <!--<li><a href="#">Monday</a></li>-->
+      <!--<li><a href="#">Tuesday</a></li>-->
+      <!--<li><a href="#">Wednesday</a></li>-->
+      <!--<li><a href="#">Thursday</a></li>-->
+      <!--<li><a href="#">Friday</a></li>-->
+      <!--<li><a href="#">Saturday</a></li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+      <!--</div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;-->
+
+      <!--<div class="col-md-3">-->
+      <!--Intrest Level</br>-->
+      <!--<div class="btn-group" role="group">-->
+      <!--<button type="button" class="btn btn-success">Great</button>-->
+      <!--<button type="button" class="btn btn-default">Average</button>-->
+      <!--<button type="button" class="btn btn-danger">Not Much</button>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <!--</div>-->
+
+    </div>
+
+  </div>
+  <div class="alert alert-warning text-center" data-ng-hide="!shopGroceries.$resolved || shopGroceries.length">
+    No Shop groceries yet, why don't you <a href="/#!/shop-groceries/create">create one</a>?
+  </div>
+</section>

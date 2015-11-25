@@ -1,0 +1,19 @@
+<section data-ng-controller="ShopFruitsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Shop fruits</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="shopFruit in shopFruits" data-ng-href="#!/shop-fruits/{{shopFruit._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="shopFruit.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="shopFruit.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="shopFruit.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!shopFruits.$resolved || shopFruits.length">
+    	No Shop fruits yet, why don't you <a href="/#!/shop-fruits/create">create one</a>?
+    </div>
+</section>
