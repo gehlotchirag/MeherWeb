@@ -25,7 +25,7 @@
           <!--by-->
           <!--<span data-ng-bind="shopFruit.user.displayName"></span>-->
           <!--</small>-->
-          <div class="row" ng-if="shopFruit.mobile !== '0'">
+          <div class="row" >
             <div class="col-md-6">
               <h4 class="list-group-item-heading" data-ng-bind="shopFruit.name"></h4>
               <span class="list-group-item-heading" data-ng-bind="shopFruit.address"></span>
@@ -41,7 +41,7 @@
 
           <!--<button class="btn btn-default" ng-click="findSpecific(shopFruit._id)">Toggle collapse</button>{{shopFruit.isCollapsed}}-->
           <br>
-          <div class="row" ng-if="shopFruit.mobile !== '0'">
+          <div class="row" >
             <div class="col-md-12 text-center">
               <button class="btn btn-primary" ng-click="showDetails=!showDetails">Show Details</button>{{shopFruit.isCollapsed}}
               <div class="alert alert-warning" style="background-color: whitesmoke" ng-if="showDetails">
@@ -55,6 +55,10 @@
                     </div>
                     <form class="form-horizontal" data-ng-submit="updateSpecific(shopFruit)" novalidate>
                       <fieldset>
+
+                        <div class="col-md-2">
+                          <input type="text" data-ng-model="shopFruit.mobile" placeholder="Mobile Number" ng-if="shopFruit.mobile !== '0'" required>
+                        </div>
 
                         <div class="col-md-2">
                           <label>Download App? {{shopFruit.appDownloaded}}</label>
