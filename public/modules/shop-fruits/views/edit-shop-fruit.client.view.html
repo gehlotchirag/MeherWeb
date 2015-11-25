@@ -4,20 +4,130 @@
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="shopFruit.name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
+          <fieldset>
+
+            <div class="col-md-2" ng-if="shopFruit.mobile == '0'">
+              <label>Mobile No</label>
+              <input type="text" data-ng-model="shopFruit.tempMobile" placeholder="Mobile Number" required>
+            </div>
+
+            <div class="col-md-2">
+              <label>Download App? {{shopFruit.appDownloadedx}}</label>
+              <label><input type="checkbox" data-ng-model="shopFruit.appDownloaded"> Login App</label>
+            </div>
+
+            <div class="col-md-4">
+              Delivery Area? <b>{{shopFruit.deliveryDistance}} </b></br>
+              <div class="btn-group">
+                <label class="btn btn-default">
+                  <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="0.5"> 0.5Km
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="1"> 1Km
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="2"> 2Km
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              Delivery time grantee? <b>{{shopFruit.deliveryTime}}</b></br>
+              <div class="btn-group">
+                <label class="btn btn-default">
+                  <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="30"> 30 min
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="45"> 45 min
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="60"> 60 min
+                </label>
+              </div>
+            </div>
+
+            <div class ="row" style="border-top:1px solid whitesmoke">
+              <div class="col-md-2">
+                Start Time?</br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="timeam" name="timeam" maxlength="2" data-ng-model="shopFruit.startTime">
+                    <label for="timeam">AM </label>{{shopFruit.startTime}}
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" id="timepm" class="form-control" name="timepm" maxlength="2" data-ng-model="shopFruit.closeTime">
+                    <label for="timepm">PM </label>{{shopFruit.closeTime}}
+                  </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+              </div>
+
+              <div class="col-md-2">
+                Open All days?{{shopFruit.Offday.name}}</br>
+                <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" ng-model="openalldays">
+      </span>
+                  <select ng-model="shopFruit.Offday" class="form-control" ng-if="!openalldays">
+                    <option value="Sunday" label="Sunday">Sunday</option>
+                    <option value="Monday" label="Monday">Monday</option>
+                    <option value="Tuesday" label="Tuesday">Tuesday</option>
+                    <option value="Wednesday" label="Wednesday">Wednesday</option>
+                    <option value="Thursday" label="Thursday">Thursday</option>
+                    <option value="Friday" label="Friday">Friday</option>
+                    <option value="Saturday" label="Saturday">Saturday</option>
+                  </select>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+
+              <div class="col-md-2">
+                <label>Minimum Price</label>
+                <input type="text" data-ng-model="shopFruit.minimumOrderPrice" placeholder="Minimum Order Price Rs." required>
+              </div>
+
+
+              <div class="col-md-4">
+                Intrest Level {{shopFruit.storeExperience}}</br>
+                <div class="btn-group">
+                  <label class="btn btn-success">
+                    <input type="radio" name="storeExperience" data-ng-model="shopFruit.ourExperience" value="3"> Great
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="storeExperience" data-ng-model="shopFruit.ourExperience" value="2"> Average
+                  </label>
+                  <label class="btn btn-danger">
+                    <input type="radio" name="storeExperience" data-ng-model="shopFruit.ourExperience" value="1"> Not Much
+                  </label>
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="comment">Notes:</label>
+                  <textarea class="form-control" rows="3" id="comment" data-ng-model="shopFruit.notes"></textarea>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group"><br/><br/>
+                  <button class="btn-primary btn-lg" ng-click="setReminder(shopFruit)">Reminder</button>
+                </div>
+              </div>
+            </div>
+
+            <br/>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-10 text-center">
+                  <input type="submit" value="Save Changes" class="btn btn-lg btn-success">
+                </div>
+              </div>
+
+              <div data-ng-show="error" class="text-danger">
+                <strong data-ng-bind="error"></strong>
+              </div>
+            </div>
+          </fieldset>
         </form>
     </div>
 </section>
