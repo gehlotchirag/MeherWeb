@@ -150,7 +150,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       $scope.reminderPost = {
         store: shopFruitData,
         shopName: shopFruitData.name,
-        url: url,
+        url: shopFruitData.url,
         address: shopFruitData.address,
         mobile: shopFruitData.mobile,
         notes: shopFruitData.notes
