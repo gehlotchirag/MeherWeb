@@ -22,7 +22,11 @@ angular.module('shop-fruits').config(['$stateProvider',
           url: '/shop-fruits/:shopFruitId',
           templateUrl: 'modules/shop-fruits/views/view-shop-fruit.client.view.html'
         }).
-        state('editShopFruit', {
+        state('editfromReminderShopFruit', {
+          url: '/shop-near-fruits/:shopFruitId/edit',
+          templateUrl: 'modules/shop-fruits/views/edit-shop-fruit.client.view.html'
+        }).
+    state('editShopFruit', {
           url: '/shop-fruits/:shopFruitId/edit',
           templateUrl: 'modules/shop-fruits/views/edit-shop-fruit.client.view.html'
         });
