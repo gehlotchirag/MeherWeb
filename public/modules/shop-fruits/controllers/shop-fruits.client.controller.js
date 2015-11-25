@@ -87,7 +87,8 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 			var shopFruit = $scope.shopFruit;
 
 			shopFruit.$update(function() {
-				$location.path('shop-fruits/' + shopFruit._id);
+				//$location.path('shop-fruits/' + shopFruit._id);
+				$location.path('reminders/');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
