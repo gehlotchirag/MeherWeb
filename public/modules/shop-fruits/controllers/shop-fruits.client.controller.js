@@ -1,8 +1,8 @@
 'use strict';
 
 // Shop fruits controller
-angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$stateParams', '$location', 'Authentication', 'ShopFruits','$http',
-	function($scope, $stateParams, $location, Authentication, ShopFruits, $http) {
+angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$stateParams', '$location', 'Authentication', 'ShopFruits','$http','$state',
+	function($scope, $stateParams, $location, Authentication, ShopFruits, $http, $state) {
 		$scope.authentication = Authentication;
 
 		// Create new Shop fruit
@@ -146,9 +146,11 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
     };
 
     $scope.setReminder = function(shopFruitData){
+      var url = $state.current.url;
       $scope.reminderPost = {
         store: shopFruitData,
         shopName: shopFruitData.name,
+        url: url,
         address: shopFruitData.address,
         mobile: shopFruitData.mobile,
         notes: shopFruitData.notes
@@ -167,7 +169,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
             $scope.reminderPost = null;
             console.log(response);
           });
-    }
+    };
 
     $scope.updateSpecific = function(shopFruitData) {
       if (shopFruitData.tempMobile)

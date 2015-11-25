@@ -24,6 +24,9 @@ var ReminderSchema = new Schema({
     default: '',
     trim: true
   },
+  url:{
+    type: String
+  },
   address:{
     type: String
   },
