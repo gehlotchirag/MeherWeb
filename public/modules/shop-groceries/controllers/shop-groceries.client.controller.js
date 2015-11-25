@@ -125,7 +125,7 @@ console.log(shopGrocery);
     $scope.updateSpecific = function(shopGroceryData) {
       var shopGrocery = shopGroceryData;
       console.log(shopGrocery);
-      shopGrocery.$update(function() {
+      shopGrocery.pushUpdates(function() {
         //$location.path('shop-groceries/' + shopGrocery._id);
         alert("Saved!");
       }, function(errorResponse) {

@@ -1,17 +1,171 @@
-<section data-ng-controller="ShopFruitsController" data-ng-init="find()">
-    <div class="page-header">
+<section data-ng-controller="ShopFruitsController" data-ng-init="findNearby()">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6">
         <h1>Shop fruits</h1>
+      </div>
+      <div class="col-md-6 ">
+        {{$scope.pageNumber}}
+        <button class="btn btn-danger pull-right" ng-click="loadmore()" type="button">Next Page ></button>
+      </div>
     </div>
+
+    <div class="input-group">
+      <input type="text" g-places-autocomplete ng-model="areaLocation" placeholder="Select Locality" class="form-control"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="findNearby()" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+
+
+  </div>
     <div class="list-group">
-        <a data-ng-repeat="shopFruit in shopFruits" data-ng-href="#!/shop-fruits/{{shopFruit._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="shopFruit.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="shopFruit.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="shopFruit.name"></h4>
-        </a>
+        <div data-ng-repeat="shopFruit in shopFruits" data-ng-href="#!/shop-fruits/{{shopFruit._id}}" class="list-group-item">
+          <!--Posted on-->
+          <!--<span data-ng-bind="shopFruit.created | date:'medium'"></span>-->
+          <!--by-->
+          <!--<span data-ng-bind="shopFruit.user.displayName"></span>-->
+          <!--</small>-->
+          <div class="row" ng-if="shopFruit.mobile !== '0'">
+            <div class="col-md-6">
+              <h4 class="list-group-item-heading" data-ng-bind="shopFruit.name"></h4>
+              <span class="list-group-item-heading" data-ng-bind="shopFruit.address"></span>
+            </div>
+            <div class="col-md-6 pull-right">
+              <div class = "pull-right">
+                <span class="list-group-item-heading" data-ng-bind="shopFruit.mobile"></span>
+                <button class="button btn-success">call</button>
+              </div>
+            </div>
+            <hr/>
+          </div>
+
+          <!--<button class="btn btn-default" ng-click="findSpecific(shopFruit._id)">Toggle collapse</button>{{shopFruit.isCollapsed}}-->
+          <br>
+          <div class="row" ng-if="shopFruit.mobile !== '0'">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-primary" ng-click="showDetails=!showDetails">Show Details</button>{{shopFruit.isCollapsed}}
+              <div class="alert alert-warning" style="background-color: whitesmoke" ng-if="showDetails">
+                <div collapse="shopFruit['isCollapsed']">
+                  <div class="well well-lg">{{shopFruit}}</div>
+                  <div class="row" style="border-top:1px solid whitesmoke ">
+                    <div class="col-md-2">
+                      Delivery boy?</br>
+                      <button class="button btn-success">Yes</button>
+                      <button class="button btn-danger" ng-click="removeSpecific(shopFruit)">No</button>
+                    </div>
+                    <form class="form-horizontal" data-ng-submit="updateSpecific(shopFruit)" novalidate>
+                      <fieldset>
+
+                        <div class="col-md-2">
+                          <label>Download App? {{shopFruit.appDownloaded}}</label>
+                          <label><input type="checkbox" data-ng-model="shopFruit.appDownloaded"> Login App</label>
+                        </div>
+
+                        <div class="col-md-4">
+                          Delivery Area? <b>{{shopFruit.deliveryDistance}} </b></br>
+                          <div class="btn-group">
+                            <label class="btn btn-default">
+                              <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="0.5"> 0.5Km
+                            </label>
+                            <label class="btn btn-default">
+                              <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="1"> 1Km
+                            </label>
+                            <label class="btn btn-default">
+                              <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="2"> 2Km
+                            </label>
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                          Delivery time grantee? <b>{{shopFruit.deliveryTime}}</b></br>
+                          <div class="btn-group">
+                            <label class="btn btn-default">
+                              <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="30"> 30 min
+                            </label>
+                            <label class="btn btn-default">
+                              <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="45"> 40 min
+                            </label>
+                            <label class="btn btn-default">
+                              <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="60"> 60 min
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class ="row" style="border-top:1px solid whitesmoke">
+
+                          <div class="col-md-2">
+                            Start Time?</br>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <input type="text" class="form-control" id="timeam" name="timeam" maxlength="2" data-ng-model="shopFruit.startTime">
+                                <label for="timeam">AM </label>{{shopFruit.startTime}}
+                              </div>
+                              <div class="col-md-6">
+                                <input type="text" id="timepm" class="form-control" name="timepm" maxlength="2" data-ng-model="shopFruit.closeTime">
+                                <label for="timepm">PM </label>{{shopFruit.closeTime}}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-2">
+                            Open All days?{{shopFruit.Offday.name}}</br>
+                            <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" ng-model="openalldays">
+      </span>
+                              <select ng-model="shopFruit.Offday" class="form-control" ng-if="!openalldays">
+                                <option value="Sunday" label="Sunday">Sunday</option>
+                                <option value="Monday" label="Monday">Monday</option>
+                                <option value="Tuesday" label="Tuesday">Tuesday</option>
+                                <option value="Wednesday" label="Wednesday">Wednesday</option>
+                                <option value="Thursday" label="Thursday">Thursday</option>
+                                <option value="Friday" label="Friday">Friday</option>
+                                <option value="Saturday" label="Saturday">Saturday</option>
+                              </select>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+
+                          <div class="col-md-4">
+                            Intrest Level {{shopFruit.storeExperience}}</br>
+                            <div class="btn-group">
+                              <label class="btn btn-success">
+                                <input type="radio" name="storeExperience" data-ng-model="shopFruit.ourExperience" value="3"> Great
+                              </label>
+                              <label class="btn btn-primary">
+                                <input type="radio" name="storeExperience" data-ng-model="shopFruit.ourExperience" value="2"> Average
+                              </label>
+                              <label class="btn btn-danger">
+                                <input type="radio" name="storeExperience" data-ng-model="shopFruit.ourExperience" value="1"> Not Much
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <br/>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-10 text-center">
+                              <input type="submit" value="Save Changes" class="btn btn-lg btn-success">
+                            </div>
+                          </div>
+
+                          <div data-ng-show="error" class="text-danger">
+                            <strong data-ng-bind="error"></strong>
+                          </div>
+                        </div>
+                      </fieldset>
+
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!shopFruits.$resolved || shopFruits.length">
     	No Shop fruits yet, why don't you <a href="/#!/shop-fruits/create">create one</a>?
