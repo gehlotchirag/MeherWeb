@@ -8,8 +8,8 @@ angular.module('reminders').controller('RemindersController', ['$scope', '$state
 		// Create new Reminder
     $scope.gotoStores = function(reminderData){
       console.log(reminderData);
-      console.log(reminderData.url + reminderData.store._id +"/edit");
-      $location.path(reminderData.url + reminderData.store._id +"/edit");
+      console.log(reminderData.url + "/"+ reminderData.store._id +"/edit");
+      $location.path(reminderData.url +"/"+ reminderData.store._id +"/edit");
     };
 
 		$scope.create = function() {
