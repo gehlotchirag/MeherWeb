@@ -26,10 +26,6 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
 
     $scope.removeSpecific = function(shopFruit) {
-
-      //$scope.shopFruit.$remove(function () {
-      //  $location.path('shop-groceries');
-      //});
       $http({
         method: 'DELETE',
         data: shopFruit,
@@ -46,8 +42,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
         console.log(response)
         alert("error" + response);
       });
-
-    }
+    };
 
 
     //$scope.removeSpecific = function(shopFruit) {
@@ -150,6 +145,8 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
 
     $scope.updateSpecific = function(shopFruitData) {
+      if (shopFruitData.tempMobile)
+        shopFruitData.mobile = shopFruitData.tempMobile;
       var shopFruit = shopFruitData;
       console.log(shopFruit);
       $http({
