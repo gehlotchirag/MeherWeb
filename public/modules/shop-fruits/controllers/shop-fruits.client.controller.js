@@ -33,9 +33,22 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
             }
           }
         } else {
-          $scope.shopFruit.$remove(function () {
-            $location.path('shop-groceries');
+
+          //$scope.shopFruit.$remove(function () {
+          //  $location.path('shop-groceries');
+          //});
+          $http({
+            method: 'PUT',
+            data: shopFruit,
+            url: 'http://getmeher.com:3000/shop-fruits/'+shopFruit._id
+          }).then(function successCallback(response) {
+            console.log(response)
+            alert("done")
+          }, function errorCallback(response) {
+            console.log(response)
+            alert("error" + response);
           });
+
         }
       }
     };
