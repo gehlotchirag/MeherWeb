@@ -49,7 +49,32 @@ var ShopFruitSchema = new Schema({
     default: '',
     trim: true
   },
-	created: {
+  appDownloaded: {
+    type : Boolean
+  },
+  deliveryDistance:{
+    type: String,
+    default: "0.5"
+  },
+  deliveryTime:{
+    type: String,
+    default: "30"
+  },
+  startTime:{
+    type: String,
+    default: "9"
+  },
+  closeTime:{
+    type: String,
+    default: "10"
+  },
+  ourExperience:{
+    type: String
+  },
+  OffDay:{
+    type: String
+  },
+  created: {
 		type: Date,
 		default: Date.now
 	},
