@@ -111,7 +111,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       }
       $scope.pageNumber = $scope.pageNumber + 1;
       console.log($scope.pageNumber);
-      $http.get('http://getmeher.com:3000/shop-groceries/near/' + $scope.areaLng + '/' + $scope.areaLat + '/' + $scope.pageNumber).
+      $http.get('http://getmeher.com:3000/shop-fruits/near/' + $scope.areaLng + '/' + $scope.areaLat + '/' + $scope.pageNumber).
           then(function (response) {
             $scope.shopFruits = (response.data);
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -125,12 +125,26 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
     $scope.updateSpecific = function(shopFruitData) {
       var shopFruit = shopFruitData;
       console.log(shopFruit);
-      shopFruit.pushUpdates(function() {
-        //$location.path('shop-groceries/' + shopFruit._id);
-        alert("Saved!");
-      }, function(errorResponse) {
-        $scope.error = errorResponse.data.message;
+      $http({
+        method: 'PUT',
+        data: shopFruitData,
+        url: 'http://getmeher.com:3000/shop-fruits/'+shopFruitData._id
+      }).then(function successCallback(response) {
+        console.log(response)
+        alert("done")
+      }, function errorCallback(response) {
+        console.log(response)
+        alert("error" + response);
       });
+
+
+      //shopFruit.pushUpdates(function() {
+      //  //$location.path('shop-groceries/' + shopFruit._id);
+      //  alert("Saved!");
+      //}, function(errorResponse) {
+      //  $scope.error = errorResponse.data.message;
+      //});
+
     };
 
     // Find existing Shop grocery
