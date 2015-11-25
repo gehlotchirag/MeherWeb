@@ -68,10 +68,19 @@ var ShopFruitSchema = new Schema({
     type: String,
     default: "10"
   },
+  preference:{
+    type: Number
+  },
   ourExperience:{
     type: String
   },
   OffDay:{
+    type: String
+  },
+  minimumOrderPrice:{
+    type: String
+  },
+  notes:{
     type: String
   },
   created: {

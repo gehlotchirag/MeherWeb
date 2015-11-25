@@ -37,7 +37,6 @@
 
                 <span class="list-group-item-heading" data-ng-bind="shopFruit.phone" ></span>
                 <button class="button btn-danger" >call</button>
-
               </div>
             </div>
             <hr/>
@@ -50,7 +49,6 @@
               <button class="btn btn-primary" ng-click="showDetails=!showDetails">Show Details</button>{{shopFruit.isCollapsed}}
               <div class="alert alert-warning" style="background-color: whitesmoke" ng-if="showDetails">
                 <div collapse="shopFruit['isCollapsed']">
-                  <div class="well well-lg">{{shopFruit}}</div>
                   <div class="row" style="border-top:1px solid whitesmoke ">
                     <div class="col-md-2">
                       Home Delivery?</br>
@@ -60,12 +58,13 @@
                     <form class="form-horizontal" data-ng-submit="updateSpecific(shopFruit)" novalidate>
                       <fieldset>
 
-                        <div class="col-md-2">
-                          <input type="text" data-ng-model="shopFruit.mobile" placeholder="Mobile Number" ng-if="shopFruit.tempMobile == '0'" required>
+                        <div class="col-md-2" ng-if="shopFruit.mobile == '0'">
+                          <label>Mobile No</label>
+                          <input type="text" data-ng-model="shopFruit.tempMobile" placeholder="Mobile Number" required>
                         </div>
 
                         <div class="col-md-2">
-                          <label>Download App? {{shopFruit.appDownloaded}}</label>
+                          <label>Download App? {{shopFruit.appDownloadedx}}</label>
                           <label><input type="checkbox" data-ng-model="shopFruit.appDownloaded"> Login App</label>
                         </div>
 
@@ -82,7 +81,6 @@
                               <input type="radio" name="color" data-ng-model="shopFruit.deliveryDistance" value="2"> 2Km
                             </label>
                           </div>
-
                         </div>
 
                         <div class="col-md-4">
@@ -92,7 +90,7 @@
                               <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="30"> 30 min
                             </label>
                             <label class="btn btn-default">
-                              <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="45"> 40 min
+                              <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="45"> 45 min
                             </label>
                             <label class="btn btn-default">
                               <input type="radio" name="deliveryTime" data-ng-model="shopFruit.deliveryTime" value="60"> 60 min
@@ -101,7 +99,6 @@
                         </div>
 
                         <div class ="row" style="border-top:1px solid whitesmoke">
-
                           <div class="col-md-2">
                             Start Time?</br>
                             <div class="row">
@@ -134,6 +131,12 @@
                             </div><!-- /input-group -->
                           </div><!-- /.col-lg-6 -->
 
+                          <div class="col-md-2">
+                            <label>Minimum Price</label>
+                            <input type="text" data-ng-model="shopFruit.minimumOrderPrice" placeholder="Minimum Order Price Rs." required>
+                          </div>
+
+
                           <div class="col-md-4">
                             Intrest Level {{shopFruit.storeExperience}}</br>
                             <div class="btn-group">
@@ -148,7 +151,20 @@
                               </label>
                             </div>
                           </div>
-
+                          </div>
+                        <br/>
+                        <div class="row">
+                          <div class="col-md-4">
+                               <div class="form-group">
+                                <label for="comment">Notes:</label>
+                                <textarea class="form-control" rows="3" id="comment" data-ng-model="shopFruit.notes"></textarea>
+                              </div>
+                           </div>
+                          <div class="col-md-4">
+                            <div class="form-group"><br/><br/>
+                              <button class="btn-primary btn-lg">Reminder</button>
+                            </div>
+                          </div>
                         </div>
 
                         <br/>

@@ -143,6 +143,29 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
           });
     };
 
+    $scope.setReminder = function(shopFruitData){
+      $scope.reminderPost = {
+        store: shopFruitData,
+        shopName: shopFruitData.name,
+        address: shopFruitData.address,
+        mobile: shopFruitData.mobile,
+        notes: shopFruitData.notes
+      };
+      $http({
+        url: 'http://getmeher.com:3000/reminders',
+        method: "POST",
+        data: $scope.reminderPost
+      }).then(function(response) {
+            // success
+            alert("done");
+            console.log(response);
+          },
+          function(response) { // optional
+            // failed
+            $scope.reminderPost = null;
+            console.log(response);
+          });
+    }
 
     $scope.updateSpecific = function(shopFruitData) {
       if (shopFruitData.tempMobile)

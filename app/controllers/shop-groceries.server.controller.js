@@ -117,7 +117,7 @@ exports.listNear = function(req, res) {
         { $near :
         {
           $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ] },
-          $maxDistance: 200000
+          $maxDistance: 5000
         }
         }
       }
