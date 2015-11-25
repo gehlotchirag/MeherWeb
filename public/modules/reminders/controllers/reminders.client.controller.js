@@ -28,20 +28,23 @@ angular.module('reminders').controller('RemindersController', ['$scope', '$state
 
 		// Remove existing Reminder
 		$scope.remove = function(reminder) {
-			if ( reminder ) { 
-				reminder.$remove();
+      if(confirm('Do you want to delete this reminder?')) {
 
-				for (var i in $scope.reminders) {
-					if ($scope.reminders [i] === reminder) {
-						$scope.reminders.splice(i, 1);
-					}
-				}
-			} else {
-        console.log($scope.reminder);
-				$scope.reminder.$remove(function() {
-					$location.path('reminders');
-				});
-			}
+        if (reminder) {
+          reminder.$remove();
+
+          for (var i in $scope.reminders) {
+            if ($scope.reminders [i] === reminder) {
+              $scope.reminders.splice(i, 1);
+            }
+          }
+        } else {
+          console.log($scope.reminder);
+          $scope.reminder.$remove(function () {
+            $location.path('reminders');
+          });
+        }
+      }
 		};
 
 		// Update existing Reminder
