@@ -26,22 +26,24 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
 
     $scope.removeSpecific = function(shopFruit) {
-      $http({
-        method: 'DELETE',
-        data: shopFruit,
-        url: 'http://getmeher.com:3000/shop-fruits/'+shopFruit._id
-      }).then(function successCallback(response) {
-        console.log(response)
-        alert("done");
-        for (var i in $scope.shopFruits) {
-          if ($scope.shopFruits [i] === shopFruit) {
-            $scope.shopFruits.splice(i, 1);
+      if(confirm('Please Explain about App before Deleting')) {
+        $http({
+          method: 'DELETE',
+          data: shopFruit,
+          url: 'http://getmeher.com:3000/shop-fruits/' + shopFruit._id
+        }).then(function successCallback(response) {
+          console.log(response)
+          alert("removed");
+          for (var i in $scope.shopFruits) {
+            if ($scope.shopFruits [i] === shopFruit) {
+              $scope.shopFruits.splice(i, 1);
+            }
           }
-        }
-      }, function errorCallback(response) {
-        console.log(response)
-        alert("error" + response);
-      });
+        }, function errorCallback(response) {
+          console.log(response)
+          alert("error" + response);
+        });
+      }
     };
 
 
@@ -157,7 +159,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
         data: $scope.reminderPost
       }).then(function(response) {
             // success
-            alert("done");
+            alert("Reminder Set");
             console.log(response);
           },
           function(response) { // optional
@@ -178,7 +180,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
         url: 'http://getmeher.com:3000/shop-fruits/'+shopFruitData._id
       }).then(function successCallback(response) {
         console.log(response)
-        alert("done")
+        alert("updates saved")
       }, function errorCallback(response) {
         console.log(response)
         alert("error" + response);
