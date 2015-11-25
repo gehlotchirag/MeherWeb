@@ -22,7 +22,34 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 				$scope.error = errorResponse.data.message;
 			});
 		};
-    
+
+
+
+    $scope.removeSpecific = function(shopFruit) {
+
+      //$scope.shopFruit.$remove(function () {
+      //  $location.path('shop-groceries');
+      //});
+      $http({
+        method: 'PUT',
+        data: shopFruit,
+        url: 'http://getmeher.com:3000/shop-fruits/'+shopFruit._id
+      }).then(function successCallback(response) {
+        console.log(response)
+        alert("done");
+        for (var i in $scope.shopFruits) {
+          if ($scope.shopFruits [i] === shopFruit) {
+            $scope.shopFruits.splice(i, 1);
+          }
+        }
+      }, function errorCallback(response) {
+        console.log(response)
+        alert("error" + response);
+      });
+
+    }
+
+
     $scope.removeSpecific = function(shopFruit) {
       if(confirm('Please Explain about App before Deleting')) {
         if (shopFruit) {
@@ -33,22 +60,9 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
             }
           }
         } else {
-
-          //$scope.shopFruit.$remove(function () {
-          //  $location.path('shop-groceries');
-          //});
-          $http({
-            method: 'PUT',
-            data: shopFruit,
-            url: 'http://getmeher.com:3000/shop-fruits/'+shopFruit._id
-          }).then(function successCallback(response) {
-            console.log(response)
-            alert("done")
-          }, function errorCallback(response) {
-            console.log(response)
-            alert("error" + response);
+          $scope.shopFruit.$remove(function () {
+            $location.path('shop-groceries');
           });
-
         }
       }
     };
