@@ -147,6 +147,8 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
     $scope.setReminder = function(shopFruitData){
       var url = $state.current.url;
+      console.log(url)
+      console.log($state.current)
       $scope.reminderPost = {
         store: shopFruitData,
         shopName: shopFruitData.name,
