@@ -6,6 +6,9 @@ angular.module('reminders').controller('RemindersController', ['$scope', '$state
 		$scope.authentication = Authentication;
 
 		// Create new Reminder
+    $scope.gotoStores = function(reminderData){
+      $location.path('shop-fruits/' + reminderData.store._id +"/edit");
+    }
 		$scope.create = function() {
 			// Create new Reminder object
 			var reminder = new Reminders ({
