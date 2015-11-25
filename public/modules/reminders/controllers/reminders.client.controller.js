@@ -37,6 +37,7 @@ angular.module('reminders').controller('RemindersController', ['$scope', '$state
 					}
 				}
 			} else {
+        console.log($scope.reminder);
 				$scope.reminder.$remove(function() {
 					$location.path('reminders');
 				});
