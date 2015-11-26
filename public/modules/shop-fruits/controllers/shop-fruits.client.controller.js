@@ -51,7 +51,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
     // Remove existing Shop fruit
 		$scope.remove = function(shopFruit) {
-			if ( shopFruit ) { 
+			if ( shopFruit ) {
 				shopFruit.$remove();
 
 				for (var i in $scope.shopFruits) {
@@ -156,6 +156,12 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
     };
 
     $scope.updateSpecific = function(shopFruitData) {
+      shopFruitData.url = $state.current.url;
+      var callLogData = {
+        store: shopFruitData,
+        notes:shopFruit.notes,
+        url:shopFruitData.url
+      };
       console.log(shopFruitData);
       if (shopFruitData) {
         if (shopFruitData.tempMobile)
@@ -168,7 +174,19 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
           url: 'http://getmeher.com:3000/shop-fruits/' + shopFruitData._id
         }).then(function successCallback(response) {
           console.log(response)
-          alert("updates saved")
+          alert("updates saved");
+          $http({
+            method: 'POST',
+            data: callLogData,
+            url: 'http://getmeher.com:3000/calldetails/'
+          }).then(function successCallback(response) {
+            console.log(response)
+            alert("call log saved");
+          }, function errorCallback(response) {
+            console.log(response)
+            alert("error" + response);
+          });
+
         }, function errorCallback(response) {
           console.log(response)
           alert("error" + response);
@@ -189,7 +207,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
     // Find existing Shop fruit
 		$scope.findOne = function() {
-			$scope.shopFruit = ShopFruits.get({ 
+			$scope.shopFruit = ShopFruits.get({
 				shopFruitId: $stateParams.shopFruitId
 			});
 		};

@@ -1,0 +1,38 @@
+<section data-ng-controller="CalldetailsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Calldetails</h1>
+    </div>
+    <div class="list-group">
+        <div data-ng-repeat="calldetail in calldetails" data-ng-href="#!/calldetails/{{calldetail._id}}" class="list-group-item">
+          <div class="row">
+            <div class="col-md-2">
+              {{calldetail.notes}}
+            </div>
+            <div class="col-md-2">
+              {{calldetail.store.name}}
+            </div>
+            <div class="col-md-2">
+              {{calldetail.store.mobile}}
+              <button class="button btn-success">call</button>
+            </div>
+            <div class="col-md-2">
+              <button class="button btn-success" ng-click="gotoStores(calldetail)">Go to Store</button>
+            </div>
+            <div class="col-md-2">
+              <button class="button btn-danger" data-ng-click="remove(calldetail);">Delete calldetail</button>
+            </div>
+
+          </div>
+			<!--<small class="list-group-item-text">-->
+				<!--Posted on-->
+				<!--<span data-ng-bind="calldetail.created | date:'medium'"></span>-->
+				<!--by-->
+				<!--<span data-ng-bind="calldetail.user.displayName"></span>-->
+			<!--</small>-->
+			<!--<h4 class="list-group-item-heading" data-ng-bind="calldetail.name"></h4>-->
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!calldetails.$resolved || calldetails.length">
+    	No Calldetails yet, why don't you <a href="/#!/calldetails/create">create one</a>?
+    </div>
+</section>
