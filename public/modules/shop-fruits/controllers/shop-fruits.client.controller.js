@@ -49,24 +49,6 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
     };
 
 
-    //$scope.removeSpecific = function(shopFruit) {
-    //  if(confirm('Please Explain about App before Deleting')) {
-    //    if (shopFruit) {
-    //      shopFruit.$remove();
-    //      for (var i in $scope.shopFruits) {
-    //        if ($scope.shopFruits [i] === shopFruit) {
-    //          $scope.shopFruits.splice(i, 1);
-    //        }
-    //      }
-    //    } else {
-    //      $scope.shopFruit.$remove(function () {
-    //        $location.path('shop-groceries');
-    //      });
-    //    }
-    //  }
-    //};
-
-
     // Remove existing Shop fruit
 		$scope.remove = function(shopFruit) {
 			if ( shopFruit ) { 
@@ -195,7 +177,6 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       else{
         alert("Please Tick tie up!")
       }
-
     };
 
     // Find existing Shop grocery
