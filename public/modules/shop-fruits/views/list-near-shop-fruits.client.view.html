@@ -20,9 +20,9 @@
 
   </div>
   <div class="list-group">
-    <div data-ng-repeat="shopFruit in shopFruits" data-ng-href="#!/shop-fruits/{{shopFruit._id}}" class="list-group-item">
+    <div data-ng-repeat="shopFruit in shopFruits" data-ng-href="#!/shop-fruits/{{shopFruit._id}}" class="list-group-item" ng-hide="shopFruit.verified">
 
-      <div class="row" ng-if="shopFruit.verified==false" >
+      <div class="row">
         <div class="col-md-6">
           <h4 class="list-group-item-heading" data-ng-bind="shopFruit.name"></h4>
           <span class="list-group-item-heading" data-ng-bind="shopFruit.address"></span>
