@@ -160,6 +160,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       var callLogData = {
         store: shopFruitData,
         notes:shopFruitData.notes,
+        address:shopFruitData.address,
         url:shopFruitData.url
       };
       console.log(shopFruitData);
@@ -174,17 +175,18 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
           url: 'http://getmeher.com:3000/shop-fruits/' + shopFruitData._id
         }).then(function successCallback(response) {
           console.log(response)
-          alert("updates saved");
+          //alert("updates saved");
           $http({
             method: 'POST',
             data: callLogData,
             url: 'http://getmeher.com:3000/calldetails/'
           }).then(function successCallback(response) {
-            console.log(response)
-            alert("call log saved");
+            console.log(response);
+            alert("updates saved");
           }, function errorCallback(response) {
-            console.log(response)
-            alert("error" + response);
+            console.log(response);
+            console.log("error" + response);
+            alert("updates saved");
           });
 
         }, function errorCallback(response) {

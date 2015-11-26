@@ -13,7 +13,9 @@
             </div>
             <div class="col-md-2">
               {{calldetail.store.mobile}}
-              <button class="button btn-success">call</button>
+              <button class="button btn-success" ng-if="calldetail.store.ourExperiencex ==2">{{calldetail.store.ourExperience}}</button>
+              <button class="button btn-primary" ng-if="calldetail.store.ourExperiencex ==1">{{calldetail.store.ourExperience}}</button>
+              <button class="button btn-danger" ng-if="calldetail.store.ourExperiencex==0">{{calldetail.store.ourExperience}}</button>
             </div>
             <div class="col-md-2">
               Verified to join: {{calldetail.store.verified}}

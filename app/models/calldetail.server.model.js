@@ -16,6 +16,13 @@ var CalldetailSchema = new Schema({
   notes:{
     type: String
   },
+  address: {
+    type: String,
+    default: '',
+    unique: true,
+    required: 'Please fill Shop address',
+    trim: true
+  },
   url:{
     type: String
   },
