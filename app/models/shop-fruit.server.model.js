@@ -49,6 +49,9 @@ var ShopFruitSchema = new Schema({
     default: '',
     trim: true
   },
+  verified:{
+    type : Boolean
+  },
   appDownloaded: {
     type : Boolean
   },
@@ -78,9 +81,6 @@ var ShopFruitSchema = new Schema({
     type: String
   },
   minimumOrderPrice:{
-    type: String
-  },
-  notes:{
     type: String
   },
   created: {
