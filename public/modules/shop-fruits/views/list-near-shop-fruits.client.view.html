@@ -5,9 +5,8 @@
         <h1>Shop fruits</h1>
       </div>
       <div class="col-md-6 ">
-        <b>Page:
-          {{window.pageNumber}}
-        </b>
+        <b>Page:{{window.pageNumber}}</b>
+
         <button class="btn btn-danger pull-right" ng-click="loadmore()" type="button">Next Page ></button>
       </div>
     </div>
@@ -22,11 +21,7 @@
   </div>
   <div class="list-group">
     <div data-ng-repeat="shopFruit in shopFruits" data-ng-href="#!/shop-fruits/{{shopFruit._id}}" class="list-group-item">
-      <!--Posted on-->
-      <!--<span data-ng-bind="shopFruit.created | date:'medium'"></span>-->
-      <!--by-->
-      <!--<span data-ng-bind="shopFruit.user.displayName"></span>-->
-      <!--</small>-->
+
       <div class="row" >
         <div class="col-md-6">
           <h4 class="list-group-item-heading" data-ng-bind="shopFruit.name"></h4>
@@ -63,9 +58,6 @@
                           <input type="checkbox" name="tieup" data-ng-model="shopFruit.verified" required> yes
                         </label>
                         <button class="btn btn-danger" ng-click="removeSpecific(shopFruit)"> No </button>
-                        <!--<label class="btn btn-danger">-->
-                        <!--<input type="radio" name="tieup" ng-click="removeSpecific(shopFruit)" value="1"> No-->
-                        <!--</label>-->
                       </div>
                     </div>
 

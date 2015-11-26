@@ -163,7 +163,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
         url:shopFruitData.url
       };
       console.log(shopFruitData);
-      if (shopFruitData) {
+      if (shopFruitData.verified) {
         if (shopFruitData.tempMobile)
           shopFruitData.mobile = shopFruitData.tempMobile;
         var shopFruit = shopFruitData;
