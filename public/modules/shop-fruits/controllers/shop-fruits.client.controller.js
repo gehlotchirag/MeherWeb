@@ -4,8 +4,9 @@
 angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$stateParams', '$location', 'Authentication', 'ShopFruits','$http','$state',
 	function($scope, $stateParams, $location, Authentication, ShopFruits, $http, $state) {
 		$scope.authentication = Authentication;
-    $scope.openalldays = true;
-    window.pageNumber = 0;
+		$scope.openalldays = true;
+		$scope.changenumber = false;
+
 		// Create new Shop fruit
 		$scope.create = function() {
 			// Create new Shop fruit object
@@ -86,7 +87,6 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 		// Update existing Shop fruit
 		$scope.update = function() {
 			var shopFruit = $scope.shopFruit;
-
 			shopFruit.$update(function() {
 				//$location.path('shop-fruits/' + shopFruit._id);
 				$location.path('reminders/');
@@ -103,7 +103,6 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
     $scope.findNearby = function() {
       //$scope.shopFruits = shopFruits.query();
       $scope.pageNumber = 0;
-      window.pageNumber = $scope.pageNumber;
       console.log($scope.areaLocation);
       if ($scope.areaLocation) {
         $scope.areaLng = $scope.areaLocation.geometry.location.lng();
@@ -137,7 +136,6 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
         $scope.areaLat = 19;
       }
       $scope.pageNumber = $scope.pageNumber + 1;
-      window.pageNumber = $scope.pageNumber;
       console.log($scope.pageNumber);
       $http.get('http://getmeher.com:3000/shop-fruits/near/' + $scope.areaLng + '/' + $scope.areaLat + '/' + $scope.pageNumber).
           then(function (response) {
@@ -153,11 +151,11 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       shopFruitData.url = $state.current.url;
       $scope.reminderPost = {
         store: shopFruitData,
-        notes: shopFruitData.notes,
         shopName: shopFruitData.name,
         url: shopFruitData.url,
         address: shopFruitData.address,
-        mobile: shopFruitData.mobile
+        mobile: shopFruitData.mobile,
+        notes: shopFruitData.notes
       };
       $http({
         url: 'http://getmeher.com:3000/reminders',
@@ -176,9 +174,8 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
     };
 
     $scope.updateSpecific = function(shopFruitData) {
-      console.log(shopFruit);
-
-      if (shopFruit.verified) {
+      console.log(shopFruitData);
+      if (shopFruitData) {
         if (shopFruitData.tempMobile)
           shopFruitData.mobile = shopFruitData.tempMobile;
         var shopFruit = shopFruitData;
@@ -195,7 +192,10 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
           alert("error" + response);
         });
       }
-      else{alert("please tick tie up")}
+      else{
+        alert("Please Tick tie up!")
+      }
+
     };
 
     // Find existing Shop grocery
