@@ -159,7 +159,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       shopFruitData.url = $state.current.url;
       var callLogData = {
         store: shopFruitData,
-        notes:shopFruit.notes,
+        notes:shopFruitData.notes,
         url:shopFruitData.url
       };
       console.log(shopFruitData);
