@@ -16,7 +16,8 @@
               <button class="button btn-success">call</button>
             </div>
             <div class="col-md-2">
-              <button class="button btn-success" ng-click="gotoStores(calldetail)">Go to Store</button>
+              Verified to join: {{calldetail.store.verified}}
+              <!--<button class="button btn-success" ng-click="gotoStores(calldetail)">Go to Store</button>-->
             </div>
 
             <div class="col-md-2">
@@ -33,6 +34,8 @@
             </div>
 
             <div class="col-md-2">
+              <button class="button btn-success" ng-click="gotoStores(calldetail)">Go to Store</button><br>
+
               <button class="button btn-danger" data-ng-click="remove(calldetail);">Delete calldetail</button>
             </div>
 
