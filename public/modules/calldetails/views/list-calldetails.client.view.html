@@ -9,10 +9,10 @@
               {{calldetail.notes}}
             </div>
             <div class="col-md-2">
-              {{calldetail.store.name}}
+              {{calldetail.store.name}}: {{calldetail.store.ourExperience}}
             </div>
             <div class="col-md-2">
-              {{calldetail.store.mobile}}
+              {{calldetail.store.mobile}} {{calldetail.created | date:'medium'}}
               <button class="button btn-success" ng-if="calldetail.store.ourExperiencex ==2">{{calldetail.store.ourExperience}}</button>
               <button class="button btn-primary" ng-if="calldetail.store.ourExperiencex ==1">{{calldetail.store.ourExperience}}</button>
               <button class="button btn-danger" ng-if="calldetail.store.ourExperiencex==0">{{calldetail.store.ourExperience}}</button>
