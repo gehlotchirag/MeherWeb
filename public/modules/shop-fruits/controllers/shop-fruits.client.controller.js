@@ -129,6 +129,33 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
           });
     };
 
+
+    $scope.sendDownloadSMS = function(shopFruitData,event){
+      event.preventDefault();
+      $http({
+        url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
+        method: "POST",
+        params: {
+          User:"mehertech",
+          passwd:"developer007",
+          mobilenumber: "9820272106",
+          message: "Thank you for ordering via Meher",
+          sid:"mehera",
+          mtype:"N",
+          DR:"Y"
+        }
+      }).then(function(response) {
+            // success
+            alert("SMS Send");
+            console.log(response);
+          },
+          function(response) { // optional
+            // failed
+            $scope.downloadSMS = null;
+            console.log(response);
+          });
+    };
+
     $scope.setReminder = function(shopFruitData){
       shopFruitData.url = $state.current.url;
       $scope.reminderPost = {

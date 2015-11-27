@@ -171,17 +171,24 @@
                     <br/><br/>
                     <div class="row">
                       <br/>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label for="comment">Notes:</label>
                           <textarea class="form-control" rows="3" id="comment" data-ng-model="shopFruit.notes"></textarea>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group"><br/><br/>
                           <button class="btn-primary btn-lg" ng-click="setReminder(shopFruit)">Reminder</button>
                         </div>
                       </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group"><br/><br/>
+                          <button class="btn-success btn-lg" ng-click="sendDownloadSMS(shopFruit,$event)">Send Download SMS</button>
+                        </div>
+                      </div>
+
 
                     </div>
 
