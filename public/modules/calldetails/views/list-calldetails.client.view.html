@@ -36,11 +36,15 @@
             </div>
 
             <div class="col-md-2">
-              <button class="button btn-success" ng-click="gotoStores(calldetail)">Go to Store</button><br>
-
+              <button class="button btn-success" ng-click="gotoStores(calldetail)">Go to Store</button><br/><br/>
               <button class="button btn-danger" data-ng-click="remove(calldetail);">Delete calldetail</button>
             </div>
 
+          </div>
+          <div class="row">
+            <small class="list-group-item-text">
+            <span data-ng-bind="calldetail.store.address"></span>
+            </small>
           </div>
 			<!--<small class="list-group-item-text">-->
 				<!--Posted on-->
