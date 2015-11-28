@@ -45,7 +45,7 @@ angular.module('fruits').controller('FruitsController', ['$scope', '$stateParams
 			var fruit = $scope.fruit;
 
 			fruit.$update(function() {
-				$location.path('fruits/' + fruit._id);
+				$location.path('/fruits');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
