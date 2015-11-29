@@ -15,13 +15,13 @@ module.exports = function(app) {
   app.route('/shop-groceries/near/:lng/:lat/:page')
       .get(shopGroceries.listNear);
 
-  app.route('/shop-groceries/mobile/:mobile')
+  app.route('/shop-groceries/mobile/:mobile/:deviceId')
       .get(shopGroceries.shopGroceryByMobile);
 
   app.route('/shop-groceries/:shopGroceryId')
 		.get(shopGroceries.read)
 		//.put(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.update)
-		.put(users.requiresLogin, shopGroceries.update)
+		.put(shopGroceries.update)
 		.delete(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.delete);
 
 	// Finish by binding the Shop grocery middleware

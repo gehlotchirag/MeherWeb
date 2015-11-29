@@ -15,12 +15,12 @@ module.exports = function(app) {
   app.route('/shop-electronics/near/:lng/:lat/:page')
       .get(shopElectronics.listNear);
 
-  app.route('/shop-electronics/mobile/:mobile')
+  app.route('/shop-electronics/mobile/:mobile/:deviceId')
       .get(shopElectronics.shopElectronicByMobile);
 
   app.route('/shop-electronics/:shopElectronicId')
 		.get(shopElectronics.read)
-		.put(users.requiresLogin, shopElectronics.hasAuthorization, shopElectronics.update)
+		.put(shopElectronics.update)
 		.delete(users.requiresLogin, shopElectronics.hasAuthorization, shopElectronics.delete);
 
 	// Finish by binding the Shop electronic middleware

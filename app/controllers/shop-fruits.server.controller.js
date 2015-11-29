@@ -137,7 +137,7 @@ exports.listNear = function(req, res) {
  * Shop fruit middleware
  */
 exports.shopFruitByID = function(req, res, next, id) { 
-	ShopFruit.findById(id).populate('user', 'displayName').exec(function(err, shopFruit) {
+	ShopFruit.findById(id).exec(function(err, shopFruit) {
 		if (err) return next(err);
 		if (! shopFruit) return next(new Error('Failed to load Shop fruit ' + id));
 		req.shopFruit = shopFruit ;
@@ -146,7 +146,7 @@ exports.shopFruitByID = function(req, res, next, id) {
 };
 
 exports.shopFruitByMobile= function(req, res) {
-  ShopFruit.find({ mobile: req.params.mobile }).exec(function(err, shopGrocery) {
+  ShopFruit.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

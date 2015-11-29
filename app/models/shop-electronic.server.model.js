@@ -49,6 +49,40 @@ var ShopElectronicSchema = new Schema({
     default: '',
     trim: true
   },
+  verified:{
+    type : Boolean
+  },
+  deviceId: {
+    type : String
+  },
+  deliveryDistance:{
+    type: String,
+    default: "5"
+  },
+  deliveryTime:{
+    type: String,
+    default: "60"
+  },
+  startTime:{
+    type: String,
+    default: "10"
+  },
+  closeTime:{
+    type: String,
+    default: "10"
+  },
+  preference:{
+    type: Number
+  },
+  ourExperience:{
+    type: String
+  },
+  OffDay:{
+    type: String
+  },
+  minimumOrderPrice:{
+    type: String
+  },
   created: {
     type: Date,
     default: Date.now

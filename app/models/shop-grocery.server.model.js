@@ -4,18 +4,18 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 /**
  * Shop grocery Schema
  */
 var ShopGrocerySchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Shop grocery name',
-		trim: true
-	},
+  name: {
+    type: String,
+    default: '',
+    required: 'Please fill Shop grocery name',
+    trim: true
+  },
   phone: {
     type: String,
     default: '',
@@ -49,13 +49,15 @@ var ShopGrocerySchema = new Schema({
     default: '',
     trim: true
   },
-	created: {
-		type: Date,
-		default: Date.now
-	},
-
-  appDownloaded: {
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  verified:{
     type : Boolean
+  },
+  deviceId: {
+    type : String
   },
   deliveryDistance:{
     type: String,
@@ -73,16 +75,22 @@ var ShopGrocerySchema = new Schema({
     type: String,
     default: "10"
   },
+  preference:{
+    type: Number
+  },
   ourExperience:{
     type: String
   },
   OffDay:{
     type: String
   },
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+  minimumOrderPrice:{
+    type: String
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
 });
 ShopGrocerySchema.index({loc: '2dsphere'});
 mongoose.model('ShopGrocery', ShopGrocerySchema);

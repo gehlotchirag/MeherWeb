@@ -15,12 +15,12 @@ module.exports = function(app) {
   app.route('/shop-fruits/near/:lng/:lat/:page')
       .get(shopFruits.listNear);
 
-  app.route('/shop-fruits/mobile/:mobile')
+  app.route('/shop-fruits/mobile/:mobile/:deviceId')
       .get(shopFruits.shopFruitByMobile);
 
   app.route('/shop-fruits/:shopFruitId')
 		.get(shopFruits.read)
-		.put(users.requiresLogin, shopFruits.hasAuthorization, shopFruits.update)
+		.put(shopFruits.update)
 		.delete(users.requiresLogin, shopFruits.hasAuthorization, shopFruits.delete);
 
 	// Finish by binding the Shop fruit middleware

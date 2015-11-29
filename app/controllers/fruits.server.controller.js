@@ -38,7 +38,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var fruit = req.fruit ;
-
 	fruit = _.extend(fruit , req.body);
 
 	fruit.save(function(err) {

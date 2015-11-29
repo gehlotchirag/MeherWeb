@@ -148,7 +148,7 @@ exports.shopElectronicByID = function(req, res, next, id) {
 };
 
 exports.shopElectronicByMobile= function(req, res) {
-  ShopElectronic.find({ mobile: req.params.mobile }).exec(function(err, shopGrocery) {
+  ShopElectronic.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

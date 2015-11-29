@@ -49,6 +49,40 @@ var ShopMedicalSchema = new Schema({
     default: '',
     trim: true
   },
+  verified:{
+    type : Boolean
+  },
+  deviceId: {
+    type : String
+  },
+  deliveryDistance:{
+    type: String,
+    default: "1"
+  },
+  deliveryTime:{
+    type: String,
+    default: "30"
+  },
+  startTime:{
+    type: String,
+    default: "9"
+  },
+  closeTime:{
+    type: String,
+    default: "10"
+  },
+  preference:{
+    type: Number
+  },
+  ourExperience:{
+    type: String
+  },
+  OffDay:{
+    type: String
+  },
+  minimumOrderPrice:{
+    type: String
+  },
   created: {
     type: Date,
     default: Date.now

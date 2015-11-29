@@ -148,7 +148,7 @@ exports.shopGroceryByID = function(req, res, next, id) {
  * Shop grocery middleware
  */
 exports.shopGroceryByMobile= function(req, res) {
-  ShopGrocery.find({ mobile: req.params.mobile }).exec(function(err, shopGrocery) {
+  ShopGrocery.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

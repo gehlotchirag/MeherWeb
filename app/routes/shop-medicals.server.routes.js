@@ -15,12 +15,12 @@ module.exports = function(app) {
   app.route('/shop-medicals/near/:lng/:lat/:page')
       .get(shopMedicals.listNear)
 
-  app.route('/shop-medicals/mobile/:mobile')
+  app.route('/shop-medicals/mobile/:mobile/:deviceId')
       .get(shopMedicals.shopMedicalByMobile)
 
   app.route('/shop-medicals/:shopMedicalId')
 		.get(shopMedicals.read)
-		.put(users.requiresLogin, shopMedicals.hasAuthorization, shopMedicals.update)
+		.put(shopMedicals.update)
 		.delete(users.requiresLogin, shopMedicals.hasAuthorization, shopMedicals.delete);
 
 	// Finish by binding the Shop medical middleware
