@@ -16,6 +16,9 @@ var OrderSchema = new Schema({
   order: {
     type: Object
   },
+	orderStatus:{
+	type: String
+	},
   customer: {
     type: Object
   },
