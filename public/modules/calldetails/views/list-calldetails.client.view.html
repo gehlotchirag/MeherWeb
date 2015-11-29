@@ -23,15 +23,16 @@
             </div>
 
             <div class="col-md-2">
-              <div class="alert alert-danger" role="alert" ng-if="!calldetail.store.appDownloaded">
+              <div class="alert alert-danger" role="alert" ng-if="!calldetail.store.devideId">
                 <span class="glyphicon glyphicon-exclamation-sign"></span>
                 <span class="sr-only">No:</span>
                 Not Downloaded
               </div>
-              <div class="alert alert-success" role="alert" ng-if="calldetail.store.appDownloaded">
+              <div class="alert alert-success" role="alert" ng-if="calldetail.store.devideId">
                 <span class="glyphicon glyphicon-ok"></span>
                 <span class="sr-only">Yes:</span>
-                 Yes App Downloaded
+                 Yes App Downloaded<br>
+                  {{calldetail.store.devideId}}
               </div>
             </div>
 

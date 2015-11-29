@@ -52,8 +52,8 @@ var ShopFruitSchema = new Schema({
   verified:{
     type : Boolean
   },
-  appDownloaded: {
-    type : Boolean
+  devideId: {
+    type : String
   },
   deliveryDistance:{
     type: String,

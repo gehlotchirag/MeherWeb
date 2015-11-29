@@ -123,7 +123,6 @@ exports.fruitByID = function(req, res, next, id) {
  * Fruit authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	//if (req.shopGrocery.user.id !== req.user.id) {
 	if ('gehlotchirag@gmail.com' !== req.user.email) {
 		return res.status(403).send('User is not authorized');
 	}
