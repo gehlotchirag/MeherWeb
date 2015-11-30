@@ -96,6 +96,19 @@ exports.orderByID = function(req, res, next, id) {
 	});
 };
 
+exports.orderUpdateStatus= function(req, res) {
+  Order.findByIdAndUpdate({'store._id':req.params.shopId},{ orderStatus: req.params.orderStatus }).exec(function(err, shopOrder) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      console.log(shopOrder);
+      res.jsonp(shopOrder);
+    }
+  });
+};
+
 exports.orderByShop= function(req, res) {
   Order.find({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
     if (err) {

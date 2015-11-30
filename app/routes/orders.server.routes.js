@@ -12,6 +12,9 @@ module.exports = function(app) {
   app.route('/orders/shop/:shopId')
       .get(orders.orderByShop);
 
+  app.route('/orders/:orderId/:orderStatus')
+      .get(orders.orderUpdateStatus)
+
   app.route('/orders/:orderId')
 		.get(orders.read)
 		.put(orders.update)
