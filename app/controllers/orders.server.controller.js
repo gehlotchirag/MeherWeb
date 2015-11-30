@@ -109,7 +109,7 @@ exports.orderUpdateStatus= function(req, res) {
     } else {
       if (shopOrder.customer.deviceId) {
         var pushMessage = {
-          "users": [shopOrder.customer.deviceId],
+          "users": [shopOrder.customer.devceId],
           "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by" + shopOrder.store.name}},
           "ios": {"badge": 0, "alert": "Your message here", "sound": "soundName"}
         };
@@ -121,11 +121,11 @@ exports.orderUpdateStatus= function(req, res) {
           },
           body: JSON.stringify(pushMessage)
         }, function _callback(err, response, body) {
-          console.log(response);
-          console.log(body);
-          //res.jsonp({message:"sent"});
-          res.jsonp(body);
+          res.jsonp(shopOrder);
         });
+      }
+      else{
+        res.jsonp({message: 'Push not sent'});
       }
     }
   });
