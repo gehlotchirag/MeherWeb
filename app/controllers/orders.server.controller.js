@@ -110,7 +110,7 @@ exports.orderUpdateStatus= function(req, res) {
       console.log(shopOrder)
       if (shopOrder.customer) {
         var pushMessage = {
-          "users": [shopOrder.customer.devceId],
+          "users": [shopOrder.customer.deviceId],
           "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by" + shopOrder.store.name}},
           "ios": {"badge": 0, "alert": "Your message here", "sound": "soundName"}
         };
@@ -122,7 +122,7 @@ exports.orderUpdateStatus= function(req, res) {
           },
           body: JSON.stringify(pushMessage)
         }, function _callback(err, response, body) {
-          res.jsonp(shopOrder);
+          res.jsonp(body);
         });
       }
       else{
