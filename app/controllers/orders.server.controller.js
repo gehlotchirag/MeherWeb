@@ -98,7 +98,7 @@ exports.orderByID = function(req, res, next, id) {
 };
 
 exports.orderUpdateStatus= function(req, res) {
-  var id = req.params.shopId;
+  var id = req.params.orderId;
   var orserStatus= req.params.orderStatus;
   Order.findByIdAndUpdate(id,{ orderStatus: orserStatus }).exec(function(err, shopOrder) {
     //Order.findByIdAndUpdate({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
