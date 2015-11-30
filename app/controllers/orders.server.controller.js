@@ -107,7 +107,8 @@ exports.orderUpdateStatus= function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      if (shopOrder.customer.deviceId) {
+      console.log(shopOrder)
+      if (shopOrder.customer) {
         var pushMessage = {
           "users": [shopOrder.customer.devceId],
           "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by" + shopOrder.store.name}},
