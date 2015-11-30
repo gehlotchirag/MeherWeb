@@ -101,35 +101,32 @@ exports.orderUpdateStatus= function(req, res) {
   var id = req.params.shopId;
   var orserStatus= req.params.orderStatus;
   Order.findByIdAndUpdate(id,{ orderStatus: orserStatus }).exec(function(err, shopOrder) {
-  //Order.findByIdAndUpdate({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
+    //Order.findByIdAndUpdate({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      //res.jsonp(shopOrder);
-
-      var pushMessage = {"users":[shopOrder.customer.deviceId],"android":{"collapseKey":"optional","data":{"message":"Your order is accepted by"+shopOrder.store.name}},"ios":{"badge":0,"alert":"Your message here","sound":"soundName"}};
-
-      //request('http://www.google.com', function (error, response, body) {
-      //  if (!error && response.statusCode == 200) {
-      //    res.jsonp(body) // Show the HTML for the Google homepage.
-      //  }
-      //})
-      request({
-        url: "http://getmeher.com:8000/send",
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(pushMessage)
-      }, function _callback(err, response, body) {
-        console.log(response);
-        console.log(body);
-        //res.jsonp({message:"sent"});
-        res.jsonp(body);
-      });
-
+      if (shopOrder.customer.deviceId) {
+        var pushMessage = {
+          "users": [shopOrder.customer.deviceId],
+          "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by" + shopOrder.store.name}},
+          "ios": {"badge": 0, "alert": "Your message here", "sound": "soundName"}
+        };
+        request({
+          url: "http://getmeher.com:8000/send",
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(pushMessage)
+        }, function _callback(err, response, body) {
+          console.log(response);
+          console.log(body);
+          //res.jsonp({message:"sent"});
+          res.jsonp(body);
+        });
+      }
     }
   });
 };
