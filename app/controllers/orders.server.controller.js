@@ -111,8 +111,8 @@ exports.orderUpdateStatus= function(req, res) {
       if (shopOrder.customer) {
         var pushMessage = {
           "users": [shopOrder.customer.deviceId],
-          "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by" + shopOrder.store.name}},
-          "ios": {"badge": 0, "alert": "Your message here", "sound": "soundName"}
+          "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by " + shopOrder.store.name}},
+          "ios": {"badge": 0, "alert": "Your order is accepted by " + shopOrder.store.name, "sound": "soundName"}
         };
         request({
           url: "http://getmeher.com:8000/send",
