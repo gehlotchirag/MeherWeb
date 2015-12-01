@@ -39,6 +39,10 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var order = req.order ;
+  console.log("***************");
+  console.log(req.order);
+  console.log("###############");
+  console.log(req.body);
 
   order = _.extend(order , req.body);
 
@@ -98,16 +102,21 @@ exports.orderByID = function(req, res, next, id) {
 };
 
 exports.orderUpdateStatus= function(req, res) {
+  console.log("***************");
+  console.log(req.order);
+  console.log("###############");
+  console.log(req.body);
   var id = req.params.orderId;
   var orserStatus= req.params.orderStatus;
-  Order.findByIdAndUpdate(id,{ orderStatus: orserStatus }).exec(function(err, shopOrder) {
+  //Order.findByIdAndUpdate(id,{ orderStatus: orserStatus }).exec(function(err, shopOrder) {
+  Order.findByIdAndUpdate(id,req.order).exec(function(err, shopOrder) {
     //Order.findByIdAndUpdate({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      console.log(shopOrder)
+      console.log(shopOrder);
       if (shopOrder.customer) {
         var pushMessage = {
           "users": [shopOrder.customer.deviceId],
@@ -122,7 +131,7 @@ exports.orderUpdateStatus= function(req, res) {
           },
           body: JSON.stringify(pushMessage)
         }, function _callback(err, response, body) {
-          res.jsonp(body);
+          res.jsonp(shopOrder);
         });
       }
       else{

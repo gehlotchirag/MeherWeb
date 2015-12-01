@@ -11,16 +11,19 @@ var mongoose = require('mongoose'),
  */
 var OrderSchema = new Schema({
 	store: {
-		type: Object
-	},
+		type: Object,
+    required: true
+  },
   order: {
-    type: Object
+    type: Object,
+    required: true
   },
 	orderStatus:{
-	type: String
+	type: String,
 	},
   customer: {
-    type: Object
+    type: Object,
+    required: true
   },
 	created: {
 		type: Date,
