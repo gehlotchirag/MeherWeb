@@ -104,11 +104,11 @@ exports.orderUpdateStatus= function(req, res) {
   var id = req.params.orderId;
   var orserStatus= req.params.orderStatus;
 
-  Order.findByIdAndUpdate(id,order).exec(function(err, shopOrder) {
+  Order.findByIdAndUpdate(id,order, {upsert: true, new: true}).exec(function(err, shopOrder) {
     //Order.findByIdAndUpdate({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        xmessage: errorHandler.getErrorMessage(err)
       });
     } else {
       console.log(shopOrder);
