@@ -200,8 +200,8 @@ exports.orderUpdateStatus= function(req, res) {
             }
           });
           if (allAvailable ==false) {
-            smsString = smsString + "\n" + "However below mentioned products are not available with your store";
-            smsString = smsString + tempSmsString + ". Request you to order these items from another store using Meher App";
+            smsString = smsString + "\n" + "However below mentioned products are not available with your store" +"\n";
+            smsString = smsString + tempSmsString + "Request you to order these items from another store using Meher App";
           }
         }
         console.log("*****")
