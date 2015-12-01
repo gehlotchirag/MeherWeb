@@ -24,19 +24,21 @@ exports.create = function(req, res) {
     } else {
       //res.jsonp(order);
       if (order.store) {
-        var msgString = "";
-        //for(value in order.order.orderitem) {
-        order.order.orderitem.forEach( function (value) {
+        var cartMsg = "You have Recieved 1 order from MEHER" + "\n";
+
+        orderData.order.orderitem.forEach( function (value) {
           if (value.quantity) {
-            msgString = msgString + value.quantity;
+            cartMsg = cartMsg + value.quantity;
             if (value.unit)
-              msgString = msgString + value.unit + " " + value.name + "\n";
+              cartMsg = cartMsg + value.unit + " " + value.name + "\n";
             else
-              msgString = msgString + " " + value.name + "\n";
+              cartMsg = cartMsg + " " + value.name + "\n";
           }
           else
-            msgString = msgString + '-' + value.name + "\n";
+            cartMsg = cartMsg + '-' + value.name + "\n";
         });
+        cartMsg = cartMsg + "Phone: " + orderData.customer.mobile + "\n";
+        cartMsg = cartMsg + "Address:" + orderData.customer.addLine1 + "\n" + orderData.customer.addLine2;
 
         var pushMessage = {
           "users": [order.customer.deviceId],
@@ -148,7 +150,7 @@ exports.orderUpdateStatus= function(req, res) {
     } else {
       console.log(orderData);
       if (orderData.customer) {
-        var cartMsg = "You have Recieved 1 order through MEHER" + "\n";
+        var cartMsg = "You have Recieved 1 order from MEHER" + "\n";
 
         orderData.order.orderitem.forEach( function (value) {
           if (value.quantity) {
@@ -162,11 +164,12 @@ exports.orderUpdateStatus= function(req, res) {
             cartMsg = cartMsg + '-' + value.name + "\n";
         });
         cartMsg = cartMsg + "Phone: " + orderData.customer.mobile + "\n";
-        cartMsg = cartMsg + "Address:" + "\n";
-        cartMsg = cartMsg + orderData.customer.addLine1 + "\n" + orderData.customer.addLine2;
+        cartMsg = cartMsg + "Address:" + orderData.customer.addLine1 + "\n" + orderData.customer.addLine2;
+        cartMsg = encodeURIComponent(cartMsg);
 
-        console.log("***************");
+        console.log("######")
         console.log(cartMsg);
+
 
         var msgString;
         if (orserStatus == 'accepted')
@@ -181,22 +184,40 @@ exports.orderUpdateStatus= function(req, res) {
           "android": {"collapseKey": "optional", "data": {"message": msgString}},
           "ios": {"badge": 0, "alert": msgString, "sound": "soundName"}
         };
+
         request({
-          url: "http://getmeher.com:8000/send",
+          url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(pushMessage)
+          params: {
+            User:"mehertech",
+            passwd:"developer007",
+            mobilenumber: "9820272106",
+            message: cartMsg,
+            sid:"mehera",
+            mtype:"N",
+            DR:"Y"
+          }
         }, function _callback(err, response, body) {
-
           res.jsonp(orderData);
-
+          request({
+            url: "http://getmeher.com:8000/send",
+            method: "POST",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify(pushMessage)
+          }, function _callback(err, response, body) {
+            res.jsonp(orderData);
+          });
         });
+
+
       }
       else{
         res.jsonp({message: 'Push not sent to customer'});
       }
+
+
     }
   });
 };
