@@ -159,7 +159,7 @@ exports.orderUpdateStatus= function(req, res) {
   var id = req.params.orderId;
   var orserStatus= req.params.orderStatus;
 
-    Order.findByIdAndUpdate(id,{ order:req.body.order, orderStatus: orserStatus }).exec(function(err, orderData) {
+  Order.findByIdAndUpdate(id,{ order:req.body.order, orderStatus: orserStatus }).exec(function(err, orderData) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -169,7 +169,7 @@ exports.orderUpdateStatus= function(req, res) {
         var allAvailable;
         var pushString;
         var smsString;
-        
+
         if (orserStatus == 'accepted') {
           pushString = "Your order is " + orserStatus + " by " + orderData.store.name ;
           smsString = "Your order is " + orserStatus + " by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
@@ -216,19 +216,20 @@ exports.orderUpdateStatus= function(req, res) {
           "android": {"collapseKey": "optional", "data": {"message": pushString}},
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
+        var params = {
+          User:"mehertech",
+          passwd:"developer007",
+          mobilenumber: "9820272106",
+          message: "Thanks you for ordering via Meher",
+          sid:"mehera",
+          mtype:"N",
+          DR:"Y"
+        };
 
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
-          params: {
-            User:"mehertech",
-            passwd:"developer007",
-            mobilenumber: "9820272106",
-            message: "Thanks you for ordering via Meher",
-            sid:"mehera",
-            mtype:"N",
-            DR:"Y"
-          }
+          body:require('querystring').stringify(params)
         }, function _callback(err, response, SMSbody) {
           console.log(SMSbody);
           request({
