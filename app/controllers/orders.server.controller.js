@@ -27,7 +27,7 @@ exports.create = function(req, res) {
         var pushString = "You have Recieved 1 order from MEHER "+order.store;
         var smsString = "You have Recieved 1 order from MEHER" + "\n";
 
-        orderData.order.orderitem.forEach( function (value) {
+        order.order.orderitem.forEach( function (value) {
           if (value.quantity) {
             smsString = smsString + value.quantity;
             if (value.unit)
@@ -38,12 +38,12 @@ exports.create = function(req, res) {
           else
             smsString = smsString + '-' + value.name + "\n";
         });
-        smsString = smsString + "Phone: " + orderData.customer.mobile + "\n";
-        smsString = smsString + "Address:" + orderData.customer.addLine1 + "\n" + orderData.customer.addLine2;
+        smsString = smsString + "Phone: " + order.customer.mobile + "\n";
+        smsString = smsString + "Address:" + order.customer.addLine1 + "\n" + order.customer.addLine2;
         console.log(smsString);
 
         var pushMessage = {
-          "users": [orderData.customer.deviceId],
+          "users": [order.customer.deviceId],
           "android": {"collapseKey": "optional", "data": {"message": pushString}},
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
