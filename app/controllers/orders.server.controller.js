@@ -148,7 +148,7 @@ exports.orderUpdateStatus= function(req, res) {
     } else {
       console.log(orderData);
       if (orderData.customer) {
-        var cartMsg = "";
+        var cartMsg = "You have Recieved 1 order through MEHER" + "\n";
 
         orderData.order.orderitem.forEach( function (value) {
           if (value.quantity) {
@@ -161,6 +161,9 @@ exports.orderUpdateStatus= function(req, res) {
           else
             cartMsg = cartMsg + '-' + value.name + "\n";
         });
+        cartMsg = cartMsg + "Phone: " + orderData.customer.mobile + "\n";
+        cartMsg = cartMsg + "Address:" + "\n";
+        cartMsg = cartMsg + orderData.customer.addLine1 + "\n" + orderData.customer.addLine2;
 
         console.log("***************");
         console.log(cartMsg);
@@ -187,7 +190,7 @@ exports.orderUpdateStatus= function(req, res) {
           body: JSON.stringify(pushMessage)
         }, function _callback(err, response, body) {
 
-          res.jsonp(shopOrder);
+          res.jsonp(orderData);
 
         });
       }
