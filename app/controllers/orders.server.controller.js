@@ -229,7 +229,7 @@ exports.orderUpdateStatus= function(req, res) {
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
-          body:require('querystring').stringify(params)
+          qs: params
         }, function _callback(err, response, SMSbody) {
           console.log(SMSbody);
           request({
