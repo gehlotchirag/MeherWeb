@@ -14,7 +14,7 @@ var request = require('request');
  */
 exports.create = function(req, res) {
   var order = new Order(req.body);
-  order.user = req.user;
+  //order.user = req.user;
 
   order.save(function(err) {
     if (err) {
@@ -22,7 +22,43 @@ exports.create = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(order);
+      //res.jsonp(order);
+      if (order.store) {
+        var msgString = "";
+        //for(value in order.order.orderitem) {
+        order.order.orderitem.forEach( function (value) {
+          if (value.quantity) {
+            msgString = msgString + value.quantity;
+            if (value.unit)
+              msgString = msgString + value.unit + " " + value.name + "\n";
+            else
+              msgString = msgString + " " + value.name + "\n";
+          }
+          else
+            msgString = msgString + '-' + value.name + "\n";
+        });
+
+        var pushMessage = {
+          "users": [order.customer.deviceId],
+          "android": {"collapseKey": "optional", "data": {"message": msgString}},
+          "ios": {"badge": 0, "alert": msgString, "sound": "soundName"}
+        };
+        request({
+          url: "http://getmeher.com:8000/send",
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(pushMessage)
+        }, function _callback(err, response, body) {
+
+          res.jsonp(order);
+
+        });
+      }
+      else{
+        res.jsonp({message: 'Push not sent to customer'});
+      }
     }
   });
 };
@@ -104,34 +140,59 @@ exports.orderUpdateStatus= function(req, res) {
   var id = req.params.orderId;
   var orserStatus= req.params.orderStatus;
 
-  //Order.findByIdAndUpdate(id,order, {upsert: true, new: true}).exec(function(err, shopOrder) {
-  //Order.findById(id, function (err, order) {
-    Order.findByIdAndUpdate(id,{ order:req.body.order, orderStatus: orserStatus }).exec(function(err, shopOrder) {
+    Order.findByIdAndUpdate(id,{ order:req.body.order, orderStatus: orserStatus }).exec(function(err, orderData) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      console.log(shopOrder);
-      if (shopOrder.customer) {
+      console.log(orderData);
+      if (orderData.customer) {
+        var cartMsg = "";
+
+        orderData.order.orderitem.forEach( function (value) {
+          if (value.quantity) {
+            cartMsg = cartMsg + value.quantity;
+            if (value.unit)
+              cartMsg = cartMsg + value.unit + " " + value.name + "\n";
+            else
+              cartMsg = cartMsg + " " + value.name + "\n";
+          }
+          else
+            cartMsg = cartMsg + '-' + value.name + "\n";
+        });
+
+        console.log("***************");
+        console.log(cartMsg);
+
+        var msgString;
+        if (orserStatus == 'accepted')
+         msgString = "Your order is "+orserStatus+" by " + orderData.store.name;
+        else if(orserStatus == 'rejected')
+         msgString = "Your order is "+orserStatus+" by " + orderData.store.name +". Request you to order from another store";
+        else
+         msgString = "Your order is sent out for delivery by"+ orderData.store.name;
+
         var pushMessage = {
-          "users": [shopOrder.customer.deviceId],
-          "android": {"collapseKey": "optional", "data": {"message": "Your order is accepted by " + shopOrder.store.name}},
-          "ios": {"badge": 0, "alert": "Your order is accepted by " + shopOrder.store.name, "sound": "soundName"}
+          "users": [orderData.customer.deviceId],
+          "android": {"collapseKey": "optional", "data": {"message": msgString}},
+          "ios": {"badge": 0, "alert": msgString, "sound": "soundName"}
         };
         request({
           url: "http://getmeher.com:8000/send",
           method: "POST",
           headers: {
-            "content-type": "application/json",
+            "content-type": "application/json"
           },
           body: JSON.stringify(pushMessage)
         }, function _callback(err, response, body) {
+
           res.jsonp(shopOrder);
+
         });
       }
       else{
-        res.jsonp({message: 'Push not sent'});
+        res.jsonp({message: 'Push not sent to customer'});
       }
     }
   });
