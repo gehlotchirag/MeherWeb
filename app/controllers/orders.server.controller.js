@@ -197,8 +197,8 @@ exports.orderUpdateStatus= function(req, res) {
             mtype:"N",
             DR:"Y"
           }
-        }, function _callback(err, response, body) {
-          res.jsonp(orderData);
+        }, function _callback(err, response, SMSbody) {
+          console.log(SMSbody);
           request({
             url: "http://getmeher.com:8000/send",
             method: "POST",
@@ -206,8 +206,9 @@ exports.orderUpdateStatus= function(req, res) {
               "content-type": "application/json"
             },
             body: JSON.stringify(pushMessage)
-          }, function _callback(err, response, body) {
-            res.jsonp(orderData);
+          }, function _callback(err, response, Pushbody) {
+            var msg = SMSbody + Pushbody
+            res.jsonp({message : msg });
           });
         });
 
