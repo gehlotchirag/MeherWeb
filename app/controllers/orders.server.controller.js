@@ -40,6 +40,7 @@ exports.create = function(req, res) {
         });
         smsString = smsString + "Phone: " + orderData.customer.mobile + "\n";
         smsString = smsString + "Address:" + orderData.customer.addLine1 + "\n" + orderData.customer.addLine2;
+        console.log(smsString);
 
         var pushMessage = {
           "users": [orderData.customer.deviceId],
@@ -47,20 +48,18 @@ exports.create = function(req, res) {
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
 
-        var params = {
-          User:"mehertech",
-          passwd:"developer007",
-          mobilenumber: "9820272106",
-          message: smsString,
-          sid:"mehera",
-          mtype:"N",
-          DR:"Y"
-        };
-
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
-          qs: params
+          qs: {
+            User:"mehertech",
+            passwd:"developer007",
+            mobilenumber: "9820272106",
+            message: smsString,
+            sid:"mehera",
+            mtype:"N",
+            DR:"Y"
+          }
         }, function _callback(err, response, SMSbody) {
           console.log(SMSbody);
           request({
@@ -219,20 +218,18 @@ exports.orderUpdateStatus= function(req, res) {
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
 
-        var params = {
-          User:"mehertech",
-          passwd:"developer007",
-          mobilenumber: "9820272106",
-          message: smsString,
-          sid:"mehera",
-          mtype:"N",
-          DR:"Y"
-        };
-
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
-          qs: params
+          qs: {
+            User:"mehertech",
+            passwd:"developer007",
+            mobilenumber: "9820272106",
+            message: smsString,
+            sid:"mehera",
+            mtype:"N",
+            DR:"Y"
+          }
         }, function _callback(err, response, SMSbody) {
           console.log(SMSbody);
           request({
