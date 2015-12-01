@@ -165,7 +165,6 @@ exports.orderUpdateStatus= function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      console.log(orderData);
       if (orderData.customer) {
         var allAvailable;
         var pushString;
@@ -176,8 +175,8 @@ exports.orderUpdateStatus= function(req, res) {
           smsString = "Your order is " + orserStatus + " by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
         else if(orserStatus == 'rejected') {
-          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store";
-          smsString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store"+ "\n" + "Thanks for using MEHER";
+          pushString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store";
+          smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store"+ "\n" + "Thanks for using MEHER";
         }
         else {
           pushString = "Your order is sent out for delivery by" + orderData.store.name;
@@ -205,13 +204,12 @@ exports.orderUpdateStatus= function(req, res) {
             smsString = smsString + tempSmsString + ". Request you to order these items from another store using Meher App";
           }
         }
+        console.log("*****")
         console.log(smsString);
         console.log("######")
         smsString = encodeURIComponent(smsString);
         console.log(smsString);
 
-
-       
 
         var pushMessage = {
           "users": [orderData.customer.deviceId],
@@ -226,7 +224,7 @@ exports.orderUpdateStatus= function(req, res) {
             User:"mehertech",
             passwd:"developer007",
             mobilenumber: "9820272106",
-            message: smsString,
+            message: "Thank you for ordering via Meher",
             sid:"mehera",
             mtype:"N",
             DR:"Y"
