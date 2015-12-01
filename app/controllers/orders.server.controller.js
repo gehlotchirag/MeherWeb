@@ -224,7 +224,7 @@ exports.orderUpdateStatus= function(req, res) {
             User:"mehertech",
             passwd:"developer007",
             mobilenumber: "9820272106",
-            message: "Thank you for ordering via Meher",
+            message: "Thanks you for ordering via Meher",
             sid:"mehera",
             mtype:"N",
             DR:"Y"
