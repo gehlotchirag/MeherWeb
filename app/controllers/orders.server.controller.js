@@ -105,8 +105,8 @@ exports.orderUpdateStatus= function(req, res) {
   var orserStatus= req.params.orderStatus;
 
   //Order.findByIdAndUpdate(id,order, {upsert: true, new: true}).exec(function(err, shopOrder) {
-  Order.findByIdAndUpdate(id,{ orderStatus: orserStatus }).exec(function(err, shopOrder) {
-  //  Order.findByIdAndUpdate({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
+  //Order.findById(id, function (err, order) {
+    Order.findByIdAndUpdate(id,{ order:req.body.order, orderStatus: orserStatus }).exec(function(err, shopOrder) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
