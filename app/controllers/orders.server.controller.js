@@ -185,7 +185,7 @@ exports.orderUpdateStatus= function(req, res) {
         }
 
         if (orserStatus == 'accepted') {
-          var tempSmsString;
+          var tempSmsString ="";
           orderData.order.orderitem.forEach(function (value) {
             if (!value.available) {
               allAvailable = false;
