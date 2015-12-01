@@ -200,7 +200,7 @@ exports.orderUpdateStatus= function(req, res) {
                 tempSmsString = tempSmsString + '-' + value.name + "\n";
             }
           });
-          if (allAvailable =false) {
+          if (allAvailable ==false) {
             smsString = smsString + "\n"; + "However below mentioned products are not available with your store";
             smsString = smsString + tempSmsString + ". Request you to order these items from another store using Meher App";
           }
