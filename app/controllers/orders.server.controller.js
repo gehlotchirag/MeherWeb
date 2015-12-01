@@ -192,16 +192,16 @@ exports.orderUpdateStatus= function(req, res) {
               if (value.quantity) {
                 tempSmsString = tempSmsString + value.quantity;
                 if (value.unit)
-                  tempSmsString = tempSmsString + value.unit + " " + value.name + "\n";
+                  tempSmsString = tempSmsString + value.unit + " " + value.name + "%0a";
                 else
-                  tempSmsString = tempSmsString + " " + value.name + "\n";
+                  tempSmsString = tempSmsString + " " + value.name + "%0a";
               }
               else
-                tempSmsString = tempSmsString + '-' + value.name + "\n";
+                tempSmsString = tempSmsString + '-' + value.name + "%0a";
             }
           });
           if (allAvailable ==false) {
-            smsString = smsString + "\n"; + "However below mentioned products are not available with your store";
+            smsString = smsString + "%0a"; + "However below mentioned products are not available with your store";
             smsString = smsString + tempSmsString + ". Request you to order these items from another store using Meher App";
           }
         }
