@@ -172,16 +172,16 @@ exports.orderUpdateStatus= function(req, res) {
         var smsString;
         
         if (orserStatus == 'accepted') {
-          pushString = "Your order is " + orserStatus + " by " + orderData.store.name;
-          smsString = "Your order is " + orserStatus + " by " + orderData.store.name;
+          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + "\n" + "Thanks for using MEHER";
+          smsString = "Your order is " + orserStatus + " by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
         else if(orserStatus == 'rejected') {
-          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store";
-          smsString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store";
+          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store" + "\n" + "Thanks for using MEHER";
+          smsString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store"+ "\n" + "Thanks for using MEHER";
         }
         else {
-          pushString = "Your order is sent out for delivery by" + orderData.store.name;
-          smsString = "Your order is sent out for delivery by" + orderData.store.name;
+          pushString = "Your order is sent out for delivery by" + orderData.store.name+ "\n" + "Thanks for using MEHER";
+          smsString = "Your order is sent out for delivery by" + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
 
         if (orserStatus == 'accepted') {
@@ -192,23 +192,22 @@ exports.orderUpdateStatus= function(req, res) {
               if (value.quantity) {
                 tempSmsString = tempSmsString + value.quantity;
                 if (value.unit)
-                  tempSmsString = tempSmsString + value.unit + " " + value.name + "%0a";
+                  tempSmsString = tempSmsString + value.unit + " " + value.name + "\n";
                 else
-                  tempSmsString = tempSmsString + " " + value.name + "%0a";
+                  tempSmsString = tempSmsString + " " + value.name + "\n";
               }
               else
-                tempSmsString = tempSmsString + '-' + value.name + "%0a";
+                tempSmsString = tempSmsString + '-' + value.name + "\n";
             }
           });
           if (allAvailable ==false) {
-            smsString = smsString + "%0a"; + "However below mentioned products are not available with your store";
+            smsString = smsString + "\n" + "However below mentioned products are not available with your store";
             smsString = smsString + tempSmsString + ". Request you to order these items from another store using Meher App";
           }
         }
-
-        smsString = encodeURIComponent(smsString);
-
+        console.log(smsString);
         console.log("######")
+        smsString = encodeURIComponent(smsString);
         console.log(smsString);
 
 
