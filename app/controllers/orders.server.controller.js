@@ -172,15 +172,15 @@ exports.orderUpdateStatus= function(req, res) {
         var smsString;
         
         if (orserStatus == 'accepted') {
-          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + "\n" + "Thanks for using MEHER";
+          pushString = "Your order is " + orserStatus + " by " + orderData.store.name ;
           smsString = "Your order is " + orserStatus + " by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
         else if(orserStatus == 'rejected') {
-          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store" + "\n" + "Thanks for using MEHER";
+          pushString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store";
           smsString = "Your order is " + orserStatus + " by " + orderData.store.name + ". Request you to order from another store"+ "\n" + "Thanks for using MEHER";
         }
         else {
-          pushString = "Your order is sent out for delivery by" + orderData.store.name+ "\n" + "Thanks for using MEHER";
+          pushString = "Your order is sent out for delivery by" + orderData.store.name;
           smsString = "Your order is sent out for delivery by" + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
 
