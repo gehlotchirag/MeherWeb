@@ -47,18 +47,20 @@ exports.create = function(req, res) {
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
 
+        var params = {
+          User:"mehertech",
+          passwd:"developer007",
+          mobilenumber: "9820272106",
+          message: smsString,
+          sid:"mehera",
+          mtype:"N",
+          DR:"Y"
+        };
+
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
-          params: {
-            User:"mehertech",
-            passwd:"developer007",
-            mobilenumber: "9820272106",
-            message: smsString,
-            sid:"mehera",
-            mtype:"N",
-            DR:"Y"
-          }
+          qs: params
         }, function _callback(err, response, SMSbody) {
           console.log(SMSbody);
           request({
@@ -216,11 +218,12 @@ exports.orderUpdateStatus= function(req, res) {
           "android": {"collapseKey": "optional", "data": {"message": pushString}},
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
+
         var params = {
           User:"mehertech",
           passwd:"developer007",
           mobilenumber: "9820272106",
-          message: "Thanks you for ordering via Meher",
+          message: smsString,
           sid:"mehera",
           mtype:"N",
           DR:"Y"
