@@ -208,7 +208,7 @@ exports.orderUpdateStatus= function(req, res) {
         console.log("*****")
         console.log(smsString);
         console.log("######")
-        smsString = encodeURIComponent(smsString);
+        //smsString = encodeURIComponent(smsString);
         console.log(smsString);
 
 
