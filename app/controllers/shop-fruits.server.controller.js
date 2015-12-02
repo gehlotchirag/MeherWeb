@@ -28,11 +28,10 @@ exports.create = function(req, res) {
 
 exports.createAll = function(req, res, next) {
   var importShops = (req);
-  console.log(req);
-  console.log(importShops);
   var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
   console.log(bulk);
   importShops.forEach(function(shop) {
+    console.log(shop)
     if (shop)
       bulk.insert(shop);
   })
