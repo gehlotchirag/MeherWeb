@@ -56,7 +56,7 @@ exports.create = function(req, res) {
             passwd:"developer007",
             mobilenumber: "9820272106",
             message: smsString,
-            sid:"mehera",
+            sid:"MEHERA",
             mtype:"N",
             DR:"Y"
           }
@@ -226,7 +226,7 @@ exports.orderUpdateStatus= function(req, res) {
             passwd:"developer007",
             mobilenumber: "9820272106",
             message: smsString,
-            sid:"mehera",
+            sid:"MEHERA",
             mtype:"N",
             DR:"Y"
           }

@@ -27,7 +27,8 @@ exports.create = function(req, res) {
 };
 
 exports.createAll = function(req, res, next) {
-  var importShops = (req.body);
+  var importShops = (req);
+  console.log(req);
   console.log(importShops);
   var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
   console.log(bulk);
@@ -59,7 +60,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var shopFruit = req.shopFruit ;
-
 	shopFruit = _.extend(shopFruit , req.body);
 
 	shopFruit.save(function(err) {
