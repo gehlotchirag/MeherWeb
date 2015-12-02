@@ -250,8 +250,6 @@ exports.orderUpdateStatus= function(req, res) {
       else{
         res.jsonp({message: 'Push not sent to customer'});
       }
-
-
     }
   });
 };

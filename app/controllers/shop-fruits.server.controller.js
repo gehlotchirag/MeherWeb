@@ -28,7 +28,9 @@ exports.create = function(req, res) {
 
 exports.createAll = function(req, res, next) {
   var importShops = (req.body);
+  console.log(importShops);
   var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
+  console.log(bulk);
   importShops.forEach(function(shop) {
     if (shop)
       bulk.insert(shop);
