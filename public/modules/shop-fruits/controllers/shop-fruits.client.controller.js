@@ -135,7 +135,7 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       $http({
         url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
         method: "POST",
-        body: {
+        params: {
           User:"mehertech",
           passwd:"developer007",
           mobilenumber: "9820272106",
