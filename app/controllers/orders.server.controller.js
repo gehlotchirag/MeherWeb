@@ -177,7 +177,7 @@ exports.orderUpdateStatus= function(req, res) {
         }
         else if(orserStatus == 'rejected') {
           pushString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store.";
-          smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store.";
+          smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store."+ "\n";
         }
         else {
           pushString = "Your order is sent out for delivery by" + orderData.store.name;
@@ -202,7 +202,7 @@ exports.orderUpdateStatus= function(req, res) {
           });
           if (allAvailable ==false) {
             smsString = smsString + "\n" + "However below mentioned products are not available with your store" +"\n";
-            smsString = smsString + tempSmsString + "Request you to order these items from another store using Meher App."+ " Thanks for using MEHER";
+            smsString = smsString + tempSmsString + "Request you to order these items from another store using Meher App";
           }
         }
         console.log("*****")
