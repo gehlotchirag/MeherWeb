@@ -132,14 +132,16 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
     $scope.sendDownloadSMS = function(shopFruitData,event){
       event.preventDefault();
+      var SmsText = "Thanks for registering with Meher. Get more orders in your Area. Download Meher Now. "+"\n"+ "Retailer App https://goo.gl/cxqKEc"+"\n"+"Customer App https://goo.gl/cxqKEc";
+      var number = shopFruitData.mobile;
       $http({
         url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
         method: "POST",
         params: {
           User:"mehertech",
           passwd:"developer007",
-          mobilenumber: "9820272106",
-          message: "Thank you for ordering via Meher",
+          mobilenumber: number,
+          message: SmsText,
           sid:"mehera",
           mtype:"N",
           DR:"Y"
