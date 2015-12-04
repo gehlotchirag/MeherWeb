@@ -177,7 +177,7 @@ exports.orderUpdateStatus= function(req, res) {
         }
         else if(orserStatus == 'rejected') {
           pushString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store.";
-          smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store."+ "\n";
+          smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store. Thanks for using MEHER";
         }
         else {
           pushString = "Your order is sent out for delivery by" + orderData.store.name;
