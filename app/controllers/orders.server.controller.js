@@ -173,7 +173,7 @@ exports.orderUpdateStatus= function(req, res) {
 
         if (orserStatus == 'accepted') {
           pushString = "Your order is " + orserStatus + " by " + orderData.store.name ;
-          smsString = "Your order is " + orserStatus + " by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
+          smsString = "Your order is acepted by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
         else if(orserStatus == 'rejected') {
           pushString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store.";
