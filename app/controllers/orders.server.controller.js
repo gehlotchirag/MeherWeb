@@ -77,6 +77,7 @@ exports.create = function(req, res) {
 
       }
       else{
+        console.log(order.store.deviceId)
         res.jsonp({message: 'Push not sent to customer'});
       }
     }
