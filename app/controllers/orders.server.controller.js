@@ -54,7 +54,7 @@ exports.create = function(req, res) {
           qs: {
             User:"mehertech",
             passwd:"developer007",
-            mobilenumber: "9820272106",
+            mobilenumber: order.store.mobile,
             message: smsString,
             sid:"MEHERA",
             mtype:"N",
