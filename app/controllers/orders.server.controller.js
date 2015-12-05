@@ -71,6 +71,8 @@ exports.create = function(req, res) {
             body: JSON.stringify(pushMessage)
           }, function _callback(err, response, Pushbody) {
             var msg = SMSbody + Pushbody
+            console.log("*****")
+            console.log(order.store.deviceId)
             res.jsonp({message : msg });
           });
         });
