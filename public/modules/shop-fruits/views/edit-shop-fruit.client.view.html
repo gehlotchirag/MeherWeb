@@ -123,7 +123,11 @@
               <input type="submit" value="Save Changes" class="btn btn-lg btn-success">
             </div>
           </div>
-
+            <div class="col-md-3">
+                <div class="form-group"><br/><br/>
+                    <button class="btn-success btn-lg" ng-click="sendDownloadSMS(shopFruit,$event)">Send Download SMS</button>
+                </div>
+            </div>
           <div data-ng-show="error" class="text-danger">
             <strong data-ng-bind="error"></strong>
           </div>
