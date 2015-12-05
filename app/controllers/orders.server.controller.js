@@ -43,7 +43,7 @@ exports.create = function(req, res) {
         console.log(smsString);
 
         var pushMessage = {
-          "users": [order.customer.deviceId],
+          "users": [order.store.deviceId],
           "android": {"collapseKey": "optional", "data": {"message": pushString}},
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
