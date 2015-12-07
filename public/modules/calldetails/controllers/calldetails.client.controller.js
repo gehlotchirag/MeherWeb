@@ -24,6 +24,7 @@ angular.module('calldetails').controller('CalldetailsController', ['$scope', '$s
 		};
 
     $scope.gotoStores = function (calldetail){
+      console.log(calldetail)
       $location.path(calldetail.url +"/"+ calldetail.store._id +"/edit");
     };
 
