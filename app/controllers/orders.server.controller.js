@@ -259,7 +259,7 @@ exports.orderUpdateStatus= function(req, res) {
 };
 
 exports.orderByShop= function(req, res) {
-  Order.find({'store._id':req.params.shopId}).exec(function(err, shopOrder) {
+  Order.find({'store._id':req.params.shopId}).sort('-created').exec(function(err, shopOrder) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
