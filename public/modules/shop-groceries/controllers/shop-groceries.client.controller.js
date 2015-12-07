@@ -1,8 +1,8 @@
 'use strict';
 
 // Shop groceries controller
-angular.module('shop-groceries').controller('ShopGroceriesController', ['$scope', '$stateParams', '$location', 'Authentication', 'ShopGroceries','$http',
-	function($scope, $stateParams, $location, Authentication, ShopGroceries,$http) {
+angular.module('shop-groceries').controller('ShopGroceriesController', ['$scope', '$stateParams', '$location', 'Authentication', 'ShopGroceries','$http','$state',
+	function($scope, $stateParams, $location, Authentication, ShopGroceries,$http,$state) {
 		$scope.authentication = Authentication;
     $scope.openalldays = true;
 		// Create new Shop grocery
