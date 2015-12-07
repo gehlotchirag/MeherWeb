@@ -20,8 +20,8 @@
 
   </div>
   <div class="list-group">
-    {{$scope.pageNumber}}
-    <div data-ng-repeat="shopGrocery in shopGroceries" data-ng-href="#!/shop-groceries/{{shopGrocery._id}}" class="list-group-item" ng-if="shopGrocery.mobile !== '0'">
+    {{shopGrocery}}
+    <div data-ng-repeat="shopGrocery in shopGroceries" data-ng-href="#!/shop-groceries/{{shopGrocery._id}}" class="list-group-item" ng-if="shopGrocery.mobile !== '0'" ng-class="{'alert-warning':shopGrocery.verified==true}">
       <!--<small class="list-group-item-text">-->
       <!--Posted on-->
       <!--<span data-ng-bind="shopGrocery.created | date:'medium'"></span>-->
