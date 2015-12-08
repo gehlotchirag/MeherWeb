@@ -24,6 +24,9 @@ module.exports = function(app) {
 		.put(shopGroceries.update)
 		.delete(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.delete);
 
-	// Finish by binding the Shop grocery middleware
+  app.route('/shop-groceries/devices')
+      .get(shopGroceries.listByDevice);
+
+  // Finish by binding the Shop grocery middleware
 	app.param('shopGroceryId', shopGroceries.shopGroceryByID);
 };

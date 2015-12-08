@@ -158,6 +158,20 @@ exports.shopGroceryByMobile= function(req, res) {
     }
   });
 };
+
+exports.listByDevice = function(req, res) {
+  console.log("$$$$$$$$$$$$$$$$$$$$")
+  ShopGrocery.find().exists('deviceId').exec(function(err, shopFruit) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopFruit);
+    }
+  });
+};
+
 /**
  * Shop grocery authorization middleware
  */
