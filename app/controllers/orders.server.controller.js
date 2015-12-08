@@ -228,7 +228,7 @@ exports.orderUpdateStatus= function(req, res) {
           qs: {
             User:"mehertech",
             passwd:"developer007",
-            mobilenumber: "9820272106",
+            mobilenumber: orderData.customer.mobile,
             message: smsString,
             sid:"MEHERA",
             mtype:"N",

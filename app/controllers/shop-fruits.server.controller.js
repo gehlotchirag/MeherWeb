@@ -144,6 +144,16 @@ exports.shopFruitByID = function(req, res, next, id) {
 	});
 };
 
+exports.listByDevice = function(req, res, next, id) {
+  ShopFruit.find( { deviceId: { $exists: true}}).exec(function(err, shopFruit) {
+    if (err) return next(err);
+    if (! shopFruit) return next(new Error('Failed to load Shop fruit ' + id));
+    req.shopFruit = shopFruit ;
+    next();
+  });
+};
+
+
 exports.shopFruitByMobile= function(req, res) {
   ShopFruit.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
     if (err) {
