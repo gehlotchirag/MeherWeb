@@ -145,6 +145,7 @@ exports.shopFruitByID = function(req, res, next, id) {
 };
 
 exports.listByDevice = function(req, res, next, id) {
+  console.log("$$$$$$$$$$$$$$$$$$$$")
   ShopFruit.find().exists('deviceId').exec(function(err, shopFruit) {
     if (err) return next(err);
     if (! shopFruit) return next(new Error('Failed to load Shop fruit ' + id));
