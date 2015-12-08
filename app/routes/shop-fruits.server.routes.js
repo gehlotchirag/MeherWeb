@@ -18,7 +18,7 @@ module.exports = function(app) {
   app.route('/shop-fruits/mobile/:mobile/:deviceId')
       .get(shopFruits.shopFruitByMobile);
 
-  app.route('/shop-fruits/devices/app')
+  app.route('/shop-fruits-devices/')
       .get(shopFruits.listByDevice);
 
   app.route('/shop-fruits/:shopFruitId')
