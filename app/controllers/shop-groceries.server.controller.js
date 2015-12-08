@@ -161,13 +161,13 @@ exports.shopGroceryByMobile= function(req, res) {
 
 exports.listByDevice = function(req, res) {
   console.log("$$$$$$$$$$$$$$$$$$$$")
-  ShopGrocery.find().exists('deviceId').exec(function(err, shopFruit) {
+  ShopGrocery.find().exists('deviceId').exec(function(err, shopGrocery) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp(shopFruit);
+      res.jsonp(shopGrocery);
     }
   });
 };

@@ -24,7 +24,7 @@ module.exports = function(app) {
 		.put(shopGroceries.update)
 		.delete(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.delete);
 
-  app.route('/shop-groceries/devices')
+  app.route('/shop-groceries-devices/')
       .get(shopGroceries.listByDevice);
 
   // Finish by binding the Shop grocery middleware
