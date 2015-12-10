@@ -24,7 +24,7 @@ exports.create = function(req, res) {
     } else {
       //res.jsonp(order);
       if (order.store) {
-        var pushString = "You have Received a New order from MEHER in"+order.addLine1;
+        var pushString = "You have Received a New order from MEHER";
         var smsString = "You have Received a New order from MEHER" + "\n";
 
         order.order.orderitem.forEach( function (value) {
