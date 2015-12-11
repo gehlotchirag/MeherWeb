@@ -157,9 +157,9 @@ console.log(shopGrocery);
 
     $scope.sendDownloadSMS = function(shopGroceryData,event){
       event.preventDefault();
-      //var SmsText = "Thanks for registering with Meher. Get more orders in your Area. Download Meher Now. "+"\n"+ "Retailer App https://goo.gl/HzI82z"+"\n"+"Customer App https://goo.gl/cxqKEc";
+      var SmsText = "Thanks for registering with Meher. Get more orders in your Area. Download Meher Now. "+"\n"+ "Retailer App https://goo.gl/HzI82z"+"\n"+"Customer App https://goo.gl/cxqKEc";
 
-      var SmsText = "Thanks for registering with Meher. Get more orders from nearby buildings/societies. Download App Now: https://goo.gl/HzI82z (on Android Play Store)";
+      //var SmsText = "Thanks for registering with Meher. Get more orders from nearby buildings/societies. Download App Now: https://goo.gl/HzI82z (on Android Play Store)";
       var number = shopGroceryData.mobile;
       $http({
         url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
