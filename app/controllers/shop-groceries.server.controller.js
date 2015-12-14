@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 };
 
 exports.createAll = function(req, res, next) {
-  var importShops = (req.body);
+  var importShops = req.body;
   var bulk = ShopGrocery.collection.initializeUnorderedBulkOp();
   importShops.forEach(function(shop) {
     if (shop)

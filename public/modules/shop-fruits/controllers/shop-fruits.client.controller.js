@@ -136,19 +136,29 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
 
       //var SmsText = "Thanks for registering with Meher. Get more orders from nearby buildings/societies. Download App Now: https://goo.gl/HzI82z (on Android Play Store)";
       var number = shopFruitData.mobile;
+      //var message = String(options.message);
+      var reqURL = 'https://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=';
+      reqURL += '91' + number + '&msg=' + encodeURI(SmsText);
+      reqURL += '&msg_type=TEXT&userid=2000141701&password=Gandhi007&auth_scheme=PLAIN';
+
+      //$http({
+      //  url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
+      //  method: "POST",
+      //  params: {
+      //    User:"mehertech",
+      //    passwd:"developer007",
+      //    mobilenumber: number,
+      //    message: SmsText,
+      //    sid:"mehera",
+      //    mtype:"N",
+      //    DR:"Y"
+      //  }
+      //})
       $http({
-        url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
-        method: "POST",
-        params: {
-          User:"mehertech",
-          passwd:"developer007",
-          mobilenumber: number,
-          message: SmsText,
-          sid:"mehera",
-          mtype:"N",
-          DR:"Y"
-        }
-      }).then(function(response) {
+        url: reqURL,
+        method: "GET"
+      })
+      .then(function(response) {
             // success
             alert("SMS Send");
             console.log(response);
