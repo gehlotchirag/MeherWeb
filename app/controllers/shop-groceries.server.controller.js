@@ -27,6 +27,7 @@ exports.create = function(req, res) {
 };
 
 exports.createAll = function(req, res, next) {
+  console.log("****")
   var importShops = req.body;
   console.log(importShops)
   var bulk = ShopGrocery.collection.initializeUnorderedBulkOp();
