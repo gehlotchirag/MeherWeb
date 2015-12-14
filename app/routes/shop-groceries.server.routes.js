@@ -10,7 +10,8 @@ module.exports = function(app) {
 		.post(users.requiresLogin, shopGroceries.create);
 
   app.route('/shop-groceriesAll')
-      .post(users.requiresLogin, shopGroceries.createAll);
+      .post( shopGroceries.createAll);
+      //.post(users.requiresLogin, shopGroceries.createAll);
 
   app.route('/shop-groceries/near/:lng/:lat/:page')
       .get(shopGroceries.listNear);
