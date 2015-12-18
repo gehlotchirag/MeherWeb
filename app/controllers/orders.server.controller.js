@@ -271,6 +271,19 @@ exports.orderByShop= function(req, res) {
   });
 };
 
+exports.orderByUserMobile= function(req, res) {
+  Order.find({'customer.mobile':req.params.mobileNumber}).sort('-created').exec(function(err, shopOrder) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      console.log(shopOrder);
+      res.jsonp(shopOrder);
+    }
+  });
+};
+
 /**
  * Order authorization middleware
  */

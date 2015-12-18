@@ -12,6 +12,9 @@ module.exports = function(app) {
   app.route('/orders/shop/:shopId')
       .get(orders.orderByShop);
 
+  app.route('/orders/user/:mobileNumber')
+      .get(orders.orderByUserMobile);
+
   app.route('/orders/:orderId/:orderStatus')
       .put(orders.orderUpdateStatus)
 
