@@ -94,7 +94,7 @@ exports.listPage = function(req, res) {
   }else{
     var page = req.params.page;
   }
-  var per_page = 8;
+  var per_page = 12;
   Household.find().sort('-created').skip((page-1)*per_page).limit(per_page).exec(function(err, fruits) {
     if (err) {
       return res.status(400).send({
