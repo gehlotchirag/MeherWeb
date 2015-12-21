@@ -15,8 +15,6 @@ module.exports = function(app) {
   app.route('/orders/user/:mobileNumber')
       .get(orders.orderByUserMobile);
 
-  app.route('/orders/:orderId/:orderStatus')
-      .put(orders.orderUpdateStatus)
 
   app.route('/orders/:orderId')
 		.get(orders.read)

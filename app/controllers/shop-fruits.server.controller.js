@@ -157,6 +157,7 @@ exports.shopFruitByMobile= function(req, res) {
     }
   });
 };
+
 exports.listByDevice = function(req, res) {
   console.log("$$$$$$$$$$$$$$$$$$$$")
   ShopFruit.find().exists('deviceId').exec(function(err, shopFruit) {

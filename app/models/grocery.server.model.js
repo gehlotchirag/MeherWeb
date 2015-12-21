@@ -16,6 +16,7 @@ var GrocerySchema = new Schema({
 		required: 'Please fill Grocery name',
 		trim: true
 	},
+
 	created: {
 		type: Date,
 		default: Date.now

@@ -25,6 +25,9 @@ var OrderSchema = new Schema({
     type: Object,
     required: true
   },
+  feedback: {
+    type: Object,
+  },
 	created: {
 		type: Date,
 		default: Date.now

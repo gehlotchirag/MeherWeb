@@ -158,9 +158,12 @@ exports.orderByID = function(req, res, next, id) {
 };
 
 exports.orderUpdateStatus= function(req, res) {
+  console.log("***")
+  console.log(req.order)
+
   var order = req.order ;
   order = _.extend(order , req.body);
-
+console.log(req.body)
   var id = req.params.orderId;
   var orserStatus= req.params.orderStatus;
 
