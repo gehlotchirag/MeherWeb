@@ -12,7 +12,10 @@ module.exports = function(app) {
   app.route('/groceries/page/:page')
       .get(groceries.listPage);
 
-	app.route('/groceries/:groceryId')
+  app.route('/groceries/search/:searchText')
+      .get(groceries.Search);
+
+  app.route('/groceries/:groceryId')
 		.get(groceries.read)
 		.put(users.requiresLogin, groceries.hasAuthorization, groceries.update)
 		.delete(users.requiresLogin, groceries.delete);
