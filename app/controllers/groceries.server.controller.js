@@ -87,7 +87,7 @@ exports.list = function(req, res) {
 exports.Search = function(req, res) {
   console.log("****")
   console.log(req.params.searchText)
-  Grocery.find({'name':new RegExp('^'+req.params.searchText+'$',"i")}).exec(function(err, groceries) {
+  Grocery.find({'name':new RegExp(req.params.searchText,"i")}).exec(function(err, groceries) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
