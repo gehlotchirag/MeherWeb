@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.route('/groceriesAll')
       .post(users.requiresLogin, groceries.createAll);
 
-  app.route('/groceries/search/:searchText')
+  app.route('/groceries-search/:searchText')
       .get(groceries.Search);
 
   app.route('/groceries/:groceryId')
