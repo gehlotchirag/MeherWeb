@@ -16,6 +16,10 @@ var PersonalcareSchema = new Schema({
 		required: 'Please fill Personalcare name',
 		trim: true
 	},
+  category: {
+    type: String,
+    default :"personalcares"
+  },
 	created: {
 		type: Date,
 		default: Date.now

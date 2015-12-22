@@ -16,6 +16,10 @@ var VegetableSchema = new Schema({
     required: 'Please fill Fruit name',
     trim: true
   },
+  category: {
+    type: String,
+    default :"vegetables"
+  },
   price: {
     type: Number,
     default: '',

@@ -16,7 +16,12 @@ var HouseholdSchema = new Schema({
 		required: 'Please fill Household name',
 		trim: true
 	},
-	created: {
+  category: {
+    type: String,
+    default :"households"
+  },
+
+  created: {
 		type: Date,
 		default: Date.now
 	},

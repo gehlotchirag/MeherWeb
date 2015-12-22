@@ -9,8 +9,11 @@ module.exports = function(app) {
 		.get(groceries.list)
 		.post(users.requiresLogin, groceries.create);
 
-  app.route('/groceries/page/:page')
+  app.route('/groceries/:category/:page')
       .get(groceries.listPage);
+
+  app.route('/groceriesAll')
+      .post(users.requiresLogin, groceries.createAll);
 
   app.route('/groceries/search/:searchText')
       .get(groceries.Search);

@@ -16,6 +16,7 @@ var ShopElectronicSchema = new Schema({
     required: 'Please fill Shop name',
     trim: true
   },
+
   phone: {
     type: String,
     default: '',

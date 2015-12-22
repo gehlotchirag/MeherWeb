@@ -16,6 +16,10 @@ var PacketfoodSchema = new Schema({
 		required: 'Please fill Packetfood name',
 		trim: true
 	},
+  category: {
+    type: String,
+    default :"packetfoods"
+  },
 	created: {
 		type: Date,
 		default: Date.now

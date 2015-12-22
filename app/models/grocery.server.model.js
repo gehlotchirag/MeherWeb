@@ -13,10 +13,14 @@ var GrocerySchema = new Schema({
 	name: {
 		type: String,
 		default: '',
+    unique: true,
 		required: 'Please fill Grocery name',
 		trim: true
 	},
-
+  category: {
+    type: String,
+    default :"groceries"
+  },
 	created: {
 		type: Date,
 		default: Date.now

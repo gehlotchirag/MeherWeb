@@ -26,6 +26,25 @@ exports.create = function(req, res) {
 	});
 };
 
+
+exports.createAll = function(req, res, next) {
+  var importShops = req.body;
+  var bulk = Grocery.collection.initializeUnorderedBulkOp();
+  importShops.forEach(function(product) {
+    if (product)
+      bulk.insert(product);
+  })
+  bulk.execute(function (err,result) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(result);
+    }
+  });
+};
+
 /**
  * Show the current Grocery
  */
@@ -109,7 +128,7 @@ exports.listPage = function(req, res) {
     var page = req.params.page;
   }
   var per_page = 12;
-  Grocery.find().sort('-created').skip((page-1)*per_page).limit(per_page).exec(function(err, fruits) {
+  Grocery.find({'catregory':req.params.category}).sort('-created').skip((page-1)*per_page).limit(per_page).exec(function(err, fruits) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

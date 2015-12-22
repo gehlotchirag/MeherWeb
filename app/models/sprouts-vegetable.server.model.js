@@ -16,6 +16,10 @@ var SproutsVegetableSchema = new Schema({
     required: 'Please fill Fruit name',
     trim: true
   },
+  category: {
+    type: String,
+    default :"sproutsvegetables"
+  },
   price: {
     type: Number,
     default: '',
