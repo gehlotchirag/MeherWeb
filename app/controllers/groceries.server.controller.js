@@ -121,6 +121,8 @@ exports.Search = function(req, res) {
  * List of pagination
  */
 exports.listPage = function(req, res) {
+  console.log("yesy here")
+  console.log(req.params.category)
   if(!req.params.page)
   {
     var page = 1;
@@ -128,7 +130,7 @@ exports.listPage = function(req, res) {
     var page = req.params.page;
   }
   var per_page = 12;
-  Grocery.find({'category':req.params.category}).sort('-created').skip((page-1)*per_page).limit(per_page).exec(function(err, fruits) {
+  Grocery.find({'category':req.params.category}).sort( { name: 1 } ).skip((page-1)*per_page).limit(per_page).exec(function(err, fruits) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
