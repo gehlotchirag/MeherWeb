@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.route('/fruitsAll')
       .post(users.requiresLogin, fruits.createAll);
 
-  app.route('/fruits/search/:searchText')
+  app.route('/fruits-search/:searchText')
       .get(fruits.Search);
 
 	app.route('/fruits/:fruitId')
