@@ -9,8 +9,14 @@ module.exports = function(app) {
 		.get(fruits.list)
 		.post(users.requiresLogin, fruits.create);
 
-  app.route('/fruits/page/:page')
-      .get(fruits.listPage)
+  app.route('/fruits/:category/:page')
+      .get(fruits.listPage);
+
+  app.route('/fruitsAll')
+      .post(users.requiresLogin, fruits.createAll);
+
+  app.route('/fruits/search/:searchText')
+      .get(fruits.Search);
 
 	app.route('/fruits/:fruitId')
 		.get(fruits.read)
