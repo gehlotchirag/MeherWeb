@@ -27,7 +27,6 @@ exports.create = function(req, res) {
 };
 
 exports.Search = function(req, res) {
-  console.log("****")
   console.log(req.params.searchText)
   Fruit.find({'name':new RegExp(req.params.searchText,"i")}).exec(function(err, fruits) {
     if (err) {
@@ -121,8 +120,6 @@ exports.list = function(req, res) {
 
 
 exports.listPage = function(req, res) {
-  console.log("yesy here")
-  console.log(req.params.category)
   if(!req.params.page)
   {
     var page = 1;
