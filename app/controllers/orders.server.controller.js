@@ -73,7 +73,7 @@ exports.create = function(req, res) {
             var msg = SMSbody + Pushbody
             console.log("*****")
             console.log(order.store.deviceId)
-            res.jsonp({message : msg });
+            //res.jsonp({message : msg });
           });
         });
 
@@ -81,8 +81,10 @@ exports.create = function(req, res) {
       else{
         console.log("*****")
         console.log(order.store.deviceId)
-        res.jsonp({message: 'Push not sent to customer'});
+        //res.jsonp({message: 'Push not sent to customer'});
       }
+      res.jsonp(order);
+
     }
   });
 };
