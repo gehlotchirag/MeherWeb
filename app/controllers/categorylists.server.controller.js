@@ -99,7 +99,7 @@ exports.delete = function(req, res) {
  * List of Categorylists
  */
 exports.list = function(req, res) { 
-	Categorylist.find().populate('user', 'displayName').exec(function(err, categorylists) {
+	Categorylist.find().exec(function(err, categorylists) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

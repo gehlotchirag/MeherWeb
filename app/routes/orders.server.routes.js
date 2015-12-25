@@ -21,6 +21,11 @@ module.exports = function(app) {
 		.put(orders.update)
 		.delete(orders.delete);
 
-	// Finish by binding the Order middleware
+  app.route('/orders/:orderId/:orderStatus')
+      .put(orders.orderUpdateStatus)
+
+  // Finish by binding the Order middleware
 	app.param('orderId', orders.orderByID);
+	app.param('orderId', orders.orderUpdateStatus);
+	app.param('orderStatus', orders.orderUpdateStatus);
 };
