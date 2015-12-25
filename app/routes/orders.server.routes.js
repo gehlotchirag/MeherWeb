@@ -26,6 +26,6 @@ module.exports = function(app) {
 
   // Finish by binding the Order middleware
 	app.param('orderId', orders.orderByID);
-	app.param('orderId', orders.orderUpdateStatus);
+	//app.param('orderId', orders.orderUpdateStatus);
 	app.param('orderStatus', orders.orderUpdateStatus);
 };
