@@ -9,6 +9,10 @@ module.exports = function(app) {
 		.get(consumers.list)
 		.post(consumers.create);
 
+  app.route('/consumers/:referedBy')
+      .get(consumers.refCount)
+
+
 	app.route('/consumers/:consumerId')
 		.get(consumers.read)
 		.put(users.requiresLogin, consumers.hasAuthorization, consumers.update)

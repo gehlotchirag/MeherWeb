@@ -84,6 +84,18 @@ exports.list = function(req, res) {
 	});
 };
 
+exports.refCount = function(req, res) {
+  Consumer.count({"referedBy": req.referedBy}).exec(function(err, count) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(count);
+    }
+  });
+};
+
 /**
  * Consumer middleware
  */

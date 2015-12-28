@@ -30,7 +30,17 @@ var ShopFruitSchema = new Schema({
     trim: true
   },
 
-  loc: { 'type': {type: String, enum: "Point", default: "Point"}, coordinates: { type: [Number],   default: [0,0]} },
+  loc: { 'type':
+    {
+      type: String,
+      enum: "Point",
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number],
+      default: [0,0]
+    }
+  },
 
   category: {
     type: String,
