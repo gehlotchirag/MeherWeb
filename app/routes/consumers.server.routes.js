@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(consumers.list)
 		.post(consumers.create);
 
-  app.route('/consumers/:referedBy')
+  app.route('/consumers-referral/:referedBy')
       .get(consumers.refCount)
 
 
