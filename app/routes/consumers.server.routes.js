@@ -20,4 +20,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Consumer middleware
 	app.param('consumerId', consumers.consumerByID);
+	app.param('referedBy', consumers.refCount);
 };
