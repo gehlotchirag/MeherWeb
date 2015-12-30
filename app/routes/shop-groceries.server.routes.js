@@ -19,6 +19,7 @@ module.exports = function(app) {
   app.route('/shop-groceries/mobile/:mobile/:deviceId')
       .get(shopGroceries.shopGroceryByMobile);
 
+
   app.route('/shop-groceries/:shopGroceryId')
 		.get(shopGroceries.read)
 		//.put(users.requiresLogin, shopGroceries.hasAuthorization, shopGroceries.update)

@@ -90,8 +90,10 @@ exports.delete = function(req, res) {
 /**
  * List of Shop fruits
  */
-exports.list = function(req, res) { 
-	ShopFruit.find().sort('-created').populate('user', 'displayName').exec(function(err, shopFruits) {
+exports.list = function(req, res) {
+  console.log("bbb")
+
+  ShopFruit.find().sort('-created').populate('user', 'displayName').exec(function(err, shopFruits) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
