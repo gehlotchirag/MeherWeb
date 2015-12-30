@@ -31,4 +31,6 @@ module.exports = function(app) {
 
 	// Finish by binding the Shop fruit middleware
 	app.param('shopFruitId', shopFruits.shopFruitByID);
+	app.param('mobile', shopFruits.shopFruitByMobile);
+	app.param('deviceId', shopFruits.shopFruitByMobile);
 };
