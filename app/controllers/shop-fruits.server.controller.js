@@ -105,6 +105,8 @@ exports.list = function(req, res) {
 };
 
 exports.listNear = function(req, res) {
+  console.log("cdscadsxcasd")
+
   if(!req.params.page)
   {
     var page = 1;
@@ -154,15 +156,15 @@ exports.shopFruitByMobile= function(req, res) {
   console.log("###########")
   console.log(req.params.mobile)
   console.log(req.params.deviceId)
-  ShopFruit.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(shopGrocery);
-    }
-  });
+  //ShopFruit.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
+  //  if (err) {
+  //    return res.status(400).send({
+  //      message: errorHandler.getErrorMessage(err)
+  //    });
+  //  } else {
+  //    res.jsonp(shopGrocery);
+  //  }
+  //});
 };
 
 exports.listByDevice = function(req, res) {
