@@ -55,7 +55,7 @@ exports.update = function(req, res) {
 
 exports.deleteConsumer = function (req,res){
   var mobile = req.params.mobile;
-  consumer.remove({"referedBy": req.params.referedBy}).exec(function(err, response) {
+  Consumer.remove({"referedBy": req.params.referedBy}).exec(function(err, response) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
