@@ -135,8 +135,10 @@ exports.listNear = function(req, res) {
 /**
  * Shop fruit middleware
  */
-exports.shopFruitByID = function(req, res, next, id) { 
-	ShopFruit.findById(id).exec(function(err, shopFruit) {
+exports.shopFruitByID = function(req, res, next, id) {
+  console.log("aaaaa")
+
+  ShopFruit.findById(id).exec(function(err, shopFruit) {
 		if (err) return next(err);
 		if (! shopFruit) return next(new Error('Failed to load Shop fruit ' + id));
 		req.shopFruit = shopFruit ;
