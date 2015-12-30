@@ -13,7 +13,7 @@ module.exports = function(app) {
       .get(consumers.refCount)
 
   app.route('/consumers-delete/:mobile')
-      .delete(consumers.deleteConsumer);
+      .get(consumers.deleteConsumer);
 
 
 	app.route('/consumers/:consumerId')
