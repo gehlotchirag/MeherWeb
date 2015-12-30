@@ -15,10 +15,7 @@ module.exports = function(app) {
   app.route('/shop-fruits/near/:lng/:lat/:page')
       .get(shopFruits.listNear);
 
-  //app.route('/shop-fruits/mobile/:mobile/:deviceId')
-  //    .get(shopFruits.shopFruitByMobile);
-
-  app.route('/shop-fruits-mobile/:mobile/:deviceId')
+  app.route('/shop-fruits/mobile/:number/:deviceId')
       .get(shopFruits.shopFruitByMobile);
 
   app.route('/shop-fruits-devices')
@@ -30,7 +27,8 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, shopFruits.hasAuthorization, shopFruits.delete);
 
 	// Finish by binding the Shop fruit middleware
-	app.param('shopFruitId', shopFruits.shopFruitByID);
-	app.param('mobile', shopFruits.shopFruitByID);
-	app.param('deviceId', shopFruits.shopFruitByID);
+  app.param('mobile', shopFruits.shopFruitByMobile);
+
+  app.param('shopFruitId', shopFruits.shopFruitByID);
+	//app.param('deviceId', shopFruits.shopFruitByMobile);
 };

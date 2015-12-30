@@ -12,7 +12,9 @@ var mongoose = require('mongoose'),
  * Create a Shop fruit
  */
 exports.create = function(req, res) {
-	var shopFruit = new ShopFruit(req.body);
+  console.log("ewddwdsds")
+
+  var shopFruit = new ShopFruit(req.body);
 	shopFruit.user = req.user;
 
 	shopFruit.save(function(err) {
@@ -27,6 +29,8 @@ exports.create = function(req, res) {
 };
 
 exports.createAll = function(req, res, next) {
+  console.log("sssssss")
+
   var importShops = req.body;
   var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
   importShops.forEach(function(shop) {
@@ -49,14 +53,17 @@ exports.createAll = function(req, res, next) {
  * Show the current Shop fruit
  */
 exports.read = function(req, res) {
-	res.jsonp(req.shopFruit);
+  console.log("xxxx")
+  res.jsonp(req.shopFruit);
 };
 
 /**
  * Update a Shop fruit
  */
 exports.update = function(req, res) {
-	var shopFruit = req.shopFruit ;
+  console.log("cccccccccc")
+
+  var shopFruit = req.shopFruit ;
 	shopFruit = _.extend(shopFruit , req.body);
 
 	shopFruit.save(function(err) {
@@ -153,18 +160,15 @@ exports.shopFruitByID = function(req, res, next, id) {
 
 
 exports.shopFruitByMobile= function(req, res) {
-  console.log("###########")
-  console.log(req.params.mobile)
-  console.log(req.params.deviceId)
-  //ShopFruit.findOneAndUpdate({ mobile: req.params.mobile },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
-  //  if (err) {
-  //    return res.status(400).send({
-  //      message: errorHandler.getErrorMessage(err)
-  //    });
-  //  } else {
-  //    res.jsonp(shopGrocery);
-  //  }
-  //});
+  ShopFruit.findOneAndUpdate({ mobile: req.params.number },{deviceId: req.params.deviceId}).exec(function(err, shopGrocery) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopGrocery);
+    }
+  });
 };
 
 exports.listByDevice = function(req, res) {
