@@ -12,7 +12,6 @@ var mongoose = require('mongoose'),
  * Create a Shop fruit
  */
 exports.create = function(req, res) {
-  console.log("ewddwdsds")
 
   var shopFruit = new ShopFruit(req.body);
 	shopFruit.user = req.user;
@@ -29,14 +28,13 @@ exports.create = function(req, res) {
 };
 
 exports.createAll = function(req, res, next) {
-  console.log("sssssss")
 
   var importShops = req.body;
   var bulk = ShopFruit.collection.initializeUnorderedBulkOp();
   importShops.forEach(function(shop) {
     if (shop)
       bulk.insert(shop);
-  })
+  });
   bulk.execute(function (err,result) {
     if (err) {
       return res.status(400).send({
@@ -53,7 +51,6 @@ exports.createAll = function(req, res, next) {
  * Show the current Shop fruit
  */
 exports.read = function(req, res) {
-  console.log("xxxx")
   res.jsonp(req.shopFruit);
 };
 
@@ -61,7 +58,6 @@ exports.read = function(req, res) {
  * Update a Shop fruit
  */
 exports.update = function(req, res) {
-  console.log("cccccccccc")
 
   var shopFruit = req.shopFruit ;
 	shopFruit = _.extend(shopFruit , req.body);
@@ -98,7 +94,6 @@ exports.delete = function(req, res) {
  * List of Shop fruits
  */
 exports.list = function(req, res) {
-  console.log("bbb")
 
   ShopFruit.find().sort('-created').populate('user', 'displayName').exec(function(err, shopFruits) {
 		if (err) {
@@ -112,7 +107,6 @@ exports.list = function(req, res) {
 };
 
 exports.listNear = function(req, res) {
-  console.log("cdscadsxcasd")
 
   if(!req.params.page)
   {
@@ -147,7 +141,6 @@ exports.listNear = function(req, res) {
  * Shop fruit middleware
  */
 exports.shopFruitByID = function(req, res, next, id) {
-  console.log("aaaaa")
 
   ShopFruit.findById(id).exec(function(err, shopFruit) {
 		if (err) return next(err);
@@ -172,8 +165,7 @@ exports.shopFruitByMobile= function(req, res) {
 };
 
 exports.listByDevice = function(req, res) {
-  console.log("$$$$$$$$$$$$$$$$$$$$")
-  ShopFruit.find().exists('deviceId').exec(function(err, shopFruit) {
+   ShopFruit.find().exists('deviceId').exec(function(err, shopFruit) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
