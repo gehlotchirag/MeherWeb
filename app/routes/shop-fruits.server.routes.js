@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.route('/shop-fruits/near/:lng/:lat/:page')
       .get(shopFruits.listNear);
 
-  app.route('/shop-fruits/mobile/:mobile/:deviceId')
+  app.route('/shop-fruits-mobile/:mobile/:deviceId')
       .get(shopFruits.shopFruitByMobile);
 
   app.route('/shop-fruits')
