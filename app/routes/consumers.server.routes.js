@@ -15,7 +15,6 @@ module.exports = function(app) {
   app.route('/consumers-delete/:mobile')
       .get(consumers.deleteConsumer);
 
-
 	app.route('/consumers/:consumerId')
 		.get(consumers.read)
 		.put(users.requiresLogin, consumers.hasAuthorization, consumers.update)
