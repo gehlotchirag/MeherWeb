@@ -52,9 +52,25 @@ exports.update = function(req, res) {
 	});
 };
 
+
+exports.deleteConsumer = function (req,res){
+  var mobile = req.params.mobile;
+  consumer.remove({"referedBy": req.params.referedBy}).exec(function(err, response) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(response);
+    }
+  })
+
+}
 /**
  * Delete an Consumer
  */
+
+
 exports.delete = function(req, res) {
 	var consumer = req.consumer ;
 
@@ -83,6 +99,7 @@ exports.list = function(req, res) {
 		}
 	});
 };
+
 
 exports.refCount = function(req, res) {
   Consumer.count({"referedBy": req.params.referedBy}).exec(function(err, count) {

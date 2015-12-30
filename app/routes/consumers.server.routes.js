@@ -12,6 +12,9 @@ module.exports = function(app) {
   app.route('/consumers-referral/:referedBy')
       .get(consumers.refCount)
 
+  app.route('/consumers-delete/:mobile')
+      .delete(consumers.deleteConsumer);
+
 
 	app.route('/consumers/:consumerId')
 		.get(consumers.read)
@@ -21,4 +24,5 @@ module.exports = function(app) {
 	// Finish by binding the Consumer middleware
 	app.param('consumerId', consumers.consumerByID);
 	app.param('referedBy', consumers.refCount);
+  app.param('mobile',consumers.deleteConsumer);
 };
