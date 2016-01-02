@@ -104,6 +104,29 @@ exports.list = function(req, res) {
 };
 
 
+exports.listOfElectronics = function(req, res) {
+  console.log(req.params.listOfElectronicsPage)
+  if(!req.params.listOfElectronicsPage)
+  {
+    var page = 1;
+  }else{
+    var page = req.params.listOfElectronicsPage;
+  }
+  var per_page = 50;
+
+  ShopElectronic.find().skip((page-1)*per_page).limit(per_page).sort('-created').exec(function(err, shopFruits) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopFruits);
+    }
+  });
+};
+
+
+
 exports.listNear = function(req, res) {
   if(!req.params.page)
   {

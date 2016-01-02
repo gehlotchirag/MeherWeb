@@ -18,6 +18,9 @@ module.exports = function(app) {
   app.route('/shop-electronics/mobile/:mobile/:deviceId')
       .get(shopElectronics.shopElectronicByMobile);
 
+  app.route('/shop-electronicsdata/:listOfElectronicsPage')
+      .get(shopElectronics.listOfElectronics);
+
   app.route('/shop-electronics/:shopElectronicId')
 		.get(shopElectronics.read)
 		.put(shopElectronics.update)
@@ -25,4 +28,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Shop electronic middleware
 	app.param('shopElectronicId', shopElectronics.shopElectronicByID);
+  app.param('listOfElectronicsPage', shopElectronics.listOfElectronics);
 };
