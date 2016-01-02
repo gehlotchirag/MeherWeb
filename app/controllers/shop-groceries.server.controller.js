@@ -148,6 +148,27 @@ exports.shopGroceryByID = function(req, res, next, id) {
 /**
  * Shop grocery middleware
  */
+
+exports.listOfGroceries = function(req, res) {
+  console.log(req.params.listOfGroceriesPage)
+  if(!req.params.listOfGroceriesPage)
+  {
+    var page = 1;
+  }else{
+    var page = req.params.listOfGroceriesPage;
+  }
+  var per_page = 98;
+
+  ShopGrocery.find().skip((page-1)*per_page).limit(per_page).sort('-created').exec(function(err, shopFruits) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopFruits);
+    }
+  });
+};
 exports.shopGroceryByMobile= function(req, res) {
   console.log("%%%%%% ----- %%%%%")
   console.log(req.params.mobile)

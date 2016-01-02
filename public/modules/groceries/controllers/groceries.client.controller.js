@@ -56,6 +56,7 @@ angular.module('groceries').controller('GroceriesController', ['$scope', '$state
 			$scope.groceries = Groceries.query();
 		};
 
+
 		// Find existing Grocery
 		$scope.findOne = function() {
 			$scope.grocery = Groceries.get({ 

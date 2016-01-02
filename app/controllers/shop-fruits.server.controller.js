@@ -106,6 +106,27 @@ exports.list = function(req, res) {
 	});
 };
 
+exports.listOfShop = function(req, res) {
+
+  if(!req.params.listOfShopPage)
+  {
+    var page = 1;
+  }else{
+    var page = req.params.listOfShopPage;
+  }
+  var per_page = 98;
+
+  ShopFruit.find().skip((page-1)*per_page).limit(per_page).sort('-created').exec(function(err, shopFruits) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopFruits);
+    }
+  });
+};
+
 exports.listNear = function(req, res) {
 
   if(!req.params.page)

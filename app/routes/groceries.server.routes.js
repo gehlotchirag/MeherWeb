@@ -18,6 +18,7 @@ module.exports = function(app) {
   app.route('/groceries-search/:searchText')
       .get(groceries.Search);
 
+
   app.route('/groceries/:groceryId')
 		.get(groceries.read)
 		.put(users.requiresLogin, groceries.hasAuthorization, groceries.update)
@@ -25,4 +26,6 @@ module.exports = function(app) {
 
 	// Finish by binding the Grocery middleware
 	app.param('groceryId', groceries.groceryByID);
+
+
 };

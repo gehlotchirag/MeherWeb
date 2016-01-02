@@ -19,6 +19,9 @@ module.exports = function(app) {
   app.route('/shop-groceries/mobile/:mobile/:deviceId')
       .get(shopGroceries.shopGroceryByMobile);
 
+  app.route('/shop-groceriesdata/:listOfGroceriesPage')
+      .get(shopGroceries.listOfGroceries);
+
 
   app.route('/shop-groceries/:shopGroceryId')
 		.get(shopGroceries.read)
@@ -31,4 +34,5 @@ module.exports = function(app) {
 
   // Finish by binding the Shop grocery middleware
 	app.param('shopGroceryId', shopGroceries.shopGroceryByID);
+	app.param('listOfGroceriesPage', shopGroceries.listOfGroceries);
 };

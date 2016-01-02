@@ -21,6 +21,9 @@ module.exports = function(app) {
   app.route('/shop-fruits-devices')
       .get(shopFruits.listByDevice);
 
+  app.route('/shop-fruitsdata/:listOfShopPage')
+      .get(shopFruits.listOfShop);
+
   app.route('/shop-fruits/:shopFruitId')
 		.get(shopFruits.read)
 		.put(shopFruits.update)
