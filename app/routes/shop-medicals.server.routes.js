@@ -23,6 +23,11 @@ module.exports = function(app) {
 		.put(shopMedicals.update)
 		.delete(users.requiresLogin, shopMedicals.hasAuthorization, shopMedicals.delete);
 
+  app.route('/shop-medicalsdata/:listOfMedicalsPage')
+      .get(shopMedicals.listOfMedicals);
+
 	// Finish by binding the Shop medical middleware
 	app.param('shopMedicalId', shopMedicals.shopMedicalByID);
+  app.param('listOfMedicalsPage', shopMedicals.listOfMedicals);
+
 };

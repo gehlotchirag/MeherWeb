@@ -161,6 +161,29 @@ exports.shopMedicalByMobile= function(req, res) {
   });
 };
 
+
+exports.listOfMedicals = function(req, res) {
+  console.log(req.params.listOfMedicalsPage)
+  if(!req.params.listOfMedicalsPage)
+  {
+    var page = 1;
+  }else{
+    var page = req.params.listOfMedicalsPage;
+  }
+  var per_page = 50;
+
+  ShopMedical.find().skip((page-1)*per_page).limit(per_page).sort('-created').exec(function(err, shopFruits) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(shopFruits);
+    }
+  });
+};
+
+
 /**
  * Shop medical authorization middleware
  */
