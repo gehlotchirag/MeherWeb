@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Shop fruits Routes
 	app.route('/shop-fruits')
-		.get(shopFruits.listByDevice)
+		.get(shopFruits.list)
 		.post(users.requiresLogin, shopFruits.create);
 
   app.route('/shop-fruitsAll')
