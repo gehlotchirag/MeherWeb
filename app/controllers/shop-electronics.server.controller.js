@@ -112,7 +112,7 @@ exports.listOfElectronics = function(req, res) {
   }else{
     var page = req.params.listOfElectronicsPage;
   }
-  var per_page = 50;
+  var per_page = 80;
 
   ShopElectronic.find().skip((page-1)*per_page).limit(per_page).sort('-created').exec(function(err, shopFruits) {
     if (err) {
