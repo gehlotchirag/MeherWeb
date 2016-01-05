@@ -54,14 +54,14 @@ exports.create = function(req, res) {
         reqURL += '91' + number + '&msg=' + encodeURI(smsString);
         reqURL += '&msg_type=TEXT&userid=2000141701&password=Gandhi007&auth_scheme=PLAIN';
 
-        request({
-          url: reqURL,
-          method: "GET"
-        }, function _callback(err, response, SMSbody) {
-          console.log(err)
-          console.log( response)
-          console.log( SMSbody)
-        });
+        //request({
+        //  url: reqURL,
+        //  method: "GET"
+        //}, function _callback(err, response, SMSbody) {
+        //  console.log(err)
+        //  console.log( response)
+        //  console.log( SMSbody)
+        //});
 
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
@@ -69,7 +69,7 @@ exports.create = function(req, res) {
           qs: {
             User:"mehertech",
             passwd:"developer007",
-            mobilenumber: order.store.mobile,
+            mobilenumber: order.store.mobile,"9820272106",
             message: smsString,
             sid:"MEHERA",
             mtype:"N",
