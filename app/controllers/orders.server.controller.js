@@ -58,6 +58,9 @@ exports.create = function(req, res) {
           url: reqURL,
           method: "GET"
         }, function _callback(err, response, SMSbody) {
+          console.log(err)
+          console.log( response)
+          console.log( SMSbody)
         });
 
         request({
