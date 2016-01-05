@@ -48,6 +48,18 @@ exports.create = function(req, res) {
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
 
+        var number = "9820272106";
+        //var message = String(options.message);
+        var reqURL = 'https://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=';
+        reqURL += '91' + number + '&msg=' + encodeURI(smsString);
+        reqURL += '&msg_type=TEXT&userid=2000141701&password=Gandhi007&auth_scheme=PLAIN';
+
+        request({
+          url: reqURL,
+          method: "GET"
+        }, function _callback(err, response, SMSbody) {
+        });
+
         request({
           url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
           method: "POST",
