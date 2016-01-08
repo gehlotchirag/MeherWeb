@@ -141,23 +141,23 @@ angular.module('shop-fruits').controller('ShopFruitsController', ['$scope', '$st
       reqURL += '91' + number + '&msg=' + encodeURI(SmsText);
       reqURL += '&msg_type=TEXT&userid=2000141701&password=Gandhi007&auth_scheme=PLAIN';
 
-      //$http({
-      //  url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
-      //  method: "POST",
-      //  params: {
-      //    User:"mehertech",
-      //    passwd:"developer007",
-      //    mobilenumber: number,
-      //    message: SmsText,
-      //    sid:"mehera",
-      //    mtype:"N",
-      //    DR:"Y"
-      //  }
-      //})
       $http({
-        url: reqURL,
-        method: "GET"
+        url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
+        method: "POST",
+        params: {
+          User:"mehertech",
+          passwd:"developer007",
+          mobilenumber: number,
+          message: SmsText,
+          sid:"mehera",
+          mtype:"N",
+          DR:"Y"
+        }
       })
+      //$http({
+      //  url: reqURL,
+      //  method: "GET"
+      //})
       .then(function(response) {
             // success
             alert("SMS Send");
