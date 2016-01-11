@@ -2,45 +2,47 @@
 
 // Orders controller
 angular.module('orders').controller('OrdersController', ['$scope','$stateParams', '$location', 'Authentication', 'Orders','$http','NgMap',
-	function($scope, $stateParams, $location, Authentication, Orders,$http,NgMap) {
-		$scope.authentication = Authentication;
+  function($scope, $stateParams, $location, Authentication, Orders,$http,NgMap) {
+    $scope.authentication = Authentication;
 
-    $scope.showMap = false;
 
-		// Create new Order
-		$scope.create = function() {
-			// Create new Order object
-			var order = new Orders ({
-				name: this.name
-			});
+    //NgMap.getMap().then(function(map) {
+    //  $scope.map = map;
+    //});
+    // Create new Order
+    $scope.create = function() {
+      // Create new Order object
+      var order = new Orders ({
+        name: this.name
+      });
 
-			// Redirect after save
-			order.$save(function(response) {
-				$location.path('orders/' + response._id);
+      // Redirect after save
+      order.$save(function(response) {
+        $location.path('orders/' + response._id);
 
-				// Clear form fields
-				$scope.name = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+        // Clear form fields
+        $scope.name = '';
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
 
-		// Remove existing Order
-		$scope.remove = function(order) {
-			if ( order ) { 
-				order.$remove();
+    // Remove existing Order
+    $scope.remove = function(order) {
+      if ( order ) {
+        order.$remove();
 
-				for (var i in $scope.orders) {
-					if ($scope.orders [i] === order) {
-						$scope.orders.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.order.$remove(function() {
-					$location.path('orders');
-				});
-			}
-		};
+        for (var i in $scope.orders) {
+          if ($scope.orders [i] === order) {
+            $scope.orders.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.order.$remove(function() {
+          $location.path('orders');
+        });
+      }
+    };
 
     $scope.renderMap = function(order){
 
@@ -86,7 +88,7 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
           routename= 'shop-groceries';
         if(category == 'Medical')
           routename= 'shop-medicals';
-        $http.get('http://getmeher.com:3000/'+routename+'/near/' +  order.longitude+ '/' + order.latitude + '/1').
+        $http.get('http://localhost:3000/'+routename+'/near/' +  order.longitude+ '/' + order.latitude + '/1').
         then(function (response) {
           $scope.shopsNearBy = (response.data);
         }, function (response) {
@@ -97,27 +99,81 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
 
 
     }
-		// Update existing Order
-		$scope.update = function() {
-			var order = $scope.order;
+    // Update existing Order
+    $scope.update = function() {
+      var order = $scope.order;
 
-			order.$update(function() {
-				$location.path('orders/' + order._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+      order.$update(function() {
+        $location.path('orders/' + order._id);
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
 
-		// Find a list of Orders
-		$scope.find = function() {
-			$scope.orders = Orders.query();
-		};
 
-		// Find existing Order
-		$scope.findOne = function() {
-			$scope.order = Orders.get({ 
-				orderId: $stateParams.orderId
-			});
-		};
-	}
+    $scope.showInfo = function(){
+      map.showInfoWindow('bar',this);
+    }
+    // Find a list of Orders
+    $scope.find = function() {
+      $scope.orders = Orders.query();
+    };
+
+    // Find existing Order
+    $scope.findOne = function() {
+      $scope.order = Orders.get({
+        orderId: $stateParams.orderId
+      });
+    };
+
+
+    $scope.changeStore = function(store,tempOrder){
+      console.log(store)
+      console.log(tempOrder)
+      $scope.order = angular.toJson(tempOrder);
+      $scope.order = JSON.parse($scope.order);
+      console.log($scope.order)
+      $scope.newStrore = store;
+      //order.store = null;
+      // call cancel
+      $scope.cancelOrder($scope.order);
+
+    }
+
+    $scope.cancelOrder = function(order) {
+      $http({
+        method: 'PUT',
+        url: 'http://localhost:3000/orders/' + order._id + '/cancelled',
+        data: order
+      }).then(function () {
+        $scope.postOrder(order)
+      })
+    };
+    $scope.postOrder = function(order) {
+      order.store = angular.copy($scope.newStrore)
+      console.log("New order")
+      console.log(order)
+      delete order._id;
+      delete order.created;
+
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3000/orders/',
+        data: order
+      }).then(function(){
+
+      })
+    };
+
+
+    $scope.showShop = function(event, shop) {
+      $scope.selectedShop = shop;
+      NgMap.getMap().then(function(map) {
+        map.showInfoWindow(event,'myInfoWindow');
+      });
+
+    };
+
+
+  }
 ]);

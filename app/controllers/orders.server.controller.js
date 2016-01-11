@@ -40,6 +40,7 @@ exports.create = function(req, res) {
         });
         smsString = smsString + "Phone: " + order.customer.mobile + "\n";
         smsString = smsString + "Address:" + order.customer.addLine1 + "\n" + order.customer.addLine2;
+        smsString = smsString + "\n" + "Download Meher App now Consumer App: https://goo.gl/cxqKEc"+ "\n" + "Retailer App: https://goo.gl/HzI82z"
         console.log(smsString);
 
         var pushMessage = {
@@ -203,9 +204,14 @@ console.log(req.body)
           pushString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store.";
           smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store. Thanks for using MEHER";
         }
+        else if(orserStatus == 'cancelled') {
+          console.log("calllllllll")
+          pushString = "Your order with " + orderData.store.name + " is cancelled";
+          smsString = "Your order with " + orderData.store.name + " is cancelled, Thanks for using MEHER";
+        }
         else {
-          pushString = "Your order is sent out for delivery by" + orderData.store.name;
-          smsString = "Your order is sent out for delivery by" + orderData.store.name+ "\n" + "Thanks for using MEHER";
+          pushString = "Your order is sent out for delivery by " + orderData.store.name;
+          smsString = "Your order is sent out for delivery by " + orderData.store.name+ "\n" + "Thanks for using MEHER";
         }
 
         if (orserStatus == 'accepted') {
@@ -242,32 +248,34 @@ console.log(req.body)
           "ios": {"badge": 0, "alert": pushString, "sound": "soundName"}
         };
 
-        request({
-          url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
-          method: "POST",
-          qs: {
-            User:"mehertech",
-            passwd:"developer007",
-            mobilenumber: orderData.customer.mobile,
-            message: smsString,
-            sid:"MEHERA",
-            mtype:"N",
-            DR:"Y"
-          }
-        }, function _callback(err, response, SMSbody) {
-          console.log(SMSbody);
-          request({
-            url: "http://getmeher.com:8000/send",
-            method: "POST",
-            headers: {
-              "content-type": "application/json"
-            },
-            body: JSON.stringify(pushMessage)
-          }, function _callback(err, response, Pushbody) {
-            var msg = SMSbody + Pushbody
-            res.jsonp({message : msg });
-          });
-        });
+        res.jsonp({cust : orderData.customer.mobile, });
+
+        //request({
+        //  url: 'http://api.smscountry.com/SMSCwebservice_bulk.aspx?',
+        //  method: "POST",
+        //  qs: {
+        //    User:"mehertech",
+        //    passwd:"developer007",
+        //    mobilenumber: orderData.customer.mobile,
+        //    message: smsString,
+        //    sid:"MEHERA",
+        //    mtype:"N",
+        //    DR:"Y"
+        //  }
+        //}, function _callback(err, response, SMSbody) {
+        //  console.log(SMSbody);
+        //  request({
+        //    url: "http://getmeher.com:8000/send",
+        //    method: "POST",
+        //    headers: {
+        //      "content-type": "application/json"
+        //    },
+        //    body: JSON.stringify(pushMessage)
+        //  }, function _callback(err, response, Pushbody) {
+        //    var msg = SMSbody + Pushbody
+        //    res.jsonp({message : msg });
+        //  });
+        //});
 
 
       }

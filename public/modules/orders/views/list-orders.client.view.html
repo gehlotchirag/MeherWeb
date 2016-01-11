@@ -53,17 +53,45 @@
                     <option>rejected</option>
                     <option>accepted</option>
                     <option>delivered</option>
+                    <option>canceled</option>
+
                 </select>
                 <hr>
-                <button type="button" class="btn btn-success" ng-click="changeOrderStatus(order)">Update Order status</button>
+                <button type="button" class="btn btn-success" ng-click="changeOrderStatus(order)">Update Order status
+                </button>
             </div>
 
             <div class="col-md-12 text-center" ng-if="order.showMap">
-                <ng-map zoom-control='false' center="{{order.latitude}},{{order.longitude}}" zoom="14">
-                    <marker position="{{order.latitude}},{{order.longitude}}" icon="https://upload.wikimedia.org/wikipedia/commons/9/92/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Home_%E2%80%93_People_%E2%80%93_Default.png"></marker>
-                    <marker animation="BOUNCE" position="{{order.store.loc.coordinates[1]}},{{order.store.loc.coordinates[0]}}" ></marker>
-                    <marker ng-repeat="p in shopsNearBy" position ="{{p.loc.coordinates[1]}},{{p.loc.coordinates[0]}}">
 
+                <!--<ng-map zoom-control='false' center="{{order.latitude}},{{order.longitude}}" zoom="14">-->
+                <!--<marker position="{{order.latitude}},{{order.longitude}}"-->
+                <!--icon="https://upload.wikimedia.org/wikipedia/commons/9/92/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Home_%E2%80%93_People_%E2%80%93_Default.png"></marker>-->
+                <!--<marker on-click="clicked(order.store.name)"-->
+                <!--icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png" animation="BOUNCE"-->
+                <!--position="{{order.store.loc.coordinates[1]}},{{order.store.loc.coordinates[0]}}"></marker>-->
+                <!--<marker ng-repeat="otherShop in shopsNearBy" id="{{otherShop._id}}"-->
+                <!--position="{{otherShop.loc.coordinates[1]}},{{otherShop.loc.coordinates[0]}}"-->
+                <!--ng-if="(otherShop.loc.coordinates[0] !==order.store.loc.coordinates[0])&&(otherShop.loc.coordinates[1] !==order.store.loc.coordinates[1])">-->
+                <!--</marker>-->
+
+
+
+                <!--</ng-map>-->
+
+                <ng-map default-style="true" zoom="14" center="{{order.latitude}},{{order.longitude}}">
+
+                    <info-window id="myInfoWindow" >
+                        <div ng-non-bindable>
+                            <h4>{{selectedShop.name}}</h4>
+                            <h6>{{selectedShop.mobile}}</h6>
+                            <button ng-click="changeStore(selectedShop,order)">Change Store</button>
+                        </div>
+                    </info-window>
+
+                    <marker ng-repeat="otherShop in shopsNearBy"
+                            position="{{otherShop.loc.coordinates[1]}},{{otherShop.loc.coordinates[0]}}"
+                            title="{{otherShop.name}}"  id="{{otherShop.id}}"
+                            on-click="showShop(event, otherShop)">
                     </marker>
 
                 </ng-map>
@@ -85,3 +113,4 @@
         No Orders yet, why don't you <a href="/#!/orders/create">create one</a>?
     </div>
 </section>
+
