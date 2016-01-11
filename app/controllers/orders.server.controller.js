@@ -176,16 +176,14 @@ exports.orderByID = function(req, res, next, id) {
 };
 
 exports.orderUpdateStatus= function(req, res) {
-  console.log("***")
-  console.log(req.order)
-
   var order = req.order ;
   order = _.extend(order , req.body);
-console.log(req.body)
-  var id = req.params.orderId;
+
+  var id = req.params.orderNUM;
   var orserStatus= req.params.orderStatus;
 
-  Order.findByIdAndUpdate(id,{ order:req.body.order, orderStatus: orserStatus }).exec(function(err, orderData) {
+  Order.findByIdAndUpdate(id,{order:req.body.order, orderStatus: orserStatus}).exec(function(err, orderData) {
+
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
