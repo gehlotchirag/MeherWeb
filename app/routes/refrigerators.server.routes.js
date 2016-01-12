@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(refrigerators.list)
 		.post(users.requiresLogin, refrigerators.create);
 
-  app.route('/refrigerators/page/:page')
+  app.route('/mobiles/refrigerators/:page')
       .get(refrigerators.listPage)
 
   app.route('/refrigeratorsAll')

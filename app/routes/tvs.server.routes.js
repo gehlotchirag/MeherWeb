@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(tvs.list)
 		.post(users.requiresLogin, tvs.create);
 
-  app.route('/tvs/page/:page')
+  app.route('/mobiles/tvs/:page')
       .get(tvs.listPage)
 
   app.route('/tvsAll')

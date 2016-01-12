@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(acs.list)
 		.post(users.requiresLogin, acs.create);
 
-  app.route('/acs/page/:page')
+  app.route('/mobiles/acs/:page')
       .get(acs.listPage)
 
   app.route('/acsAll')

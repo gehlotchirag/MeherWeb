@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(wmachines.list)
 		.post(users.requiresLogin, wmachines.create);
 
-  app.route('/wmachines/page/:page')
+  app.route('/mobiles/wmachines/:page')
       .get(wmachines.listPage)
 
   app.route('/wmachinesAll')
