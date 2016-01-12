@@ -176,6 +176,9 @@ exports.orderByID = function(req, res, next, id) {
 };
 
 exports.orderUpdateStatus= function(req, res) {
+  console.log("*****")
+  console.log(req.body.order)
+
   var order = req.order ;
   order = _.extend(order , req.body);
 
@@ -203,7 +206,6 @@ exports.orderUpdateStatus= function(req, res) {
           smsString = "Your order is declined by " + orderData.store.name + ". Request you to order from another store. Thanks for using MEHER";
         }
         else if(orserStatus == 'cancelled') {
-          console.log("calllllllll")
           pushString = "Your order with " + orderData.store.name + " is cancelled";
           smsString = "Your order with " + orderData.store.name + " is cancelled, Thanks for using MEHER";
         }
