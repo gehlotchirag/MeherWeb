@@ -88,7 +88,7 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
           routename= 'shop-groceries';
         if(category == 'Medical')
           routename= 'shop-medicals';
-        $http.get('http://localhost:3000/'+routename+'/near/' +  order.longitude+ '/' + order.latitude + '/1').
+        $http.get('http://getmeher.com:3000/'+routename+'/near/' +  order.longitude+ '/' + order.latitude + '/1').
         then(function (response) {
           $scope.shopsNearBy = (response.data);
         }, function (response) {
@@ -143,7 +143,7 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
     $scope.cancelOrder = function(order) {
       $http({
         method: 'PUT',
-        url: 'http://localhost:3000/orders/' + order._id + '/cancelled',
+        url: 'http://getmeher.com:3000/orders/' + order._id + '/cancelled',
         data: order
       }).then(function () {
         $scope.postOrder(order)
@@ -158,7 +158,7 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
 
       $http({
         method: 'POST',
-        url: 'http://localhost:3000/orders/',
+        url: 'http://getmeher.com:3000/orders/',
         data: order
       }).then(function(){
 
