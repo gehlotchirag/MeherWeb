@@ -16,7 +16,18 @@ var CategorylistSchema = new Schema({
 		required: 'Please fill Categorylist name',
 		trim: true
 	},
-	created: {
+  loc: { 'type':
+  {
+    type: String,
+    enum: "Point",
+    default: "Point"
+  },
+    coordinates: {
+      type: [Number]
+    }
+  },
+
+  created: {
 		type: Date,
 		default: Date.now
 	},
@@ -26,4 +37,5 @@ var CategorylistSchema = new Schema({
 	}
 });
 
+CategorylistSchema.index({loc: '2dsphere'});
 mongoose.model('Categorylist', CategorylistSchema);

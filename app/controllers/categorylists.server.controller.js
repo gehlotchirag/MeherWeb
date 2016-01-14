@@ -109,6 +109,43 @@ exports.list = function(req, res) {
 		}
 	});
 };
+exports.listNear = function(req, res) {
+  var TotalData;
+  Categorylist.find({"loc":null}).exec(function(err, cat) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      TotalData = cat;
+      Categorylist.find()
+          .and([
+            {"loc":{$ne:null}},
+            {
+              loc:
+              { $near :
+              {
+                $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ]},
+                $maxDistance: 200000
+              }
+              }
+            }
+          ])
+      .exec(function(err, cityCat) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          //TotalData = TotalData + cityCat;
+          TotalData = TotalData.concat(cityCat);
+          res.jsonp(TotalData);
+        }
+      });
+    }
+  });
+
+};
 
 /**
  * Categorylist middleware

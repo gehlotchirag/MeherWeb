@@ -64,11 +64,8 @@
             <div class="col-md-12 text-center" ng-if="order.showMap">
 
                 <!--<ng-map zoom-control='false' center="{{order.latitude}},{{order.longitude}}" zoom="14">-->
-                <!--<marker position="{{order.latitude}},{{order.longitude}}"-->
-                <!--icon="https://upload.wikimedia.org/wikipedia/commons/9/92/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Home_%E2%80%93_People_%E2%80%93_Default.png"></marker>-->
-                <!--<marker on-click="clicked(order.store.name)"-->
-                <!--icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png" animation="BOUNCE"-->
-                <!--position="{{order.store.loc.coordinates[1]}},{{order.store.loc.coordinates[0]}}"></marker>-->
+
+
                 <!--<marker ng-repeat="otherShop in shopsNearBy" id="{{otherShop._id}}"-->
                 <!--position="{{otherShop.loc.coordinates[1]}},{{otherShop.loc.coordinates[0]}}"-->
                 <!--ng-if="(otherShop.loc.coordinates[0] !==order.store.loc.coordinates[0])&&(otherShop.loc.coordinates[1] !==order.store.loc.coordinates[1])">-->
@@ -91,7 +88,17 @@
                     <marker ng-repeat="otherShop in shopsNearBy"
                             position="{{otherShop.loc.coordinates[1]}},{{otherShop.loc.coordinates[0]}}"
                             title="{{otherShop.name}}"  id="{{otherShop.id}}"
-                            on-click="showShop(event, otherShop)">
+                            on-click="showShop(event, otherShop)"
+                            ng-if="(otherShop.loc.coordinates[0]!==order.store.loc.coordinates[0])&&(otherShop.loc.coordinates[1]!==order.store.loc.coordinates[1])">
+                    </marker>
+
+                    <marker position="{{order.latitude}},{{order.longitude}}"
+                            icon="https://upload.wikimedia.org/wikipedia/commons/9/92/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Home_%E2%80%93_People_%E2%80%93_Default.png">
+                    </marker>
+
+                    <marker on-click="clicked(order.store.name)"
+                            icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png" animation="BOUNCE"
+                            position="{{order.store.loc.coordinates[1]}},{{order.store.loc.coordinates[0]}}">
                     </marker>
 
                 </ng-map>

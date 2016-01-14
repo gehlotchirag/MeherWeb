@@ -6,9 +6,7 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
     $scope.authentication = Authentication;
 
 
-    //NgMap.getMap().then(function(map) {
-    //  $scope.map = map;
-    //});
+
     // Create new Order
     $scope.create = function() {
       // Create new Order object
@@ -44,6 +42,16 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
       }
     };
 
+    $scope.changeOrderStatus = function(order){
+      $http({
+        method:'PUT',
+        url:'http://localhost:3000/orders/'+order._id,
+        data:order
+      }).then(function(){
+        alert("Order Status changed !");
+      })
+    }
+
     $scope.renderMap = function(order){
 
       console.log("https://maps.googleapis.com/maps/api/geocode/json?address="+order.customer.addLine2);
@@ -58,6 +66,10 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
         console.log(order.location)
         order.showMap = !order.showMap;
         $scope.listNearBy(order);
+        NgMap.getMap().then(function(map) {
+          $scope.map = map;
+          console.log(map);
+        });
         //NgMap.getMap().then(function(map) {
         //  console.log(map)
         //  //map.setCenter(order.latitude,order.longitude)
@@ -168,10 +180,7 @@ angular.module('orders').controller('OrdersController', ['$scope','$stateParams'
 
     $scope.showShop = function(event, shop) {
       $scope.selectedShop = shop;
-      NgMap.getMap().then(function(map) {
-        map.showInfoWindow(event,'myInfoWindow');
-      });
-
+      $scope.map.showInfoWindow('myInfoWindow',this);
     };
 
 
