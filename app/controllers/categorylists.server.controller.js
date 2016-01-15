@@ -144,7 +144,6 @@ exports.listNear = function(req, res) {
       });
     }
   });
-
 };
 
 /**
