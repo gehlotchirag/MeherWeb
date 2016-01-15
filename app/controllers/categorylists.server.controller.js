@@ -118,8 +118,7 @@ exports.listNear = function(req, res) {
       });
     } else {
       TotalData = cat;
-      console.log(TotalData)
-      Categorylist.find({
+       Categorylist.find({
             loc:
             { $near :
             {
@@ -136,8 +135,6 @@ exports.listNear = function(req, res) {
         } else {
           //TotalData = TotalData + cityCat;
           TotalData = TotalData.concat(cityCat);
-          console.log("&&&&&&&&&")
-          console.log(TotalData)
           res.jsonp(TotalData);
         }
       });
