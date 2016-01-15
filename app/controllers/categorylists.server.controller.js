@@ -119,19 +119,15 @@ exports.listNear = function(req, res) {
     } else {
       TotalData = cat;
       console.log(TotalData)
-      Categorylist.find()
-          .and([
-            {"loc":{$ne:null}},
+      Categorylist.find({
+            loc:
+            { $near :
             {
-              loc:
-              { $near :
-              {
-                $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ]},
-                $maxDistance: 200000
-              }
-              }
+              $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ]},
+              $maxDistance: 200000
             }
-          ])
+            }
+          })
       .exec(function(err, cityCat) {
         if (err) {
           return res.status(400).send({
