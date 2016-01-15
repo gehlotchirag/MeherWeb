@@ -10,12 +10,6 @@ var mongoose = require('mongoose'),
  * Categorylist Schema
  */
 var CategorylistSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Categorylist name',
-		trim: true
-	},
   loc: { 'type':
   {
     type: String,
