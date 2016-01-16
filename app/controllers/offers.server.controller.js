@@ -33,7 +33,7 @@ exports.create = function(req, res) {
 
 
 exports.offerByType = function(req,res){
-
+console.log()
   if(!req.params.page)
   {
     var page = 1;
@@ -61,7 +61,7 @@ exports.createAll = function(req, res, next) {
       importShops.forEach(function (shop) {
         if (shop)
           bulk.insert(shop);
-      })
+      });
       bulk.execute(function (err, result) {
         if (err) {
           return res.status(400).send({

@@ -13,7 +13,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, offers.createAll);
 
 
-  app.route('/offers-type/:offerType/:page')
+  app.route('/offers/:category/:page')
       .get(offers.offerByType)
 
 
