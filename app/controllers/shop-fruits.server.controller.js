@@ -129,11 +129,11 @@ exports.listOfShop = function(req, res) {
 
 exports.listNear = function(req, res) {
 
-  if(!req.params.page)
+  if(!req.params.fruitspage)
   {
     var page = 1;
   }else{
-    var page = req.params.page;
+    var page = req.params.fruitspage;
   }
   var per_page = 10;
 
@@ -142,7 +142,7 @@ exports.listNear = function(req, res) {
         loc:
         { $near :
         {
-          $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ] },
+          $geometry: { type: "Point",  coordinates: [ req.params.fruitslng, req.params.fruitslat ] },
           $maxDistance: 200000
         }
         }

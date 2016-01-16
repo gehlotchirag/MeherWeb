@@ -13,7 +13,7 @@ module.exports = function(app) {
       //.post( shopGroceries.createAll);
       .post(users.requiresLogin, shopGroceries.createAll);
 
-  app.route('/shop-groceries/near/:lng/:lat/:page')
+  app.route('/shop-groceries/near/:grocerieslng/:grocerieslat/:groceriespage')
       .get(shopGroceries.listNear);
 
   app.route('/shop-groceries/mobile/:mobile/:deviceId')
@@ -35,7 +35,7 @@ module.exports = function(app) {
   // Finish by binding the Shop grocery middleware
 	app.param('shopGroceryId', shopGroceries.shopGroceryByID);
 	app.param('listOfGroceriesPage', shopGroceries.listOfGroceries);
-	app.param('lng', shopGroceries.listNear);
-	app.param('lat', shopGroceries.listNear);
-	app.param('page', shopGroceries.listNear);
+	app.param('grocerieslng', shopGroceries.listNear);
+	app.param('grocerieslat', shopGroceries.listNear);
+	app.param('groceriespage', shopGroceries.listNear);
 };

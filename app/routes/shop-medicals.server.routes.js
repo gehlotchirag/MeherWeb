@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.route('/shop-medicalsAll')
       .post(users.requiresLogin, shopMedicals.createAll);
 
-  app.route('/shop-medicals/near/:lng/:lat/:page')
+  app.route('/shop-medicals/near/:medicalslng/:medicalslat/:medicalspage')
       .get(shopMedicals.listNear)
 
   app.route('/shop-medicals/mobile/:mobile/:deviceId')
@@ -30,7 +30,7 @@ module.exports = function(app) {
 	app.param('shopMedicalId', shopMedicals.shopMedicalByID);
   app.param('listOfMedicalsPage', shopMedicals.listOfMedicals);
 
-  app.param('lng', shopMedicals.listNear);
-  app.param('lat', shopMedicals.listNear);
-  app.param('page', shopMedicals.listNear);
+  app.param('medicalslng', shopMedicals.listNear);
+  app.param('medicalslat', shopMedicals.listNear);
+  app.param('medicalspage', shopMedicals.listNear);
 };

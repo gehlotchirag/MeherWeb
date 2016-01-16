@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.route('/shop-electronicsAll')
       .post(users.requiresLogin, shopElectronics.createAll);
 
-  app.route('/shop-electronics/near/:lng/:lat/:page')
+  app.route('/shop-electronics/near/:electronicslng/:electronicslat/:electronicspage')
       .get(shopElectronics.listNear);
 
   app.route('/shop-electronics/mobile/:mobile/:deviceId')
@@ -30,7 +30,7 @@ module.exports = function(app) {
 	app.param('shopElectronicId', shopElectronics.shopElectronicByID);
   app.param('listOfElectronicsPage', shopElectronics.listOfElectronics);
 
-  app.param('lng', shopElectronics.listNear);
-  app.param('lat', shopElectronics.listNear);
-  app.param('page', shopElectronics.listNear);
+  app.param('electronicslng', shopElectronics.listNear);
+  app.param('electronicslat', shopElectronics.listNear);
+  app.param('electronicspage', shopElectronics.listNear);
 };

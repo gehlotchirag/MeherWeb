@@ -104,13 +104,13 @@ exports.list = function(req, res) {
 };
 
 exports.listNear = function(req, res) {
-  console.log("**** $$$$$$ *****");
-  console.log(req.params.lng);
-  if(!req.params.page)
+  console.log("**** &&& *****");
+  console.log(req.params.grocerieslng);
+  if(!req.params.groceriespage)
   {
     var page = 1;
   }else{
-    var page = req.params.page;
+    var page = req.params.groceriespage;
   }
   var per_page = 10;
 
@@ -119,7 +119,7 @@ exports.listNear = function(req, res) {
         loc:
         { $near :
         {
-          $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ] },
+          $geometry: { type: "Point",  coordinates: [ req.params.grocerieslng, req.params.grocerieslat ] },
           $maxDistance: 5000
         }
         }

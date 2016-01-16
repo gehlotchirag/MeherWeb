@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.route('/shop-fruitsAll')
       .post(users.requiresLogin, shopFruits.createAll);
 
-  app.route('/shop-fruits/near/:lng/:lat/:page')
+  app.route('/shop-fruits/near/:fruitslng/:fruitslat/:fruitspage')
       .get(shopFruits.listNear);
 
   app.route('/shop-fruits/mobile/:number/:deviceId')
@@ -34,8 +34,8 @@ module.exports = function(app) {
 
   app.param('shopFruitId', shopFruits.shopFruitByID);
 	//app.param('deviceId', shopFruits.shopFruitByMobile);
-  app.param('lng', shopFruits.listNear);
-  app.param('lat', shopFruits.listNear);
-  app.param('page', shopFruits.listNear);
+  app.param('fruitslng', shopFruits.listNear);
+  app.param('fruitslat', shopFruits.listNear);
+  app.param('fruitspage', shopFruits.listNear);
 
 };

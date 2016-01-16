@@ -104,11 +104,11 @@ exports.list = function(req, res) {
 
 
 exports.listNear = function(req, res) {
-  if(!req.params.page)
+  if(!req.params.medicalspage)
   {
     var page = 1;
   }else{
-    var page = req.params.page;
+    var page = req.params.medicalspage;
   }
   var per_page = 10;
   console.log(page);
@@ -120,7 +120,7 @@ exports.listNear = function(req, res) {
         loc:
         { $near :
         {
-          $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ] },
+          $geometry: { type: "Point",  coordinates: [ req.params.medicalslng, req.params.medicalslat ] },
           $maxDistance: 200000
         }
         }
