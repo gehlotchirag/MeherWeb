@@ -25,6 +25,6 @@ module.exports = function(app) {
 
 	// Finish by binding the Offer middleware
 	app.param('offerId', offers.offerByID);
-	app.param('offerType', offers.offerByType);
+	app.param('category', offers.offerByType);
 	app.param('page', offers.offerByType);
 };
