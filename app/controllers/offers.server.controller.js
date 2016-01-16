@@ -34,14 +34,14 @@ exports.create = function(req, res) {
 
 exports.offerByType = function(req,res){
 console.log()
-  if(!req.params.page)
+  if(!req.params.offerpage)
   {
     var page = 1;
   }else{
-    var page = req.params.page;
+    var page = req.params.offerpage;
   }
   var per_page = 12;
-  Offer.find({'category':req.params.category}).sort( { name: 1 } ).skip((page-1)*per_page).limit(per_page).exec(function(err, offers) {
+  Offer.find({'category':req.params.offercategory}).sort( { name: 1 } ).skip((page-1)*per_page).limit(per_page).exec(function(err, offers) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

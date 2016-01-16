@@ -13,7 +13,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, offers.createAll);
 
 
-  app.route('/offers/:category/:page')
+  app.route('/offers/:offercategory/:offerpage')
       .get(offers.offerByType)
 
 
@@ -25,6 +25,6 @@ module.exports = function(app) {
 
 	// Finish by binding the Offer middleware
 	app.param('offerId', offers.offerByID);
-	app.param('category', offers.offerByType);
-	app.param('page', offers.offerByType);
+	app.param('offercategory', offers.offerByType);
+	app.param('offerpage', offers.offerByType);
 };
