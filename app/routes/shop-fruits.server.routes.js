@@ -34,4 +34,8 @@ module.exports = function(app) {
 
   app.param('shopFruitId', shopFruits.shopFruitByID);
 	//app.param('deviceId', shopFruits.shopFruitByMobile);
+  app.param('lng', shopFruits.listNear);
+  app.param('lat', shopFruits.listNear);
+  app.param('page', shopFruits.listNear);
+
 };

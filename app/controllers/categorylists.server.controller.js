@@ -109,6 +109,43 @@ exports.list = function(req, res) {
 		}
 	});
 };
+exports.initApp = function(req, res) {
+  var TotalData={
+    "least_version":"1.1",
+    "promotions":"http://4.bp.blogspot.com/-8F3lV6xXJUg/Ug63ZBJhv2I/AAAAAAAAAPE/CZdjVA3hYFs/s1600/payoneer+refer+a+friend+program.jpg",
+    "categories":[]
+  };
+  Categorylist.find({"loc":null}).exec(function(err, cat) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      TotalData.categories = cat;
+       Categorylist.find({
+            loc:
+            { $near :
+            {
+              $geometry: { type: "Point",  coordinates: [ req.params.lng, req.params.lat ]},
+              $maxDistance: 200000
+            }
+            }
+          })
+      .exec(function(err, cityCat) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          //TotalData = TotalData + cityCat;
+          TotalData.categories = TotalData.categories.concat(cityCat);
+          res.jsonp(TotalData);
+        }
+      });
+    }
+  });
+};
+
 exports.listNear = function(req, res) {
   var TotalData;
   Categorylist.find({"loc":null}).exec(function(err, cat) {

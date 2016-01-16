@@ -35,4 +35,7 @@ module.exports = function(app) {
   // Finish by binding the Shop grocery middleware
 	app.param('shopGroceryId', shopGroceries.shopGroceryByID);
 	app.param('listOfGroceriesPage', shopGroceries.listOfGroceries);
+	app.param('lng', shopGroceries.listNear);
+	app.param('lat', shopGroceries.listNear);
+	app.param('page', shopGroceries.listNear);
 };

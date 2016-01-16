@@ -29,4 +29,8 @@ module.exports = function(app) {
 	// Finish by binding the Shop electronic middleware
 	app.param('shopElectronicId', shopElectronics.shopElectronicByID);
   app.param('listOfElectronicsPage', shopElectronics.listOfElectronics);
+
+  app.param('lng', shopElectronics.listNear);
+  app.param('lat', shopElectronics.listNear);
+  app.param('page', shopElectronics.listNear);
 };

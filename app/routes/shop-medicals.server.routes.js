@@ -30,4 +30,7 @@ module.exports = function(app) {
 	app.param('shopMedicalId', shopMedicals.shopMedicalByID);
   app.param('listOfMedicalsPage', shopMedicals.listOfMedicals);
 
+  app.param('lng', shopMedicals.listNear);
+  app.param('lat', shopMedicals.listNear);
+  app.param('page', shopMedicals.listNear);
 };

@@ -12,6 +12,10 @@ module.exports = function(app) {
   app.route('/categorylists/:lng/:lat')
       .get(categorylists.listNear);
 
+  app.route('/initapp/:lng/:lat')
+      .get(categorylists.initApp);
+
+
   app.route('/categorylistsAll')
       .post(users.requiresLogin, categorylists.createAll);
 

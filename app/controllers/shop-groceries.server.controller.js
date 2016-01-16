@@ -91,7 +91,7 @@ exports.delete = function(req, res) {
 /**
  * List of Shop groceries
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
 	ShopGrocery.find().sort('-created').populate('user', 'displayName').exec(function(err, shopGroceries) {
 		if (err) {
 			return res.status(400).send({
@@ -104,6 +104,8 @@ exports.list = function(req, res) {
 };
 
 exports.listNear = function(req, res) {
+  console.log("**** $$$$$$ *****");
+  console.log(req.params.lng);
   if(!req.params.page)
   {
     var page = 1;
