@@ -52,6 +52,17 @@ exports.update = function(req, res) {
 	});
 };
 
+exports.updateCoins = function (req,res){
+  Consumer.findOneAndUpdate({"mobile" : req.params.consumermobile}, {"coins" : req.params.coins}, function(err, consumer) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(consumer);
+    }
+  })
+}
 
 exports.deleteConsumer = function (req,res){
   var mobile = req.params.mobile;
@@ -99,7 +110,6 @@ exports.list = function(req, res) {
 		}
 	});
 };
-
 
 exports.refCount = function(req, res) {
   Consumer.count({"referedBy": req.params.referedBy}).exec(function(err, count) {

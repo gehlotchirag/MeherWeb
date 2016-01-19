@@ -20,6 +20,11 @@ var ConsumerSchema = new Schema({
   deviceId: {
     type : String
   },
+  coins: {
+    type : Number,
+    default: 0
+  },
+
   referedBy: {
     type : String
   },
